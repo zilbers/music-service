@@ -23,7 +23,7 @@ const mysqlCon = mysql.createConnection({
 
 mysqlCon.connect((err) => {
   if (err) throw err;
-  console.log('Connected!');
+  console.log('Connected to MySql!');
 });
 
 app.get('/api/songs', (req, res) => {
