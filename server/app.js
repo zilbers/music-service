@@ -35,8 +35,8 @@ app.get('/api/songs', (req, res) => {
   });
 });
 
-app.get('/song/:id', async (req, res) => {
-  mysqlCon.query('SELECT * FROM songs WHERE song_id = ? AND song_name = ?', [req.params.id, 'asdf'], (error, results, fields) => {
+app.get('/api/songs/:id', async (req, res) => {
+  mysqlCon.query('SELECT * FROM songs WHERE song_id = ?', [req.params.id], (error, results, fields) => {
     if (error) {
       res.send(err.message);
       throw error;
