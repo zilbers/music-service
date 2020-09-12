@@ -54,32 +54,47 @@ app.get('/api/lists/:table/:id', async (req, res) => {
     });
 });
 
-// Get the top liked songs
-app.get('/api/top/songs', (req, res) => {
-  mysqlCon.query(`SELECT user_liked_songs.song_id, songs.title, COUNT(user_liked_songs.song_id) AS likes
-  FROM music_service.user_liked_songs
-  JOIN music_service.songs ON user_liked_songs.song_id=songs.song_id
-  GROUP BY song_id
-  ORDER BY likes DESC
-  LIMIT 20`, (error, results, fields) => {
-    if (error) {
-      res.status(500).send(error.message);
-    }
-    res.send(results);
-  });
-});
+// Get the top charts
+app.get('/api/top/:table', (req, res) => {
+  if (req.params.table === 'albums') {
+    mysqlCon.query(`SELECT albums.album_id, albums.name, COUNT(user_liked_albums.album_id) AS likes
+    FROM music_service.albums
+    JOIN music_service.user_liked_albums ON albums.album_id=user_liked_albums.album_id
+    GROUP BY album_id
+    ORDER BY likes DESC
+    LIMIT 20`, (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+      }
+      res.send(results);
+    });
+  }
 
-// Get the top liked playlists
-app.get('/api/top/playlists', (req, res) => {
-  mysqlCon.query(`SELECT playlists.playlist_id, playlists.name, COUNT(user_playlists.playlist_id) AS saves
-  FROM music_service.user_playlists
-  JOIN music_service.playlists ON playlists.playlist_id=user_playlists.playlist_id
-  GROUP BY playlist_id
-  ORDER BY saves DESC
-  LIMIT 20`, (error, results, fields) => {
-    if (error) {
-      res.status(500).send(error.message);
-    }
-    res.send(results);
-  });
+  if (req.params.table === 'playlists') {
+    mysqlCon.query(`SELECT playlists.playlist_id, playlists.name, COUNT(user_playlists.playlist_id) AS saves
+    FROM music_service.user_playlists
+    JOIN music_service.playlists ON playlists.playlist_id=user_playlists.playlist_id
+    GROUP BY playlist_id
+    ORDER BY saves DESC
+    LIMIT 20`, (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+      }
+      res.send(results);
+    });
+  }
+
+  if (req.params.table === 'songs') {
+    mysqlCon.query(`SELECT user_liked_songs.song_id, songs.title, COUNT(user_liked_songs.song_id) AS likes
+    FROM music_service.user_liked_songs
+    JOIN music_service.songs ON user_liked_songs.song_id=songs.song_id
+    GROUP BY song_id
+    ORDER BY likes DESC
+    LIMIT 20`, (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+      }
+      res.send(results);
+    });
+  }
 });
