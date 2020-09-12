@@ -36,8 +36,9 @@ app.get('/api/lists/:table', (req, res) => {
   mysqlCon.query(`SELECT * FROM ${table}`, (error, results, fields) => {
     if (error) {
       res.status(500).send(error.message);
+    } else {
+      res.status(200).send(results);
     }
-    res.send(results);
   });
 });
 
@@ -49,8 +50,9 @@ app.get('/api/lists/:table/:id', async (req, res) => {
       if (error) {
         res.status(500).send(error.message);
         throw error;
+      } else {
+        results[0] ? res.send(results) : res.status(404).send(`No ${req.params.table} with this ID`);
       }
-      results[0] ? res.send(results) : res.status(404).send(`No ${req.params.table} with this ID`);
     });
 });
 
@@ -65,8 +67,9 @@ app.get('/api/top/:table', (req, res) => {
     LIMIT 20`, (error, results, fields) => {
       if (error) {
         res.status(500).send(error.message);
+      } else {
+        res.status(200).send(results);
       }
-      res.send(results);
     });
   }
 
@@ -79,8 +82,9 @@ app.get('/api/top/:table', (req, res) => {
     LIMIT 20`, (error, results, fields) => {
       if (error) {
         res.status(500).send(error.message);
+      } else {
+        res.status(200).send(results);
       }
-      res.send(results);
     });
   }
 
@@ -93,8 +97,57 @@ app.get('/api/top/:table', (req, res) => {
     LIMIT 20`, (error, results, fields) => {
       if (error) {
         res.status(500).send(error.message);
+      } else {
+        res.status(200).send(results);
       }
-      res.send(results);
     });
   }
+});
+
+// Post new data to the database
+app.post('/api/:table', (req, res) => {
+  const collums = req.body.collums.map((collum) => `\`${collum}\``).join();
+  const values = req.body.values.map((value) => `'${value}'`).join();
+  const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
+  const { table } = req.params;
+  mysqlCon.query(`INSERT INTO \`music_service\`.\`${req.params.table}\` (${collums}, upload_at) 
+    VALUES (${values}, '${date}')`, (error, results, fields) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else {
+      res.status(200).send(`Uploaded new ${table.slice(0, -1)}`);
+    }
+  });
+});
+
+// Update data in the database
+app.put('/api/:table/:id', (req, res) => {
+  const collums = req.body.collums.map((collum) => `\`${collum}\``);
+  const values = req.body.values.map((value) => `'${value}'`);
+  const query = collums.map((collum, index) => `${collum} = ${values[index]}`).join();
+
+  const { table } = req.params;
+  mysqlCon.query(`UPDATE \`music_service\`.\`${req.params.table}\` 
+  SET ${query} 
+  WHERE ${table.slice(0, -1)}_id =${req.params.id}`, (error, results, fields) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else {
+      res.status(200).send(`Updated ${table.slice(0, -1)}`);
+    }
+  });
+});
+
+// Delete data from database
+app.delete('/api/:table/:id', (req, res) => {
+  const { table } = req.params;
+  mysqlCon.query(`DELETE FROM \`music_service\`.\`${req.params.table}\` 
+  WHERE ${table.slice(0, -1)}_id =${req.params.id}`, (error, results, fields) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else {
+      res.status(200).send(`Deleted ${table.slice(0, -1)}`);
+    }
+  });
 });
