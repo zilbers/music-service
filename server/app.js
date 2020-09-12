@@ -5,6 +5,7 @@ require('dotenv').config();
 const app = express();
 module.exports = app;
 let requestID = 0;
+const { database, password, user } = process.env;
 
 function logger(req, res, next) {
   console.log(
@@ -19,9 +20,9 @@ app.use(express.json());
 
 const mysqlCon = mysql.createConnection({
   host: 'localhost',
-  user: process.env.user,
-  password: process.env.password,
-  database: 'music_service',
+  user,
+  password,
+  database,
   multipleStatements: true,
 });
 
@@ -30,7 +31,7 @@ mysqlCon.connect((err) => {
   console.log('Connected to MySql!');
 });
 
-// Get all
+// Get all from a certain table
 app.get('/api/lists/:table', (req, res) => {
   const { table } = req.params;
   mysqlCon.query(`SELECT * FROM ${table}`, (error, results, fields) => {
@@ -60,8 +61,8 @@ app.get('/api/lists/:table/:id', async (req, res) => {
 app.get('/api/top/:table', (req, res) => {
   if (req.params.table === 'albums') {
     mysqlCon.query(`SELECT albums.album_id, albums.name, COUNT(user_liked_albums.album_id) AS likes
-    FROM music_service.albums
-    JOIN music_service.user_liked_albums ON albums.album_id=user_liked_albums.album_id
+    FROM ${database}.albums
+    JOIN ${database}.user_liked_albums ON albums.album_id=user_liked_albums.album_id
     GROUP BY album_id
     ORDER BY likes DESC
     LIMIT 20`, (error, results, fields) => {
@@ -75,8 +76,8 @@ app.get('/api/top/:table', (req, res) => {
 
   if (req.params.table === 'playlists') {
     mysqlCon.query(`SELECT playlists.playlist_id, playlists.name, COUNT(user_playlists.playlist_id) AS saves
-    FROM music_service.user_playlists
-    JOIN music_service.playlists ON playlists.playlist_id=user_playlists.playlist_id
+    FROM ${database}.user_playlists
+    JOIN ${database}.playlists ON playlists.playlist_id=user_playlists.playlist_id
     GROUP BY playlist_id
     ORDER BY saves DESC
     LIMIT 20`, (error, results, fields) => {
@@ -90,8 +91,8 @@ app.get('/api/top/:table', (req, res) => {
 
   if (req.params.table === 'songs') {
     mysqlCon.query(`SELECT user_liked_songs.song_id, songs.title, COUNT(user_liked_songs.song_id) AS likes
-    FROM music_service.user_liked_songs
-    JOIN music_service.songs ON user_liked_songs.song_id=songs.song_id
+    FROM ${database}.user_liked_songs
+    JOIN ${database}.songs ON user_liked_songs.song_id=songs.song_id
     GROUP BY song_id
     ORDER BY likes DESC
     LIMIT 20`, (error, results, fields) => {
@@ -111,7 +112,7 @@ app.post('/api/:table', (req, res) => {
   const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
   const { table } = req.params;
-  mysqlCon.query(`INSERT INTO \`music_service\`.\`${req.params.table}\` (${collums}, upload_at) 
+  mysqlCon.query(`INSERT INTO \`${database}\`.\`${req.params.table}\` (${collums}, upload_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
       res.status(500).send(error.message);
@@ -128,7 +129,7 @@ app.put('/api/:table/:id', (req, res) => {
   const query = collums.map((collum, index) => `${collum} = ${values[index]}`).join();
 
   const { table } = req.params;
-  mysqlCon.query(`UPDATE \`music_service\`.\`${req.params.table}\` 
+  mysqlCon.query(`UPDATE \`${database}\`.\`${req.params.table}\` 
   SET ${query} 
   WHERE ${table.slice(0, -1)}_id =${req.params.id}`, (error, results, fields) => {
     if (error) {
@@ -142,7 +143,7 @@ app.put('/api/:table/:id', (req, res) => {
 // Delete data from database
 app.delete('/api/:table/:id', (req, res) => {
   const { table } = req.params;
-  mysqlCon.query(`DELETE FROM \`music_service\`.\`${req.params.table}\` 
+  mysqlCon.query(`DELETE FROM \`${database}\`.\`${req.params.table}\` 
   WHERE ${table.slice(0, -1)}_id =${req.params.id}`, (error, results, fields) => {
     if (error) {
       res.status(500).send(error.message);
