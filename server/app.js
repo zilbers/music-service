@@ -30,68 +30,27 @@ mysqlCon.connect((err) => {
   console.log('Connected to MySql!');
 });
 
-// Get all songs
-app.get('/api/songs', (req, res) => {
-  mysqlCon.query('SELECT * FROM songs', (error, results, fields) => {
+// Get all
+app.get('/api/:table', (req, res) => {
+  console.log(req.params.table);
+  const { table } = req.params;
+  mysqlCon.query(`SELECT * FROM ${table}`, (error, results, fields) => {
     if (error) {
-      res.status(500).send(err.message);
+      res.status(500).send(error.message);
     }
     res.send(results);
   });
 });
 
-// Get song by ID
-app.get('/api/songs/:id', async (req, res) => {
-  mysqlCon.query('SELECT * FROM songs WHERE song_id = ?',
-    [req.params.id], (error, results, fields) => {
+// Get by ID
+app.get('/api/:table/:id', async (req, res) => {
+  const { table, id } = req.params;
+  mysqlCon.query(`SELECT * FROM ${table} WHERE ${table.slice(0, -1)}_id = ?`,
+    [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(err.message);
+        res.status(500).send(error.message);
         throw error;
       }
-      results[0] ? res.send(results) : res.status(404).send('No song with this ID');
-    });
-});
-
-// Get all artists
-app.get('/api/artists', (req, res) => {
-  mysqlCon.query('SELECT * FROM artists', (error, results, fields) => {
-    if (error) {
-      res.status(500).send(err.message);
-    }
-    res.send(results);
-  });
-});
-
-// Get artist by ID
-app.get('/api/artists/:id', async (req, res) => {
-  mysqlCon.query('SELECT * FROM artists WHERE artist_id = ?',
-    [req.params.id], (error, results, fields) => {
-      if (error) {
-        res.status(500).send(err.message);
-        throw error;
-      }
-      results[0] ? res.send(results) : res.status(404).send('No artists with this ID');
-    });
-});
-
-// Get all albums
-app.get('/api/albums', (req, res) => {
-  mysqlCon.query('SELECT * FROM albums', (error, results, fields) => {
-    if (error) {
-      res.status(500).send(err.message);
-    }
-    res.send(results);
-  });
-});
-
-// Get album by ID
-app.get('/api/albums/:id', async (req, res) => {
-  mysqlCon.query('SELECT * FROM albums WHERE album_id = ?',
-    [req.params.id], (error, results, fields) => {
-      if (error) {
-        res.status(500).send(err.message);
-        throw error;
-      }
-      results[0] ? res.send(results) : res.status(404).send('No albums with this ID');
+      results[0] ? res.send(results) : res.status(404).send(`No ${req.params.table} with this ID`);
     });
 });
