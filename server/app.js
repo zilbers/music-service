@@ -4,9 +4,13 @@ require('dotenv').config();
 
 const app = express();
 module.exports = app;
+let requestID = 0;
 
 function logger(req, res, next) {
-  console.log(`request fired ${req.url} ${req.method}`);
+  console.log(
+    `Request #${requestID}\nRequest fired: ${req.url}\nMethod: ${req.method}`,
+  );
+  requestID += 1;
   next();
 }
 
@@ -26,21 +30,46 @@ mysqlCon.connect((err) => {
   console.log('Connected to MySql!');
 });
 
+// Get all songs
 app.get('/api/songs', (req, res) => {
   mysqlCon.query('SELECT * FROM songs', (error, results, fields) => {
     if (error) {
-      res.send(err.message);
+      res.status(500).send(err.message);
     }
     res.send(results);
   });
 });
 
+// Get song by ID
 app.get('/api/songs/:id', async (req, res) => {
-  mysqlCon.query('SELECT * FROM songs WHERE song_id = ?', [req.params.id], (error, results, fields) => {
+  mysqlCon.query('SELECT * FROM songs WHERE song_id = ?',
+    [req.params.id], (error, results, fields) => {
+      if (error) {
+        res.status(500).send(err.message);
+        throw error;
+      }
+      results[0] ? res.send(results) : res.status(404).send('No song with this ID');
+    });
+});
+
+// Get all artists
+app.get('/api/artists', (req, res) => {
+  mysqlCon.query('SELECT * FROM artists', (error, results, fields) => {
     if (error) {
-      res.send(err.message);
-      throw error;
+      res.status(500).send(err.message);
     }
     res.send(results);
   });
+});
+
+// Get artist by ID
+app.get('/api/artists/:id', async (req, res) => {
+  mysqlCon.query('SELECT * FROM artists WHERE artist_id = ?',
+    [req.params.id], (error, results, fields) => {
+      if (error) {
+        res.status(500).send(err.message);
+        throw error;
+      }
+      results[0] ? res.send(results) : res.status(404).send('No artists with this ID');
+    });
 });
