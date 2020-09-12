@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/albums
+GET http://localhost:3001/api/lists/albums
