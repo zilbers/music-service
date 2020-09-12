@@ -73,3 +73,25 @@ app.get('/api/artists/:id', async (req, res) => {
       results[0] ? res.send(results) : res.status(404).send('No artists with this ID');
     });
 });
+
+// Get all albums
+app.get('/api/albums', (req, res) => {
+  mysqlCon.query('SELECT * FROM albums', (error, results, fields) => {
+    if (error) {
+      res.status(500).send(err.message);
+    }
+    res.send(results);
+  });
+});
+
+// Get album by ID
+app.get('/api/albums/:id', async (req, res) => {
+  mysqlCon.query('SELECT * FROM albums WHERE album_id = ?',
+    [req.params.id], (error, results, fields) => {
+      if (error) {
+        res.status(500).send(err.message);
+        throw error;
+      }
+      results[0] ? res.send(results) : res.status(404).send('No albums with this ID');
+    });
+});
