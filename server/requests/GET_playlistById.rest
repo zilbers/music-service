@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/lists/playlists/12
+GET http://localhost:3001/api/playlists/3

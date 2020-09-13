@@ -2,6 +2,6 @@ POST http://localhost:3001/api/albums
 Content-Type: application/json
 
 {
-    "collums": ["name", "cover_img"],
-    "values" : ["Khalid", "https://thetrinityvoice.com/wp-content/uploads/2018/03/Screen-Shot-2018-03-15-at-2.28.14-PM.png"]
+    "collums": ["name", "cover_img", "artist_id", "created_at"],
+    "values" : ["Free Spirit", "SoonToBeAdded", 22, "2019-04-05" ]
 }
