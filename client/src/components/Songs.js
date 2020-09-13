@@ -12,25 +12,27 @@ function Songs(props) {
   }
 
   async function deleteSong(song_id) {
-    await props
-      .deleteById(`songs/${song_id}`)
-      .then((res) => {
-        getAllSongs();
-        alert(res.data);
-      })
-      .catch((err) => console.log(err));
+    if (window.confirm("Delete the song?")) {
+      await props
+        .deleteById(`songs/${song_id}`)
+        .then((res) => {
+          getAllSongs();
+          alert(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
   }
 
   return (
-    <div className="songs">
+    <div className="mainWrapper">
       {!data && <button onClick={getAllSongs}>songs</button>}
       {data && (
         <div className="display">
-          <button onClick={() => setData()}>Songs</button>
+          <button className="type" onClick={() => setData()}>Songs</button>
           {data.map((data) => (
             <div className="row" key={data.song_id}>
               <span>{data.title}</span>
-              <button onClick={()=>deleteSong(data.song_id)}>Delete</button>
+              <button onClick={() => deleteSong(data.song_id)}>Delete</button>
             </div>
           ))}
         </div>

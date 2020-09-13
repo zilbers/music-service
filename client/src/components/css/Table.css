@@ -11,3 +11,12 @@
     width: 90%;
     padding: 2%;
 }
+
+.mainWrapper{
+    display: flex;
+    align-items: flex-start;
+}
+
+.type {
+    align-self: center;
+}
