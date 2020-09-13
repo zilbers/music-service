@@ -13,8 +13,11 @@ function Songs(props) {
 
   async function deleteSong(song_id) {
     await props
-      .deleteById(`lists/songs/${song_id}`)
-      .then((res) => console.log(res))
+      .deleteById(`songs/${song_id}`)
+      .then((res) => {
+        getAllSongs();
+        alert(res.data);
+      })
       .catch((err) => console.log(err));
   }
 
