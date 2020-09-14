@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import "./css/Table.css";
 
-function Albums(props) {
+function ListDisplay(props) {
   const [data, setData] = useState();
+  const type = props.type;
 
   async function getAll() {
     await props
-      .get(`lists/${props.type}`)
+      .get(`${type}`)
       .then((data) => setData(data.data))
       .catch((err) => console.log(err));
   }
 
-  async function deleteById(album_id) {
-    if (window.confirm(`Delete the ${props.type}?`)) {
+  async function deletItem(id) {
+    if (window.confirm(`Delete the ${type.slice(0,-1)}?`)) {
       await props
-        .deleteById(`${props.type}/${album_id}`)
+        .deleteById(`${type}/${id}`)
         .then((res) => {
           getAll();
           alert(res.data);
@@ -25,14 +26,16 @@ function Albums(props) {
 
   return (
     <div className="mainWrapper">
-      {!data && <button onClick={getAll}>albums</button>}
+      {!data && <button onClick={getAll}>{type}</button>}
       {data && (
         <div className="display">
-          <button className="type" onClick={() => setData()}>albums</button>
+          <button className="type" onClick={() => setData()}>
+            {type}
+          </button>
           {data.map((data) => (
-            <div className="row" key={data.album_id}>
+            <div className="row" key={data.id}>
               <span>{data.name}</span>
-              <button onClick={() => deleteById(data.album_id)}>Delete</button>
+              <button onClick={() => deletItem(data.id)}>Delete</button>
             </div>
           ))}
         </div>
@@ -41,4 +44,4 @@ function Albums(props) {
   );
 }
 
-export default Albums;
+export default ListDisplay;
