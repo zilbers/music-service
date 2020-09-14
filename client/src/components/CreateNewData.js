@@ -4,7 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Button from "@material-ui/core/Button";
-import { useForm } from "react-hook-form";
+import Form from "./Form";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -18,13 +18,17 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
   },
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+      width: "25ch",
+    },
+  },
 }));
 
 export default function TransitionsModal() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const { addNewEntry } = useForm();
-  const onSubmit = (data) => console.log(data);
 
   const handleOpen = () => {
     setOpen(true);
@@ -59,21 +63,8 @@ export default function TransitionsModal() {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="add-new-form">Add</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              {/* register your input into the hook by invoking the "register" function */}
-              <input name="example" defaultValue="test" ref={register} />
-
-              {/* include validation with required or other standard HTML validation rules */}
-              <input
-                name="exampleRequired"
-                ref={register({ required: true })}
-              />
-              {/* errors will return when field validation fails  */}
-              {errors.exampleRequired && <span>This field is required</span>}
-
-              <input type="submit" />
-            </form>
+            <h2 id="add-new-form">Add new entrie</h2>
+            <Form />
           </div>
         </Fade>
       </Modal>
