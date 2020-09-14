@@ -5,8 +5,8 @@ function get(endPoint) {
   return axios.get(`${baseUrl}/${endPoint}`);
 }
 
-function create(newObject) {
-  return axios.post(baseUrl, newObject);
+function create(endPoint, newObject) {
+  return axios.post(`${baseUrl}/${endPoint}`, newObject);
 }
 
 function update(id, newObject) {

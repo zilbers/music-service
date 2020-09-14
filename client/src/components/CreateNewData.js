@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal() {
+export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -64,7 +64,7 @@ export default function TransitionsModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="add-new-form">Add new entrie</h2>
-            <Form handleClose={handleClose}/>
+            <Form handleClose={handleClose} />
           </div>
         </Fade>
       </Modal>

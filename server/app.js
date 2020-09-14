@@ -173,7 +173,7 @@ app.post('/api/songs', (req, res) => {
   const collums = req.body.collums.map((collum) => `\`${collum}\``).join();
   const values = req.body.values.map((value) => `'${value}'`).join();
   const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
+  console.log(req.body);
   mysqlCon.query(`INSERT INTO \`${database}\`.\`songs\` (${collums}, uploaded_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
@@ -201,17 +201,20 @@ app.post('/api/albums', (req, res) => {
 });
 
 // Post new data to palylists
-app.post('/api/palylists', (req, res) => {
+app.post('/api/playlists', (req, res) => {
   const collums = req.body.collums.map((collum) => `\`${collum}\``).join();
   const values = req.body.values.map((value) => `'${value}'`).join();
   const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-  mysqlCon.query(`INSERT INTO \`${database}\`.\`palylists\` (${collums}, uploaded_at) 
+  console.log(req.body);
+
+  mysqlCon.query(`INSERT INTO \`${database}\`.\`playlists\` (${collums}, uploaded_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
+      console.log(error.message);
       res.status(500).send(error.message);
     } else {
-      res.status(200).send('Uploaded new palylist');
+      res.status(200).send('Uploaded new playlist');
     }
   });
 });

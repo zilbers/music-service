@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm, Controller } from "react-hook-form";
 import {
@@ -10,6 +10,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import "./css/Form.css";
+import { get, deleteById, update, create } from "../modules/axios-module";
 
 const types = [
   {
@@ -49,15 +50,30 @@ export default function Form(props) {
   const classes = useStyles();
   const { register, handleSubmit, control, errors } = useForm();
   const [type, setType] = useState("");
+  const [artists, setArtists] = useState([]);
 
   const onSubmit = (data) => {
     props.handleClose();
-    console.log(data);
+    const saveFormat = {
+      collums: Object.keys(data),
+      values: Object.values(data),
+    };
+    create(type, saveFormat)
+      .then((res) => alert(res.message))
+      .catch((res) => alert(res.message));
   };
 
   const handleChange = (event) => {
     setType(event.target.value);
   };
+
+  const getArtists = () => {
+    get("artists")
+      .then((data) => setArtists(data.data))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(getArtists, []);
 
   return (
     <form
@@ -85,11 +101,42 @@ export default function Form(props) {
 
       {type && (
         <>
+          {/* Artist input */}
+          {(type === "albums" || type === "songs") && (
+            <>
+              <FormControl error={Boolean(errors.artist)}>
+                <InputLabel id="artist">artist</InputLabel>
+                <Controller
+                  as={
+                    <Select
+                      labelId="select-artist"
+                      id="select-artist"
+                      value={type}
+                    >
+                      {artists.map((option) => (
+                        <MenuItem key={option.id} value={`${option.id}`}>
+                          {option.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  }
+                  name="artist_id"
+                  rules={{ required: "this is required" }}
+                  control={control}
+                  defaultValue=""
+                />
+                {errors.artist && (
+                  <FormHelperText>{errors.artist.message}</FormHelperText>
+                )}
+              </FormControl>
+            </>
+          )}
+
           {/* Name input */}
           <TextField
-            name="name"
-            label="name"
-            id="name"
+            name={type === "songs" ? "title" : "name"}
+            label={type === "songs" ? "title" : "name"}
+            id={type === "songs" ? "title" : "name"}
             inputRef={register({ required: true })}
             error={Boolean(errors.name)}
           />
@@ -97,24 +144,6 @@ export default function Form(props) {
             <FormHelperText error={Boolean(errors.name)}>
               this is required
             </FormHelperText>
-          )}
-
-          {/* Artist input */}
-          {(type === "albums" || type === "songs") && (
-            <>
-              <TextField
-                name="artist"
-                label="artist"
-                id="artist"
-                inputRef={register({ required: true })}
-                error={Boolean(errors.artist)}
-              />
-              {errors.artists && (
-                <FormHelperText error={Boolean(errors.artist)}>
-                  this is required
-                </FormHelperText>
-              )}
-            </>
           )}
 
           {/* youtube_link input */}
@@ -130,7 +159,7 @@ export default function Form(props) {
           )}
 
           {/* Created at input */}
-          {type === "albums" && (
+          {(type === "albums" || type === "songs") && (
             <>
               <TextField
                 name="Created_at"

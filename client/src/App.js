@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Display from "./components/Display";
 import Menu from "./components/Menu";
-import CreateNewData from "./components/CreateNewData"
+import CreateNewData from "./components/CreateNewData";
 import "./App.css";
 import { get, deleteById, update, create } from "./modules/axios-module";
 
 function App() {
   const [data, setData] = useState();
 
-  async function getAll(type) {
-    await get(type)
+  function getAll(type) {
+    get(type)
       .then((data) => setData(data.data))
       .catch((err) => console.log(err));
   }
