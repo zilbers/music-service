@@ -85,6 +85,7 @@ export default function Form(props) {
 
       {type && (
         <>
+          {/* Name input */}
           <TextField
             name="name"
             label="name"
@@ -93,9 +94,12 @@ export default function Form(props) {
             error={Boolean(errors.name)}
           />
           {errors.name && (
-            <FormHelperText>{errors.name.message}</FormHelperText>
+            <FormHelperText error={Boolean(errors.name)}>
+              this is required
+            </FormHelperText>
           )}
 
+          {/* Artist input */}
           {(type === "albums" || type === "songs") && (
             <>
               <TextField
@@ -105,12 +109,15 @@ export default function Form(props) {
                 inputRef={register({ required: true })}
                 error={Boolean(errors.artist)}
               />
-              {errors.name && (
-                <FormHelperText>{errors.name.message}</FormHelperText>
+              {errors.artists && (
+                <FormHelperText error={Boolean(errors.artist)}>
+                  this is required
+                </FormHelperText>
               )}
             </>
           )}
 
+          {/* youtube_link input */}
           {type === "songs" && (
             <>
               <TextField
@@ -122,6 +129,7 @@ export default function Form(props) {
             </>
           )}
 
+          {/* Created at input */}
           {type === "albums" && (
             <>
               <TextField
@@ -139,46 +147,79 @@ export default function Form(props) {
             </>
           )}
 
-          {type === "albums" && (
+          {/* Cover-img input */}
+          {(type === "albums" ||
+            type === "artists" ||
+            type === "playlists") && (
             <>
               <TextField
                 name="cover_img"
-                label="cover_img"
+                label="cover image"
                 id="cover_img"
                 inputRef={register}
               />
             </>
           )}
 
+          {/* Length input */}
           {type === "songs" && (
             <>
-              <TextField
-                id="length"
-                label="length"
-                type="time"
-                defaultValue="00:00"
-                className={classes.textField}
-                inputRef={register({ required: true })}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                inputProps={{
-                  step: 1,
-                }}
-              />
+              <FormControl>
+                <Controller
+                  as={
+                    <TextField
+                      id="length"
+                      label="length"
+                      type="time"
+                      className={classes.textField}
+                      inputRef={register({ required: true })}
+                      InputLabelProps={{
+                        shrink: true,
+                      }}
+                      inputProps={{
+                        step: 1,
+                      }}
+                    />
+                  }
+                  name="length"
+                  defaultValue="00:00:00"
+                  rules={{ required: "this is required" }}
+                  control={control}
+                />
+                {errors.length && (
+                  <FormHelperText error={Boolean(errors.length)}>
+                    {errors.length.message}
+                  </FormHelperText>
+                )}
+              </FormControl>
             </>
           )}
 
+          {/* Lyrics input */}
           {type === "songs" && (
-            <TextField
-              id="lyrics"
-              label="lyrics"
-              multiline
-              rows={6}
-              inputRef={register}
-              defaultValue=""
-              variant="outlined"
-            />
+            <FormControl>
+              <Controller
+                as={
+                  <TextField
+                    id="lyrics"
+                    label="lyrics"
+                    multiline
+                    rows={6}
+                    variant="outlined"
+                    error={Boolean(errors.lyrics)}
+                  />
+                }
+                name="lyrics"
+                rules={{ required: "this is required" }}
+                control={control}
+                defaultValue=""
+              />
+              {errors.lyrics && (
+                <FormHelperText error={Boolean(errors.lyrics)}>
+                  {errors.lyrics.message}
+                </FormHelperText>
+              )}
+            </FormControl>
           )}
 
           <input type="submit" />
