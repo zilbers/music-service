@@ -1,24 +1,48 @@
-import React from "react";
-import ListDisplay from "./components/ListDisplay";
+import React, { useState, useEffect } from "react";
+import Display from "./components/Display";
+import Menu from "./components/Menu";
+import CreateNewData from "./components/CreateNewData"
 import "./App.css";
 import { get, deleteById, update, create } from "./modules/axios-module";
-import AlbumIcon from "@material-ui/icons/Album";
-import MusicNoteIcon from "@material-ui/icons/MusicNote";
-import QueueMusicIcon from "@material-ui/icons/QueueMusic";
-import PersonIcon from '@material-ui/icons/Person';
 
 function App() {
+  const [data, setData] = useState();
+
+  async function getAll(type) {
+    await get(type)
+      .then((data) => setData(data.data))
+      .catch((err) => console.log(err));
+  }
+
+  async function deletItem(type, id) {
+    if (window.confirm(`Delete the ${type.slice(0, -1)}?`)) {
+      await deleteById(`${type}/${id}`)
+        .then((res) => {
+          getAll();
+          alert(res.data);
+        })
+        .catch((err) => console.log(err));
+    }
+  }
+
+  function favorite(id) {
+    const currentDataId = data.slice();
+    let index = currentDataId.findIndex((item) => item.id === id);
+    currentDataId[index].favorite
+      ? delete currentDataId[index].favorite
+      : (currentDataId[index].favorite = true);
+    console.log(currentDataId);
+    setData(currentDataId);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Music-Service</h1>
-        <div className="showCase">
-          <ListDisplay type="songs" Icon={MusicNoteIcon} />
-          <ListDisplay type="albums" Icon={AlbumIcon} />
-          <ListDisplay type="artists" Icon={PersonIcon}/>
-          <ListDisplay type="playlists" Icon={QueueMusicIcon} />
-        </div>
-      </header>
+      <h1>Music-Service</h1>
+      <div className="showCase">
+        <Menu getAll={getAll} />
+        <CreateNewData />
+      </div>
+      {data && <Display data={data} favorite={favorite} />}
     </div>
   );
 }
