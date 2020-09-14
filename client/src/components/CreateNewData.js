@@ -64,7 +64,7 @@ export default function TransitionsModal() {
         <Fade in={open}>
           <div className={classes.paper}>
             <h2 id="add-new-form">Add new entrie</h2>
-            <Form />
+            <Form handleClose={handleClose}/>
           </div>
         </Fade>
       </Modal>

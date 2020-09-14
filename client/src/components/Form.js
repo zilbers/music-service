@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useForm, Controller } from "react-hook-form";
 import {
@@ -14,19 +14,19 @@ import "./css/Form.css";
 const types = [
   {
     value: "songs",
-    label: "Songs",
+    label: "Song",
   },
   {
     value: "albums",
-    label: "Albums",
+    label: "Album",
   },
   {
     value: "artists",
-    label: "Artists",
+    label: "Artist",
   },
   {
     value: "playlists",
-    label: "Playlists",
+    label: "Playlist",
   },
 ];
 
@@ -37,14 +37,27 @@ const useStyles = makeStyles((theme) => ({
       width: "25ch",
       display: "flex",
     },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200,
+    },
   },
 }));
 
-export default function Form() {
+export default function Form(props) {
   const classes = useStyles();
   const { register, handleSubmit, control, errors } = useForm();
+  const [type, setType] = useState("");
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    props.handleClose();
+    console.log(data);
+  };
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   return (
     <form
@@ -55,40 +68,124 @@ export default function Form() {
     >
       <FormControl error={Boolean(errors.type)}>
         <InputLabel id="type-of-entrie">Type of entrie</InputLabel>
-        <Controller
-          as={
-            <Select>
-              {types.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </Select>
-          }
-          name="type"
-          rules={{ required: "this is required" }}
-          control={control}
-          defaultValue=""
-        />
+        <Select
+          labelId="select-type"
+          id="select-type"
+          onChange={handleChange}
+          value={type}
+        >
+          {types.map((option) => (
+            <MenuItem key={option.value} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </Select>
         {errors.type && <FormHelperText>{errors.type.message}</FormHelperText>}
       </FormControl>
 
-        <TextField
-          name="name"
-          label="name"
-          id="name"
-          inputRef={register({ required: true })}
-          error={Boolean(errors.name)}
-        />
-        {errors.name && <FormHelperText>{errors.name.message}</FormHelperText>}
-        
-        <TextField
-          name="cover_img"
-          label="cover_img"
-          id="cover_img"
-          inputRef={register}
-        />
-        <input type="submit" />
+      {type && (
+        <>
+          <TextField
+            name="name"
+            label="name"
+            id="name"
+            inputRef={register({ required: true })}
+            error={Boolean(errors.name)}
+          />
+          {errors.name && (
+            <FormHelperText>{errors.name.message}</FormHelperText>
+          )}
+
+          {(type === "albums" || type === "songs") && (
+            <>
+              <TextField
+                name="artist"
+                label="artist"
+                id="artist"
+                inputRef={register({ required: true })}
+                error={Boolean(errors.artist)}
+              />
+              {errors.name && (
+                <FormHelperText>{errors.name.message}</FormHelperText>
+              )}
+            </>
+          )}
+
+          {type === "songs" && (
+            <>
+              <TextField
+                name="youtube_link"
+                label="youtube link"
+                id="youtube_link"
+                inputRef={register}
+              />
+            </>
+          )}
+
+          {type === "albums" && (
+            <>
+              <TextField
+                name="Created_at"
+                id="date"
+                label="Created at"
+                type="date"
+                className={classes.textField}
+                error={Boolean(errors.artist)}
+                inputRef={register({ required: true })}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </>
+          )}
+
+          {type === "albums" && (
+            <>
+              <TextField
+                name="cover_img"
+                label="cover_img"
+                id="cover_img"
+                inputRef={register}
+              />
+            </>
+          )}
+
+          {type === "songs" && (
+            <>
+              <TextField
+                id="length"
+                label="length"
+                type="time"
+                defaultValue="00:00"
+                className={classes.textField}
+                inputRef={register({ required: true })}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                inputProps={{
+                  step: 1,
+                }}
+              />
+            </>
+          )}
+
+          {type === "songs" && (
+            <TextField
+              id="lyrics"
+              label="lyrics"
+              multiline
+              rows={6}
+              inputRef={register}
+              defaultValue=""
+              variant="outlined"
+            />
+          )}
+
+          <input type="submit" />
+
+          {type === "albums" && <></>}
+        </>
+      )}
     </form>
   );
 }
