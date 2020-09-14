@@ -200,7 +200,7 @@ app.post('/api/albums', (req, res) => {
   });
 });
 
-// Post new data to palylists
+// Post new data to playlists
 app.post('/api/playlists', (req, res) => {
   const collums = req.body.collums.map((collum) => `\`${collum}\``).join();
   const values = req.body.values.map((value) => `'${value}'`).join();

@@ -59,7 +59,7 @@ export default function Form(props) {
       values: Object.values(data),
     };
     create(type, saveFormat)
-      .then((res) => alert(res.message))
+      .then((res) => alert(res.data))
       .catch((res) => alert(res.message));
   };
 
