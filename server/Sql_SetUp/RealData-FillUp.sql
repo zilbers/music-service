@@ -61,56 +61,56 @@ INSERT INTO `music_service`.`albums` ( `name`, `created_at`, `uploaded_at`, `cov
 -- INSERT INTO `music_service`.`albums` ( `name`, `created_at`, `uploaded_at`, `cover_img`, `artist_id`) VALUES ('Waking Up', '2009-01-02', '2009-02-02', 'imgdotcom', '24');
 
 -- Foo Fighters
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('The Pretender', 'https://youtu.be/SBjQ9tuuTJQ', '04:30', '2009-01-01', 'to be added', '2009-01-01', '1', '1');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('All My Life', 'https://youtu.be/xQ04WbgI9rg', '04:44', '2009-01-01', 'to be added', '2009-01-01', '1', '1');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Everlong', 'https://youtu.be/eBG7P-K-r1Y', '04:49', '2009-01-01', 'to be added', '2009-01-01', '1', '1');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('The Pretender', 'SBjQ9tuuTJQ', '04:30', '2009-01-01', 'to be added', '2009-01-01', '1', '1');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('All My Life', 'xQ04WbgI9rg', '04:44', '2009-01-01', 'to be added', '2009-01-01', '1', '1');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Everlong', 'eBG7P-K-r1Y', '04:49', '2009-01-01', 'to be added', '2009-01-01', '1', '1');
 
 -- RHCP
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Cant Stop', 'https://youtu.be/8DyziWtkfBw', '04:37', '2002-01-01', 'to be added', '2009-01-01', '2', '2');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('By The Way', 'https://youtu.be/JnfyjwChuNU', '03:37', '2002-01-01', 'to be added', '2009-01-01', '2', '2');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('This Is The Place', 'https://youtu.be/gqgm7ViA2Ag', '04:30', '2002-01-01', 'to be added', '2009-01-01', '2', '2');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Cant Stop', '8DyziWtkfBw', '04:37', '2002-01-01', 'to be added', '2009-01-01', '2', '2');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('By The Way', 'JnfyjwChuNU', '03:37', '2002-01-01', 'to be added', '2009-01-01', '2', '2');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('This Is The Place', 'gqgm7ViA2Ag', '04:30', '2002-01-01', 'to be added', '2009-01-01', '2', '2');
 
 -- Bare Dreams
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Never Mine', 'https://youtu.be/zk3bQ3CJNg4', '03:45', '2020-01-01', 'to be added', '2009-01-01', '3', '3');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Coffee Stains', 'https://youtu.be/5kDr5863BoI', '03:14', '2020-01-01', 'to be added', '2009-01-01', '3', '3');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Oh Sister', 'https://youtu.be/YSg9qE-oDGU', '03:30', '2020-01-01', 'to be added', '2009-01-01', '3', '3');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Never Mine', 'zk3bQ3CJNg4', '03:45', '2020-01-01', 'to be added', '2009-01-01', '3', '3');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Coffee Stains', '5kDr5863BoI', '03:14', '2020-01-01', 'to be added', '2009-01-01', '3', '3');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Oh Sister', 'YSg9qE-oDGU', '03:30', '2020-01-01', 'to be added', '2009-01-01', '3', '3');
 
 -- Paramore
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Misguided Ghosts', 'https://youtu.be/oGWeHPK3NC4', '02:58', '2009-01-01', 'to be added', '2009-01-01', '4', '4');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('All I Wanted', 'https://youtu.be/W7nmB20qJv4', '03:45', '2009-01-01', 'to be added', '2009-01-01', '4', '4');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Where The Lines Overlap', 'https://youtu.be/blDjUkMA9oU', '03:16', '2009-01-01', 'to be added', '2009-01-01', '4', '4');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Misguided Ghosts', 'oGWeHPK3NC4', '02:58', '2009-01-01', 'to be added', '2009-01-01', '4', '4');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('All I Wanted', 'W7nmB20qJv4', '03:45', '2009-01-01', 'to be added', '2009-01-01', '4', '4');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Where The Lines Overlap', 'blDjUkMA9oU', '03:16', '2009-01-01', 'to be added', '2009-01-01', '4', '4');
 
 -- Billie Ellish
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('myboy', 'https://youtu.be/dVUmSgzgOqs', '02:50', '2017-01-01', 'to be added', '2009-01-01', '5', '5');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('party favor', 'https://youtu.be/tGHTOVw6F4Q', '03:23', '2017-01-01', 'to be added', '2009-01-01', '5', '5');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('idontwannabeyouanymore', 'https://youtu.be/-tn2S3kJlyU', '03:24', '2017-01-01', 'to be added', '2009-01-01', '5', '5');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('myboy', 'dVUmSgzgOqs', '02:50', '2017-01-01', 'to be added', '2009-01-01', '5', '5');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('party favor', 'tGHTOVw6F4Q', '03:23', '2017-01-01', 'to be added', '2009-01-01', '5', '5');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('idontwannabeyouanymore', '-tn2S3kJlyU', '03:24', '2017-01-01', 'to be added', '2009-01-01', '5', '5');
 
 -- Nirvana
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Come As You Are', 'https://youtu.be/vabnZ9-ex7o', '03:45', '1991-02-03', 'to be added', '1990-02-01', '6', '6');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Smells Like Teen Spirit', 'https://youtu.be/hTWKbfoikeg', '04:38', '1991-02-03', 'to be added', '1990-02-01', '6', '6');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Lithium', 'https://youtu.be/LYfnBsaTVEo', '04:17', '1991-02-03', 'to be added', '1990-02-01', '6', '6');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Come As You Are', 'vabnZ9-ex7o', '03:45', '1991-02-03', 'to be added', '1990-02-01', '6', '6');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Smells Like Teen Spirit', 'hTWKbfoikeg', '04:38', '1991-02-03', 'to be added', '1990-02-01', '6', '6');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Lithium', 'LYfnBsaTVEo', '04:17', '1991-02-03', 'to be added', '1990-02-01', '6', '6');
 
 -- Tenacious D
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Tribute', 'https://youtu.be/_lK4cX5xGiQ', '04:52', '2001-02-02', 'to be added', '2001-01-02', '7', '7');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Wonderboy', 'https://youtu.be/FL4HSiGvk68', '04:31', '2001-02-02', 'to be added', '2001-01-02', '7', '7');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Kielbasa', 'https://youtu.be/7LBxr5ZScqE', '03:00', '2001-02-02', 'to be added', '2001-01-02', '7', '7');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Tribute', '_lK4cX5xGiQ', '04:52', '2001-02-02', 'to be added', '2001-01-02', '7', '7');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Wonderboy', 'FL4HSiGvk68', '04:31', '2001-02-02', 'to be added', '2001-01-02', '7', '7');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Kielbasa', '7LBxr5ZScqE', '03:00', '2001-02-02', 'to be added', '2001-01-02', '7', '7');
 
 -- Avenged Sevenfold
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Dear God', 'https://youtu.be/mzX0rhF8buo', '04:42', '2007-02-02', 'to be added', '2007-01-02', '8', '8');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('So Far Away', 'https://youtu.be/A7ry4cx6HfY', '05:28', '2010-02-02', 'to be added', '2010-01-02', '11', '8');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Buried Alive', 'https://youtu.be/imwmmv9r1oE', '06:47', '2010-02-02', 'to be added', '2010-01-02', '11', '8');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Gunslinger', 'https://youtu.be/3vDetD8cW_o', '04:11', '2007-02-02', 'to be added', '2007-01-02', '8', '8');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Dear God', 'mzX0rhF8buo', '04:42', '2007-02-02', 'to be added', '2007-01-02', '8', '8');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('So Far Away', 'A7ry4cx6HfY', '05:28', '2010-02-02', 'to be added', '2010-01-02', '11', '8');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Buried Alive', 'imwmmv9r1oE', '06:47', '2010-02-02', 'to be added', '2010-01-02', '11', '8');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Gunslinger', '3vDetD8cW_o', '04:11', '2007-02-02', 'to be added', '2007-01-02', '8', '8');
 
 -- Eminem
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Space Bound', 'https://youtu.be/JByDbPn6A1o', '04:24', '2010-02-02', 'to be added', '2010-01-02', '9', '9');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Love The Way You Lie', 'https://youtu.be/uelHwf8o7_U', '04:26', '2010-02-02', 'to be added', '2010-01-02', '9', '9');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Not Afraid', 'https://youtu.be/j5-yKhDd64s', '04:18', '2010-02-02', 'to be added', '2010-01-02', '9', '9');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Space Bound', 'JByDbPn6A1o', '04:24', '2010-02-02', 'to be added', '2010-01-02', '9', '9');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Love The Way You Lie', 'uelHwf8o7_U', '04:26', '2010-02-02', 'to be added', '2010-01-02', '9', '9');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Not Afraid', 'j5-yKhDd64s', '04:18', '2010-02-02', 'to be added', '2010-01-02', '9', '9');
 
 -- Breaking Benjamin
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Evil Angel', 'https://youtu.be/Wjrh8vid0IE', '03:40', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Unknown Soldier', 'https://youtu.be/SQl3waLGR4s', '03:42', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('The Diary Of Jane', 'https://youtu.be/DWaB4PXCwFU', '03:27', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
-INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Breath', 'https://youtu.be/Ib9swdvt3mA', '03:38', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Evil Angel', 'Wjrh8vid0IE', '03:40', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Unknown Soldier', 'SQl3waLGR4s', '03:42', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('The Diary Of Jane', 'DWaB4PXCwFU', '03:27', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
+INSERT INTO `music_service`.`songs` (`title`, `youtube_link`, `length`, `uploaded_at`, `lyrics`, `created_at`, `album_id`, `artist_id`) VALUES ('Breath', 'Ib9swdvt3mA', '03:38', '2009-02-02', 'to be added', '2009-01-02', '10', '10');
 
 INSERT INTO music_service.songs_in_album(`album_id`,`song_id`)
 SELECT `album_id`,`song_id` FROM music_service.songs;
