@@ -27,9 +27,12 @@ INSERT INTO `music_service`.`artists` (`name`, `uploaded_at`, `cover_img`) VALUE
 INSERT INTO `music_service`.`artists` (`name`, `uploaded_at`, `cover_img`) VALUES ('Eagles', '2004-08-15', 'imgdotcom');
 INSERT INTO `music_service`.`artists` (`name`, `uploaded_at`, `cover_img`) VALUES ('The Pretty Reckless', '2001-02-18', 'imgdotcom');
 INSERT INTO `music_service`.`artists` (`name`, `uploaded_at`, `cover_img`) VALUES ('OneRepublic', '1998-04-16', 'imgdotcom');
+INSERT INTO `music_service`.`artists` (`name`, `cover_img`, `uploaded_at`) VALUES ('Khalid', '2020-09-16', 'imgdotcom');
+INSERT INTO `music_service`.`artists` (`name`, `cover_img`, `uploaded_at`) VALUES ('Justin Bieber', '2020-09-16', 'imgdotcom');
+INSERT INTO `music_service`.`artists` (`name`, `cover_img`, `uploaded_at`) VALUES ('Ed Sheeran', '2020-09-16', 'imgdotcom');
 
-SELECT * FROM music_service.artists;
-
+-- Albums
+INSERT INTO `music_service`.`albums` (`name`, `created_at`, `uploaded_at`, `cover_img`, `artist_id`) VALUES ('The Colour And The Shape', '1997-08-17', '2010-01-02', 'imgdotcom', '1');
 INSERT INTO `music_service`.`albums` (`name`, `created_at`, `uploaded_at`, `cover_img`, `artist_id`) VALUES ('By the way', '2009-01-01', '2009-01-01', 'imgdotcom', '2');
 INSERT INTO `music_service`.`albums` (`name`, `created_at`, `uploaded_at`, `cover_img`, `artist_id`) VALUES ('Lost With All Hands', '2019-02-01', '2020-01-01', 'imgdotcom', '3');
 INSERT INTO `music_service`.`albums` (`name`, `created_at`, `uploaded_at`, `cover_img`, `artist_id`) VALUES ('Brand New Eyes', '2015-01-01', '2015-01-01', 'imgdotcom', '4');

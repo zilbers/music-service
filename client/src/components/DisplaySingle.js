@@ -11,13 +11,9 @@ function DisplaySingle(props) {
   }
 
   useEffect(() => {
-    console.log(props.match.url);
     getAll(`${props.match.url}`);
   }, []);
 
-  useEffect(() => {
-    console.log(item);
-  }, [item]);
   return (
     <div className="DisplaySingle">
       <h2>{item.name}</h2>

@@ -6,6 +6,11 @@
     color: white;
 }
 
+.row:hover {
+background-color: rgba(255, 255, 255, 0.445);
+border-radius: 5%;
+}
+
 .itemTitle {
     font-weight: 400;
     font-size: 1.1rem;
