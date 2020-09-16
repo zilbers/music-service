@@ -5,9 +5,9 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 
-function Display(props) {
+function List(props) {
   const [data, setData] = useState([]);
-  const type = props.match.params.display;
+  const type = props.dataType;
 
   function getAll(type) {
     get(type)
@@ -29,12 +29,16 @@ function Display(props) {
     getAll(type);
   }, [type]);
 
+  const query = props.match.url.split("/").slice(1);
   return (
     <div className="display">
-      <h2>{type}</h2>
-      {data.map((data) => (
-        <div className="row" key={data.id}>
-          <Link key={data.id} className="links" to={`/${type}/${data.id}`}>
+      {data.map((data, index) => (
+        <div className="row" key={data.id + index + data.name}>
+          <Link
+            key={data.id + index}
+            className="links"
+            to={`/songs/${data.id}?from=${query[0]}&id=${query[1]}`}
+          >
             <span className="title">
               {data.name}
               {data.artist && <span className="artist">{data.artist}</span>}
@@ -49,4 +53,4 @@ function Display(props) {
   );
 }
 
-export default Display;
+export default List;

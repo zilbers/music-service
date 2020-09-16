@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../modules/axios-module";
-import Display from "./Display";
+import { Link } from "react-router-dom";
+import List from "./List";
+import Recomended from "./Recomended";
 
 function DisplaySingle(props) {
   const [item, setItem] = useState({});
   let type =
-    props.match.path === "/playlists/:id" || props.match.path === "/albums/:id";
+    props.match.path === "/playlists/:id" ||
+    props.match.path === "/albums/:id" ||
+    props.match.path === "/artists/:id";
 
   function getAll(type) {
     get(type)
@@ -15,14 +19,21 @@ function DisplaySingle(props) {
 
   useEffect(() => {
     getAll(`${props.match.url}`);
-  }, []);
+  }, [props.match.url]);
 
-  console.log(props.match);
-
+  const query = props.match.url.split("/").slice(1);
+  const url = `/${query[0]}/${query[1]}/list`;
+  const qParams = new URLSearchParams(props.location.search);
+  const qParamsObj = { from: qParams.get("from"), id: qParams.get("id") };
+  
   return (
     <div className="DisplaySingle">
       <h2>{item.name}</h2>
-      {item.artist && <h4>By {item.artist}</h4>}
+      {item.artist && (
+        <Link className="links" to={`/artists/${item.artist_id}`}>
+          <h4>By {item.artist}</h4>
+        </Link>
+      )}
       {item.youtube_link && (
         <iframe
           width="560"
@@ -33,9 +44,22 @@ function DisplaySingle(props) {
           allowFullScreen
         ></iframe>
       )}
-      {type && <Display dataType={`playlists/${props.match.params.id}/list`} />}
+      {type && (
+        <List
+          dataType={url}
+          match={props.match}
+          history={props.history}
+          location={props.location}
+        />
+      )}
       {item.created_at && (
         <h5>Created at: {item.created_at.slice(0, 11).replace("T", " ")}</h5>
+      )}
+      {qParamsObj.from && (
+        <span>
+          {qParamsObj.from}
+          <Recomended url={`${qParamsObj.from}/${qParamsObj.id}/list`} />
+        </span>
       )}
     </div>
   );

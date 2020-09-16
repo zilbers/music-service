@@ -77,10 +77,11 @@ END
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `get_top_playlists`()
 BEGIN
-SELECT user_playlists.playlist_id,playlists.name as name, COUNT(user_playlists.user_id) AS likes
+SELECT user_playlists.playlist_id as id,playlists.name as name, COUNT(user_playlists.user_id) AS likes
 FROM user_playlists 
-JOIN playlists ON playlists.playlist_id=user_playlists.playlist_id
-GROUP BY playlist_id 
+JOIN playlists AS playlists
+ON playlists.playlist_id=user_playlists.playlist_id
+GROUP BY user_playlists.playlist_id 
 ORDER BY likes DESC;
 END
 
@@ -96,4 +97,11 @@ ON playlists.playlist_id = songs_in_playlist.playlist_id
 JOIN artists AS artists
 ON songs.artist_id = artists.artist_id
 WHERE songs_in_playlist.playlist_id = id;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_artist_byId`(IN id INT)
+BEGIN
+SELECT artists.artist_id as id, artists.name as name 
+FROM music_service.artists 
+WHERE artist_id = id;
 END

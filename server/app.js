@@ -120,10 +120,52 @@ app.get('/api/playlists/:id', async (req, res) => {
     });
 });
 
-// Get by playlists ID
+// Get by artist ID
+app.get('/api/artists/:id', async (req, res) => {
+  const { id } = req.params;
+  mysqlCon.query('CALL get_artist_byId(?)',
+    [id], (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+        throw error;
+      } else {
+        results[0][0] ? res.send(results[0]) : res.status(404).send('No playlist with this ID');
+      }
+    });
+});
+
+// Get the songs that are in the playlist
 app.get('/api/playlists/:id/list', async (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_songs_inPlaylist(?)',
+    [id], (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+        throw error;
+      } else {
+        res.send(results[0]);
+      }
+    });
+});
+
+// Get the songs that are in the album
+app.get('/api/albums/:id/list', async (req, res) => {
+  const { id } = req.params;
+  mysqlCon.query('CALL get_songs_inAlbum(?)',
+    [id], (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+        throw error;
+      } else {
+        res.send(results[0]);
+      }
+    });
+});
+
+// Get the songs that are in the album
+app.get('/api/artists/:id/list', async (req, res) => {
+  const { id } = req.params;
+  mysqlCon.query('CALL get_songs_ofArtist(?)',
     [id], (error, results, fields) => {
       if (error) {
         res.status(500).send(error.message);
