@@ -41,7 +41,7 @@ function Home() {
                         key={item.name}
                       >
                         {item.cover_img && (
-                          <img className="cover_img" src={item.cover_img} alt="Italian Trulli" />
+                          <img className="cover_img" src={item.cover_img} alt={`${item.name} image`} />
                         )}
                         <span className="carouselItem" key={item.id}>
                           <span className="itemTitle">{item.name}</span>
