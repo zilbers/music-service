@@ -83,3 +83,17 @@ JOIN playlists ON playlists.playlist_id=user_playlists.playlist_id
 GROUP BY playlist_id 
 ORDER BY likes DESC;
 END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `get_songs_inPlaylist`(IN id INT)
+BEGIN
+SELECT songs_in_playlist.playlist_id as id, playlists.name AS playlist, songs.title AS name, 
+playlists.created_at, artists.name AS artist
+FROM songs_in_playlist AS songs_in_playlist
+JOIN songs AS songs
+ON songs.song_id = songs_in_playlist.song_id
+JOIN playlists AS playlists
+ON playlists.playlist_id = songs_in_playlist.playlist_id
+JOIN artists AS artists
+ON songs.artist_id = artists.artist_id
+WHERE songs_in_playlist.playlist_id = id;
+END

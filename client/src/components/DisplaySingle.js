@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../modules/axios-module";
-import Display from './Display';
+import Display from "./Display";
 
 function DisplaySingle(props) {
   const [item, setItem] = useState({});
-  let type = props.match.path === "/playlists/:id";
+  let type =
+    props.match.path === "/playlists/:id" || props.match.path === "/albums/:id";
 
   function getAll(type) {
     get(type)
@@ -15,6 +16,8 @@ function DisplaySingle(props) {
   useEffect(() => {
     getAll(`${props.match.url}`);
   }, []);
+
+  console.log(props.match);
 
   return (
     <div className="DisplaySingle">
@@ -30,7 +33,7 @@ function DisplaySingle(props) {
           allowFullScreen
         ></iframe>
       )}
-      {type && <Display dataType="songs" />}
+      {type && <Display dataType={`playlists/${props.match.params.id}/list`} />}
       {item.created_at && (
         <h5>Created at: {item.created_at.slice(0, 11).replace("T", " ")}</h5>
       )}
