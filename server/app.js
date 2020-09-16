@@ -115,7 +115,21 @@ app.get('/api/playlists/:id', async (req, res) => {
         res.status(500).send(error.message);
         throw error;
       } else {
-        results[0][0] ? res.send(results[0]) : res.status(404).send('No $playlist with this ID');
+        results[0][0] ? res.send(results[0]) : res.status(404).send('No playlist with this ID');
+      }
+    });
+});
+
+// Get by playlists ID
+app.get('/api/playlists/:id/list', async (req, res) => {
+  const { id } = req.params;
+  mysqlCon.query('CALL get_songs_inPlaylist(?)',
+    [id], (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+        throw error;
+      } else {
+        res.send(results[0]);
       }
     });
 });

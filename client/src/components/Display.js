@@ -5,9 +5,10 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 
-function Display({ match }) {
+function Display(props) {
   const [data, setData] = useState([]);
-  const type = match.params.display;
+  const { match, dataType } = props;
+  const type = dataType ? dataType : match.params.display;
 
   function getAll(type) {
     get(type)
