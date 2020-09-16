@@ -8,7 +8,6 @@ import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-
   // async function deletItem(type, id) {
   //   if (window.confirm(`Delete the ${type.slice(0, -1)}?`)) {
   //     await deleteById(`${type}/${id}`)
@@ -23,11 +22,13 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <h1>Music-Service</h1>
-        <div className="showCase">
-          <Menu />
-          <CreateNewData />
-        </div>
+        <section className="solid">
+          <h1>Music-Service</h1>
+          <div className="showCase">
+            <Menu />
+            <CreateNewData />
+          </div>
+        </section>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/lists/:display" component={Display} />

@@ -1,5 +1,8 @@
 .charts {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .links {
@@ -7,16 +10,51 @@
 }
 
 .row:hover {
-background-color: rgba(255, 255, 255, 0.445);
+background-color: #eeeeee3a;
 border-radius: 5%;
 }
 
 .itemTitle {
     font-weight: 400;
     font-size: 1.1rem;
+    padding: 0px 20px;
 }
 
 .index {
     font-weight: 300;
     font-size: 0.9rem;
+}
+.Home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.chart {
+    width: 80%;
+    border-radius: 10%;
+    margin: 2%;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carouselItem{
+    display: flex;
+    padding: 5%;
+    background-color: #eeeeee67;
+    border-radius: 5%;
+    margin: 2%;
+}
+
+.carouselItem:hover {
+    background-color: #eeeeee3a;
+    }
+
+.carouselLinks{
+    color: white;
 }

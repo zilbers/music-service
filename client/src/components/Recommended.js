@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./css/Table.css";
+import "./css/Recommended.css";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 
-function List(props) {
+function Recommended(props) {
   const [data, setData] = useState([]);
   const url = props.url;
 
@@ -18,7 +18,7 @@ function List(props) {
   }, [url]);
 
   return (
-    <div className="display">
+    <div className="recommendedDisplay">
       {data.map((data, index) => (
         <div className="row" key={(data.id + index) * index}>
           <Link
@@ -37,4 +37,4 @@ function List(props) {
   );
 }
 
-export default List;
+export default Recommended;

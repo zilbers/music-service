@@ -1,0 +1,7 @@
+.recommended {
+    height: 315px;
+    width: 315px;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: #4d5464af;
+}

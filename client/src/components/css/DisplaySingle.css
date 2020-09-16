@@ -1,0 +1,28 @@
+.mainSec {
+    display: flex;
+}
+
+.DisplaySingle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+@media screen and (min-width: 992px) {
+    .DisplaySingle {
+        width: 700px;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .mainSec {
+        display: flex;
+        flex-direction: column;
+    }
+    .recommended {
+        height: 315px;
+        width: 560px;
+    }
+  }

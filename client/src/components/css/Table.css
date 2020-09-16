@@ -11,6 +11,9 @@
     align-items: center;
     width: 90%;
     padding: 2%;
+    margin: 2%;
+    background-color: #393e46;
+    border-radius: 10%;
 }
 
 .mainWrapper{
@@ -38,3 +41,10 @@
 .icon :hover {
     cursor: pointer;
 }
+
+
+@media screen and (min-width: 992px) {
+    .display {
+        width: 700px;
+    }
+  }

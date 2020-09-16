@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Carousel from 'react-elastic-carousel';
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 import "./css/Home.css";
@@ -29,20 +30,21 @@ function Home() {
             return (
               <div key={index} className="chart">
                 <h3 className="title"> Top {endpoints[index]}</h3>
+                <Carousel itemsToShow={3}> 
                 {chart.map((item, smallIndex) => {
                   return (
                     <Link
-                      className="links"
+                      className="carouselLinks"
                       to={`/${endpoints[index]}/${item.id}`}
                       key={item.name}
                     >
-                      <span className="row" key={item.id}>
-                        <span className="index">{smallIndex + 1}</span>{" "}
+                      <span className="carouselItem" key={item.id}>
                         <span className="itemTitle">{item.name}</span>
                       </span>
                     </Link>
                   );
                 })}
+                </Carousel>
               </div>
             );
           })}
