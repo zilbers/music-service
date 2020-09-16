@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./css/Table.css";
+import "./css/Display.css";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { get } from "../modules/axios-module";
@@ -31,19 +31,26 @@ function Display(props) {
 
   return (
     <div className="display">
-      <h2>{type}</h2>
-      {data.map((data) => (
-        <div className="row" key={data.id}>
-          <Link key={data.id} className="links" to={`/${type}/${data.id}`}>
+      <h2 className="header">{type}</h2>
+      {data.map((item) => (
+        <Link key={item.id} className="row" to={`/${type}/${item.id}`}>
+          <div className="linksDisplay" key={item.id}>
+            {item.cover_img && (
+              <img
+                className="cover_img"
+                src={item.cover_img}
+                alt={`${item.name} picture`}
+              />
+            )}
             <span className="title">
-              {data.name}
-              {data.artist && <span className="artist">{data.artist}</span>}
+              {item.name}
+              {item.artist && <span className="artist">{item.artist}</span>}
             </span>
-          </Link>
-          <span className="icon" onClick={() => favorite(data.id)}>
-            {data.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </span>
-        </div>
+            <span className="icon" onClick={() => favorite(item.id)}>
+              {item.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+            </span>
+          </div>
+        </Link>
       ))}
     </div>
   );

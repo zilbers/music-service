@@ -32,20 +32,27 @@ function List(props) {
   const query = props.match.url.split("/").slice(1);
   return (
     <div className="display">
-      {data.map((data, index) => (
-        <div className="row" key={data.id + index + data.name}>
+      {data.map((item, index) => (
+        <div className="row" key={item.id + index + item.name}>
+          {item.cover_img && (
+            <img
+              className="cover_img"
+              src={item.cover_img}
+              alt={item.name}
+            />
+          )}
           <Link
-            key={data.id + index}
+            key={item.id + index}
             className="links"
-            to={`/songs/${data.id}?from=${query[0]}&id=${query[1]}`}
-          >
+            to={`/songs/${item.id}?from=${query[0]}&id=${query[1]}`}
+            >
             <span className="title">
-              {data.name}
-              {data.artist && <span className="artist">{data.artist}</span>}
+              {item.name}
+              {item.artist && <span className="artist">{item.artist}</span>}
             </span>
           </Link>
-          <span className="icon" onClick={() => favorite(data.id)}>
-            {data.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          <span className="icon" onClick={() => favorite(item.id)}>
+            {item.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </span>
         </div>
       ))}

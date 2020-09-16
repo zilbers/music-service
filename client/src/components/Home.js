@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Carousel from 'react-elastic-carousel';
+import Carousel from "react-elastic-carousel";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 import "./css/Home.css";
+
+const styleCarousel = { color: "white" };
 
 function Home() {
   const [charts, setCharts] = useState([]);
@@ -30,20 +32,23 @@ function Home() {
             return (
               <div key={index} className="chart">
                 <h3 className="title"> Top {endpoints[index]}</h3>
-                <Carousel itemsToShow={3}> 
-                {chart.map((item, smallIndex) => {
-                  return (
-                    <Link
-                      className="carouselLinks"
-                      to={`/${endpoints[index]}/${item.id}`}
-                      key={item.name}
-                    >
-                      <span className="carouselItem" key={item.id}>
-                        <span className="itemTitle">{item.name}</span>
-                      </span>
-                    </Link>
-                  );
-                })}
+                <Carousel itemsToShow={3} style={styleCarousel}>
+                  {chart.map((item, smallIndex) => {
+                    return (
+                      <Link
+                        className="carouselLinks"
+                        to={`/${endpoints[index]}/${item.id}`}
+                        key={item.name}
+                      >
+                        {item.cover_img && (
+                          <img className="cover_img" src={item.cover_img} alt="Italian Trulli" />
+                        )}
+                        <span className="carouselItem" key={item.id}>
+                          <span className="itemTitle">{item.name}</span>
+                        </span>
+                      </Link>
+                    );
+                  })}
                 </Carousel>
               </div>
             );
