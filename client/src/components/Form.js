@@ -10,7 +10,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import "./css/Form.css";
-import { get, deleteById, update, create } from "../modules/axios-module";
+import { get, create } from "../modules/axios-module";
 
 const types = [
   {

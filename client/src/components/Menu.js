@@ -9,6 +9,8 @@ import AlbumIcon from "@material-ui/icons/Album";
 import MusicNoteIcon from "@material-ui/icons/MusicNote";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
 import PersonIcon from "@material-ui/icons/Person";
+import HomeIcon from "@material-ui/icons/Home";
+import { Link } from "react-router-dom";
 
 const StyledMenu = withStyles({
   paper: {
@@ -43,7 +45,6 @@ const StyledMenuItem = withStyles((theme) => ({
 
 export default function MenuComp(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { getAll } = props;
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -71,53 +72,70 @@ export default function MenuComp(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem
-          onClick={() => {
-            handleClose();
-            getAll("songs");
-          }}
-        >
-          <ListItemIcon>
-            <MusicNoteIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="songs" />
-        </StyledMenuItem>
+        <Link to="/">
+          <StyledMenuItem
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            <ListItemIcon>
+              <HomeIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </StyledMenuItem>
+        </Link>
 
-        <StyledMenuItem
-          onClick={() => {
-            handleClose();
-            getAll("albums");
-          }}
-        >
-          <ListItemIcon>
-            <AlbumIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Albums" />
-        </StyledMenuItem>
+        <Link to="/lists/songs">
+          <StyledMenuItem
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            <ListItemIcon>
+              <MusicNoteIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="songs" />
+          </StyledMenuItem>
+        </Link>
 
-        <StyledMenuItem
-          onClick={() => {
-            handleClose();
-            getAll("artists");
-          }}
-        >
-          <ListItemIcon>
-            <PersonIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="Artists" />
-        </StyledMenuItem>
+        <Link to="/lists/albums">
+          <StyledMenuItem
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            <ListItemIcon>
+              <AlbumIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Albums" />
+          </StyledMenuItem>
+        </Link>
 
-        <StyledMenuItem
-          onClick={() => {
-            handleClose();
-            getAll("playlists");
-          }}
-        >
-          <ListItemIcon>
-            <QueueMusicIcon fontSize="small" />
-          </ListItemIcon>
-          <ListItemText primary="playlists" />
-        </StyledMenuItem>
+        <Link to="/lists/artists">
+          <StyledMenuItem
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            <ListItemIcon>
+              <PersonIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="Artists" />
+          </StyledMenuItem>
+        </Link>
+
+        <Link to="/lists/playlists">
+          <StyledMenuItem
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            <ListItemIcon>
+              <QueueMusicIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText primary="playlists" />
+          </StyledMenuItem>
+        </Link>
       </StyledMenu>
     </div>
   );

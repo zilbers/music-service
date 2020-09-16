@@ -2,47 +2,41 @@ import React, { useState } from "react";
 import Display from "./components/Display";
 import Menu from "./components/Menu";
 import CreateNewData from "./components/CreateNewData";
+import Home from "./components/Home";
+import DisplaySingle from "./components/DisplaySingle";
 import "./App.css";
-import { get, deleteById, update, create } from "./modules/axios-module";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
-  const [data, setData] = useState();
 
-  function getAll(type) {
-    get(type)
-      .then((data) => setData(data.data))
-      .catch((err) => console.log(err));
-  }
-
-  async function deletItem(type, id) {
-    if (window.confirm(`Delete the ${type.slice(0, -1)}?`)) {
-      await deleteById(`${type}/${id}`)
-        .then((res) => {
-          getAll();
-          alert(res.data);
-        })
-        .catch((err) => console.log(err));
-    }
-  }
-
-  function favorite(id) {
-    const currentDataId = data.slice();
-    let index = currentDataId.findIndex((item) => item.id === id);
-    currentDataId[index].favorite
-      ? delete currentDataId[index].favorite
-      : (currentDataId[index].favorite = true);
-    console.log(currentDataId);
-    setData(currentDataId);
-  }
+  // async function deletItem(type, id) {
+  //   if (window.confirm(`Delete the ${type.slice(0, -1)}?`)) {
+  //     await deleteById(`${type}/${id}`)
+  //       .then((res) => {
+  //         getAll();
+  //         alert(res.data);
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }
 
   return (
     <div className="App">
-      <h1>Music-Service</h1>
-      <div className="showCase">
-        <Menu getAll={getAll} />
-        <CreateNewData />
-      </div>
-      {data && <Display data={data} favorite={favorite} />}
+      <Router>
+        <h1>Music-Service</h1>
+        <div className="showCase">
+          <Menu />
+          <CreateNewData />
+        </div>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/lists/:display" component={Display} />
+          <Route path="/songs/:id" component={DisplaySingle} />
+          <Route path="/albums/:id" component={DisplaySingle} />
+          <Route path="/artists/:id" component={DisplaySingle} />
+          <Route path="/playlists/:id" component={DisplaySingle} />
+        </Switch>
+      </Router>
     </div>
   );
 }
