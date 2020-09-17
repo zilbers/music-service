@@ -51,6 +51,7 @@ export default function Form(props) {
   const { register, handleSubmit, control, errors } = useForm();
   const [type, setType] = useState("");
   const [artists, setArtists] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
   const onSubmit = (data) => {
     props.handleClose();
@@ -73,7 +74,16 @@ export default function Form(props) {
       .catch((err) => console.log(err));
   };
 
-  useEffect(getArtists, []);
+  const getAlbums = () => {
+    get("albums")
+      .then((data) => setAlbums(data.data))
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getArtists();
+    getAlbums();
+  }, []);
 
   return (
     <form
@@ -127,6 +137,37 @@ export default function Form(props) {
                 />
                 {errors.artist && (
                   <FormHelperText>{errors.artist.message}</FormHelperText>
+                )}
+              </FormControl>
+            </>
+          )}
+
+          {/* Albums input */}
+          {type === "songs" && (
+            <>
+              <FormControl error={Boolean(errors.albums)}>
+                <InputLabel id="albums">Albums</InputLabel>
+                <Controller
+                  as={
+                    <Select
+                      labelId="select-albums"
+                      id="select-albums"
+                      value={type}
+                    >
+                      {albums.map((option) => (
+                        <MenuItem key={option.id} value={`${option.id}`}>
+                          {option.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  }
+                  name="albumst_id"
+                  rules={{ required: "this is required" }}
+                  control={control}
+                  defaultValue=""
+                />
+                {errors.albums && (
+                  <FormHelperText>{errors.albums.message}</FormHelperText>
                 )}
               </FormControl>
             </>

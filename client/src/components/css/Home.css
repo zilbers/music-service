@@ -29,12 +29,16 @@ border-radius: 5%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 80%;
 }
 .chart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 80%;
     border-radius: 10%;
     margin: 2%;
+    background: #4d5464af;
 }
 
 .title {
@@ -46,9 +50,9 @@ border-radius: 5%;
 .carouselItem{
     display: flex;
     padding: 5%;
-    background-color: #eeeeee67;
     border-radius: 5%;
     margin: 2%;
+    border: white 1px;
 }
 
 .carouselItem:hover {
@@ -61,4 +65,50 @@ border-radius: 5%;
 
 .cover_img{
     height: 100px;
+    width: 100px;
 }
+
+.brcpxa{
+    display: none;
+  }
+  .ikyGAt{
+    display: none;
+  }
+  
+  .sc-bdnylx.hCVuYx.rec.rec-arrow.rec.rec-arrow-left{
+    font-size: 20px;
+    width:8px;
+    min-width: 20px;
+    height:20px;
+    line-height: 0;
+    background-color: #383838;
+    color: #ffffff;
+    
+  }
+  .sc-bdnylx.chowzb.rec.rec-arrow.rec.rec-arrow-right{
+    background: #ffffff;
+    background-color: #383838;
+    font-size: 20px;
+    width:8px;
+    min-width: 20px;
+    height:20px;
+    line-height: 0;
+  }
+  .sc-bdnylx.chowzb.rec.rec-arrow.rec.rec-arrow-left{
+    color: #ffffff;
+    background-color: #383838;
+    font-size: 20px;
+    width:8px;
+    min-width: 20px;
+    height:20px;
+    line-height: 0;
+  }
+  .sc-bdnylx.hCVuYx.rec.rec-arrow.rec.rec-arrow-right{
+    color: #ffffff;
+    background-color: #383838;
+    font-size: 20px;
+    width:8px;
+    min-width: 20px;
+    height:20px;
+    line-height: 0;
+  }
