@@ -36,6 +36,9 @@ function DisplaySingle(props) {
         </Link>
       )}
       <div className="mainSec">
+      {item.cover_img && (
+                          <img className="cover_img" src={item.cover_img} alt={`${item.name} image`} />
+                        )}
         {item.youtube_link && (
           <iframe
             width="560"

@@ -4,6 +4,7 @@ import Menu from "./components/Menu";
 import CreateNewData from "./components/CreateNewData";
 import Home from "./components/Home";
 import DisplaySingle from "./components/DisplaySingle";
+import Page404 from "./components/Page404";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -36,6 +37,7 @@ function App() {
           <Route path="/albums/:id" component={DisplaySingle} />
           <Route path="/artists/:id" component={DisplaySingle} />
           <Route path="/playlists/:id" component={DisplaySingle} />
+          <Route component={Page404} />
         </Switch>
       </Router>
     </div>

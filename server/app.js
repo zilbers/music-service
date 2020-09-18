@@ -225,7 +225,7 @@ app.post('/api/songs', (req, res) => {
   const collums = req.body.collums.map((collum) => `\`${collum}\``).join();
   const values = req.body.values.map((value) => `'${value}'`).join();
   const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
+  console.log(collums, values);
   mysqlCon.query(`INSERT INTO \`${database}\`.\`songs\` (${collums}, uploaded_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {

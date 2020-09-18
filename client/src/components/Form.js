@@ -68,21 +68,16 @@ export default function Form(props) {
     setType(event.target.value);
   };
 
-  const getArtists = () => {
-    get("artists")
-      .then((data) => setArtists(data.data))
-      .catch((err) => console.log(err));
-  };
-
-  const getAlbums = () => {
-    get("albums")
-      .then((data) => setAlbums(data.data))
+  const getAll = (endpoint, setter) => {
+    get(endpoint)
+      .then((data) => setter(data.data))
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    getArtists();
-    getAlbums();
+    getAll("artists", setArtists)
+    getAll("albums", setAlbums
+    )
   }, []);
 
   return (
@@ -161,7 +156,7 @@ export default function Form(props) {
                       ))}
                     </Select>
                   }
-                  name="albumst_id"
+                  name="album_id"
                   rules={{ required: "this is required" }}
                   control={control}
                   defaultValue=""
