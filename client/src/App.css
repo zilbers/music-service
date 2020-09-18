@@ -1,13 +1,18 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   background-color: #222831;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   font-size: calc(10px + 1vmin);
   color: white;
   width: 100%;
+}
+
+.Responsive{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .showCase{
@@ -42,4 +47,10 @@ a {
   flex-direction: column;
   align-items: center;
   width: 80%;
+}
+
+@media screen and (min-width: 1300px) {
+  .Responsive {
+      width: 1300px;
+  }
 }

@@ -31,6 +31,19 @@ mysqlCon.connect((err) => {
   console.log('Connected to MySql!');
 });
 
+// Login
+app.post('/api/login', (req, res) => {
+  const { email, pass } = req.params;
+  const query = `CALL login('${email}','${pass}')`;
+  mysqlCon.query((query), (error, results, fields) => {
+    if (error) {
+      res.status(500).send(error.message);
+    } else {
+      res.status(200).send(results);
+    }
+  });
+});
+
 // Get all from songs
 app.get('/api/songs', (req, res) => {
   mysqlCon.query('CALL get_all_songs()',

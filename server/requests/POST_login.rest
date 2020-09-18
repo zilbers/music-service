@@ -1,0 +1,12 @@
+POST http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+    "email":"donald70@example.net",
+    "pass":"2597e87fb979dc7a8f5e98a5d98bc213ba8120cd"
+}
+
+# {
+#     "email":"donald70@s.net",
+#     "pass":"2597e87fa8f5e98a5d98bc213ba8120cd"
+# }

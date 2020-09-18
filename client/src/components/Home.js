@@ -4,8 +4,6 @@ import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 import "./css/Home.css";
 
-const styleCarousel = { color: "white" };
-
 function Home() {
   const [charts, setCharts] = useState([]);
   const endpoints = ["songs", "albums", "artists", "playlists"];
@@ -32,7 +30,7 @@ function Home() {
             return (
               <div key={index} className="chart">
                 <h3 className="title"> Top {endpoints[index]}</h3>
-                <Carousel itemsToShow={3} style={styleCarousel}>
+                <Carousel itemsToShow={3}>
                   {chart.map((item, smallIndex) => {
                     return (
                       <Link
