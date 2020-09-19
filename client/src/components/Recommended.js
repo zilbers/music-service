@@ -34,8 +34,6 @@ function Recommended(props) {
               </Link>
             </div>
           );
-        } else {
-          return;
         }
       })}
     </div>

@@ -26,8 +26,8 @@ class Login extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (
-      this.state.username == "admin@littech.in" &&
-      this.state.password == "secret"
+      this.state.username === "admin@littech.in" &&
+      this.state.password === "secret"
     ) {
       this.props.history.push("/home");
     } else {

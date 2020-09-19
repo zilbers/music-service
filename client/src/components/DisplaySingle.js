@@ -36,12 +36,13 @@ function DisplaySingle(props) {
       )}
       <div className="mainSec">
       {item.cover_img && (
-                          <img className="cover_img" src={item.cover_img} alt={`${item.name} image`} />
+                          <img className="cover_img" src={item.cover_img} alt={`${item.name}`} />
                         )}
         {item.youtube_link && (
           <iframe
             width="560"
             height="315"
+            title={item.name}
             src={`https://www.youtube.com/embed/${item.youtube_link}`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

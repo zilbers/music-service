@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Display from "./components/Display";
 import Menu from "./components/Menu";
 import CreateNewData from "./components/CreateNewData";

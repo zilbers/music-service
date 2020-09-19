@@ -33,11 +33,11 @@ border-radius: 5%;
 }
 .chart {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 80%;
     margin: 2%;
-    padding-top: 20px;
     padding-left: 10px;
     padding-right: 10px;
     background: #4d5464af;
@@ -70,6 +70,7 @@ border-radius: 5%;
 .cover_img{
     height: 100px;
     width: 100px;
+    border-radius: 5%;
 }
 
 .brcpxa{
@@ -78,38 +79,40 @@ border-radius: 5%;
   .ikyGAt{
     display: none;
   }
-  
-  .sc-bdnylx.hCVuYx.rec.rec-arrow.rec.rec-arrow-left{
-    font-size: 20px;
-    width:8px;
-    min-width: 20px;
-    height:20px;
-    line-height: 0;
-    background-color: #383838;
-    color: #ffffff;
-    
-  }
+
   .sc-bdnylx.chowzb.rec.rec-arrow.rec.rec-arrow-right{
-    background: #ffffff;
-    background-color: #383838;
+    background-color: #ffffff;
+    color: #383838;
     font-size: 20px;
     width:8px;
     min-width: 20px;
     height:20px;
     line-height: 0;
   }
+
   .sc-bdnylx.chowzb.rec.rec-arrow.rec.rec-arrow-left{
-    color: #ffffff;
-    background-color: #383838;
+    background-color: #ffffff;
+    color: #383838;
     font-size: 20px;
     width:8px;
     min-width: 20px;
     height:20px;
     line-height: 0;
   }
+
   .sc-bdnylx.hCVuYx.rec.rec-arrow.rec.rec-arrow-right{
-    color: #ffffff;
-    background-color: #383838;
+    background-color: #4d546400;
+    color: #4d5464af;
+    font-size: 20px;
+    width:8px;
+    min-width: 20px;
+    height:20px;
+    line-height: 0;
+  }
+
+  .sc-bdnylx.hCVuYx.rec.rec-arrow.rec.rec-arrow-left{
+    background-color: #4d546400;
+    color: #4d5464af;
     font-size: 20px;
     width:8px;
     min-width: 20px;

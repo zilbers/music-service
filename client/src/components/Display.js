@@ -39,7 +39,7 @@ function Display(props) {
               <img
                 className="cover_img"
                 src={item.cover_img}
-                alt={`${item.name} picture`}
+                alt={`${item.name}`}
               />
             )}
             <span className="title">

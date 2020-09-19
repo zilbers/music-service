@@ -42,7 +42,14 @@ function Home() {
                           <img
                             className="cover_img"
                             src={item.cover_img}
-                            alt={`${item.name} image`}
+                            alt={`${item.name}`}
+                          />
+                        )}
+                        {item.youtube_link && (
+                          <img
+                            className="cover_img"
+                            src={`https://img.youtube.com/vi/${item.youtube_link}/0.jpg`}
+                            alt={`${item.name}`}
                           />
                         )}
                         <span className="itemTitle" key={item.id}>
