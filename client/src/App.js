@@ -5,7 +5,6 @@ import CreateNewData from "./components/CreateNewData";
 import Home from "./components/Home";
 import DisplaySingle from "./components/DisplaySingle";
 import Page404 from "./components/Page404";
-import Login from './components/Login'
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -33,7 +32,6 @@ function App() {
             </div>
           </section>
           <Switch>
-            <Route path="/" exact component={Login} />
             <Route path="/home" exact component={Home} />
             <Route path="/lists/:display" component={Display} />
             <Route path="/songs/:id" component={DisplaySingle} />

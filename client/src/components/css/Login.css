@@ -1,0 +1,20 @@
+ .login-form
+ {
+     display: flex;
+ justify-content: center;
+ min-height: 50vh;
+ }
+
+.login-background
+ {
+ justify-content: center;
+ min-height: 30vh;
+ padding: 50px;
+ background: black;
+ }
+ 
+ .MuiGrid-item {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }

@@ -10,6 +10,7 @@ import {
   Link,
 } from "@material-ui/core";
 import { create } from "../modules/axios-module";
+import "./css/Login.css";
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Login extends React.Component {
     create("login", credntials)
       .then((res) => {
         if (res.data) {
-          this.props.history.push("/");
+          this.props.history.push("/home");
         } else {
           alert("Incorrect Credntials!");
         }
@@ -47,7 +48,7 @@ class Login extends React.Component {
           <Toolbar>
             <Grid container justify="center" wrap="wrap">
               <Grid item>
-                <Typography variant="h6">Music-Service</Typography>
+                <Typography variant="h2">Music-Service</Typography>
               </Grid>
             </Grid>
           </Toolbar>
