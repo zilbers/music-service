@@ -33,13 +33,13 @@ mysqlCon.connect((err) => {
 
 // Login
 app.post('/api/login', (req, res) => {
-  const { email, pass } = req.params;
-  const query = `CALL login('${email}','${pass}')`;
+  const { email, pass } = req.body;
+  const query = `CALL music_service.login('${email}','${pass}')`;
   mysqlCon.query((query), (error, results, fields) => {
     if (error) {
       res.status(500).send(error.message);
     } else {
-      res.status(200).send(results);
+      res.status(200).send(!!results[0][0]);
     }
   });
 });

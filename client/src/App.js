@@ -33,13 +33,13 @@ function App() {
             </div>
           </section>
           <Switch>
-            <Route path="/" exact component={Home} />
+            <Route path="/" exact component={Login} />
+            <Route path="/home" exact component={Home} />
             <Route path="/lists/:display" component={Display} />
             <Route path="/songs/:id" component={DisplaySingle} />
             <Route path="/albums/:id" component={DisplaySingle} />
             <Route path="/artists/:id" component={DisplaySingle} />
             <Route path="/playlists/:id" component={DisplaySingle} />
-            <Route path="/login" exact component={Login} />
             <Route component={Page404} />
           </Switch>
         </Router>

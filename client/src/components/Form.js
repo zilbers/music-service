@@ -110,7 +110,7 @@ export default function Form(props) {
           {(type === "albums" || type === "songs") && (
             <>
               <FormControl error={Boolean(errors.artist)}>
-                <InputLabel id="artist">artist</InputLabel>
+                <InputLabel id="artist">Artist</InputLabel>
                 <Controller
                   as={
                     <Select

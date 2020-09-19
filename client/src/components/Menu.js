@@ -72,7 +72,7 @@ export default function MenuComp(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <Link to="/">
+        <Link to="/home">
           <StyledMenuItem
             onClick={() => {
               handleClose();

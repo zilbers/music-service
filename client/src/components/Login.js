@@ -9,6 +9,7 @@ import {
   Toolbar,
   Link,
 } from "@material-ui/core";
+import { create } from "../modules/axios-module";
 
 class Login extends React.Component {
   constructor(props) {
@@ -25,14 +26,19 @@ class Login extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault();
-    if (
-      this.state.username === "admin@littech.in" &&
-      this.state.password === "secret"
-    ) {
-      this.props.history.push("/home");
-    } else {
-      alert("Incorrect Credntials!");
-    }
+    const credntials = {
+      email: this.state.username,
+      pass: this.state.password,
+    };
+    create("login", credntials)
+      .then((res) => {
+        if (res.data) {
+          this.props.history.push("/");
+        } else {
+          alert("Incorrect Credntials!");
+        }
+      })
+      .catch((res) => alert(res.message));
   }
   render() {
     return (
