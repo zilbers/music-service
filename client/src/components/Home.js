@@ -30,7 +30,7 @@ function Home() {
             return (
               <div key={index} className="chart">
                 <h3 className="title"> Top {endpoints[index]}</h3>
-                <Carousel itemsToShow={3}>
+                <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
                     return (
                       <Link

@@ -42,6 +42,13 @@ function Display(props) {
                 alt={`${item.name}`}
               />
             )}
+            {item.youtube_link && (
+              <img
+                className="cover_img"
+                src={`https://img.youtube.com/vi/${item.youtube_link}/0.jpg`}
+                alt={`${item.name}`}
+              />
+            )}
             <span className="title">
               {item.name}
               {item.artist && <span className="artist">{item.artist}</span>}
