@@ -11,6 +11,9 @@ import {
 } from "@material-ui/core";
 import { create } from "../modules/axios-module";
 import "./css/Login.css";
+import { createBrowserHistory } from "history";
+
+const history = createBrowserHistory();
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,8 +36,10 @@ class Login extends React.Component {
     };
     create("login", credntials)
       .then((res) => {
+        console.log(this.props);
         if (res.data) {
-          this.props.history.push("/home");
+          this.props.setLogged(true);
+          history.push("home");
         } else {
           alert("Incorrect Credntials!");
         }
