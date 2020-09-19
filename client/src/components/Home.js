@@ -34,15 +34,19 @@ function Home() {
                   {chart.map((item, smallIndex) => {
                     return (
                       <Link
-                        className="carouselLinks"
+                        className="carouselLinks carouselItem"
                         to={`/${endpoints[index]}/${item.id}`}
                         key={item.name}
                       >
                         {item.cover_img && (
-                          <img className="cover_img" src={item.cover_img} alt={`${item.name} image`} />
+                          <img
+                            className="cover_img"
+                            src={item.cover_img}
+                            alt={`${item.name} image`}
+                          />
                         )}
-                        <span className="carouselItem" key={item.id}>
-                          <span className="itemTitle">{item.name}</span>
+                        <span className="itemTitle" key={item.id}>
+                          {item.name}
                         </span>
                       </Link>
                     );

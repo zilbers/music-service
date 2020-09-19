@@ -36,8 +36,10 @@ border-radius: 5%;
     justify-content: center;
     align-items: center;
     width: 80%;
-    border-radius: 10%;
     margin: 2%;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
     background: #4d5464af;
 }
 
@@ -49,8 +51,10 @@ border-radius: 5%;
 
 .carouselItem{
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 5%;
-    border-radius: 5%;
     margin: 2%;
     border: white 1px;
 }

@@ -26,7 +26,6 @@ function DisplaySingle(props) {
   const url = `/${query[0]}/${query[1]}/list`;
   const qParams = new URLSearchParams(props.location.search);
   const qParamsObj = { from: qParams.get("from"), id: qParams.get("id") };
-
   return (
     <div className="DisplaySingle">
       <h2 className="header">{item.name}</h2>
@@ -53,12 +52,12 @@ function DisplaySingle(props) {
           (qParamsObj.from ? (
             <div className="recommended">
               From same {qParamsObj.from}
-              <Recommended url={`${qParamsObj.from}/${qParamsObj.id}/list`} />
+              <Recommended url={`${qParamsObj.from}/${qParamsObj.id}/list`} item_id={item.id}/>
             </div>
           ) : (
             <div className="recommended">
               More from charts
-              <Recommended url={`top/songs`} />
+              <Recommended url={`top/songs`} item_id={item.id}/>
             </div>
           ))}
       </div>

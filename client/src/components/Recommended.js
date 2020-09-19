@@ -16,23 +16,28 @@ function Recommended(props) {
   useEffect(() => {
     getAll(url);
   }, [url]);
-
   return (
     <div className="recommendedDisplay">
-      {data.map((data, index) => (
-        <div className="row" key={(data.id + index) * index}>
-          <Link
-            key={data.id + index}
-            className="links"
-            to={`/songs/${data.id}`}
-          >
-            <span className="title">
-              {data.name}
-              {data.artist && <span className="artist">{data.artist}</span>}
-            </span>
-          </Link>
-        </div>
-      ))}
+      {data.map((data, index) => {
+        if (data.id !== props.item_id) {
+          return (
+            <div className="row" key={(data.id + index) * index}>
+              <Link
+                key={data.id + index}
+                className="links"
+                to={`/songs/${data.id}`}
+              >
+                <span className="title">
+                  {data.name}
+                  {data.artist && <span className="artist">{data.artist}</span>}
+                </span>
+              </Link>
+            </div>
+          );
+        } else {
+          return;
+        }
+      })}
     </div>
   );
 }
