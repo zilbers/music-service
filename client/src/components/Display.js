@@ -19,9 +19,7 @@ function Display(props) {
 
   function like(id) {
     create(`${type}/like`, { song_id: id, user_id: context.user_id })
-      .then((res) => {
-        console.log(res);
-      })
+      .then(() => {})
       .catch((err) => console.log(err));
   }
 
@@ -32,7 +30,6 @@ function Display(props) {
     currentDataId[index].favorite
       ? delete currentDataId[index].favorite
       : (currentDataId[index].favorite = true);
-    console.log(currentDataId);
     setData(currentDataId);
   }
 

@@ -295,9 +295,14 @@ app.post('/api/songs/like', async (req, res) => {
   mysqlCon.query('CALL like_song(?,?)',
     [user_id, song_id], (error, results, fields) => {
       if (error) {
-        return res.status(500).send('Error with action');
-      } if (results.length) {
-        console.log('The result is  ', rows[0].user);
+        mysqlCon.query('CALL remove_likeSong(?,?)',
+          [user_id, song_id], (err1, res1, fields) => {
+            if (err1) {
+              return res.status(500).send('Error with action');
+            }
+            console.log('remove like');
+            return res.send(res1[0]);
+          });
       } else {
         res.send(results[0]);
       }
