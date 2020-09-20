@@ -1,10 +1,25 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import Button from "@material-ui/core/Button";
 import Form from "./Form";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    "&:focus": {
+      backgroundColor: theme.palette.primary.main,
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+        color: theme.palette.common.white,
+      },
+    },
+  },
+}))(MenuItem);
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -29,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 export default function TransitionsModal(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-
   const handleOpen = () => {
     setOpen(true);
   };
@@ -40,15 +54,17 @@ export default function TransitionsModal(props) {
 
   return (
     <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="secondary"
-        onClick={handleOpen}
+      <StyledMenuItem
+        onClick={() => {
+          props.menuHandleClose();
+          handleOpen();
+        }}
       >
-        Add
-      </Button>
+        <ListItemIcon>
+          <AddBoxIcon />
+        </ListItemIcon>
+        <ListItemText primary="New" />
+      </StyledMenuItem>
       <Modal
         aria-labelledby="add-new-form"
         aria-describedby="sends-new-data-to-server"

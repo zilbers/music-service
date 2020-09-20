@@ -12,7 +12,7 @@ import {
 import { create } from "../modules/axios-module";
 import "./css/Login.css";
 import { createBrowserHistory } from "history";
-import {UserContext} from '../context/UserContext'
+import { UserContext } from "../context/UserContext";
 
 const history = createBrowserHistory();
 
@@ -41,8 +41,8 @@ class Login extends React.Component {
     create("login", credntials)
       .then((res) => {
         if (res.data) {
-          this.props.setLogged(true);
-          history.push("home");
+          this.context.logUserIn(res.data);
+          history.push("/");
         } else {
           alert("Incorrect Credntials!");
         }

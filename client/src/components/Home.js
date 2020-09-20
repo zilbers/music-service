@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Carousel from "react-elastic-carousel";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 import "./css/Home.css";
+import { UserContext } from "../context/UserContext";
 
 function Home() {
   const [charts, setCharts] = useState([]);

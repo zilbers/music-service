@@ -1,6 +1,5 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -10,7 +9,10 @@ import MusicNoteIcon from "@material-ui/icons/MusicNote";
 import QueueMusicIcon from "@material-ui/icons/QueueMusic";
 import PersonIcon from "@material-ui/icons/Person";
 import HomeIcon from "@material-ui/icons/Home";
+import MenuIcon from "@material-ui/icons/Menu";
 import { Link } from "react-router-dom";
+import IconButton from "@material-ui/core/IconButton";
+import CreateNewData from "./CreateNewData";
 
 const StyledMenu = withStyles({
   paper: {
@@ -45,6 +47,7 @@ const StyledMenuItem = withStyles((theme) => ({
 
 export default function MenuComp(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [modal, setModal] = React.useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -56,15 +59,15 @@ export default function MenuComp(props) {
 
   return (
     <div>
-      <Button
-        aria-controls="customized-menu"
-        aria-haspopup="true"
-        variant="contained"
-        color="primary"
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
         onClick={handleClick}
       >
-        Menu
-      </Button>
+        <MenuIcon />
+      </IconButton>
+
       <StyledMenu
         id="customized-menu"
         anchorEl={anchorEl}
@@ -136,6 +139,8 @@ export default function MenuComp(props) {
             <ListItemText primary="playlists" />
           </StyledMenuItem>
         </Link>
+
+        <CreateNewData menuHandleClose={handleClose} />
       </StyledMenu>
     </div>
   );

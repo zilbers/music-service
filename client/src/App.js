@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Display from "./components/Display";
-import Menu from "./components/Menu";
-import CreateNewData from "./components/CreateNewData";
 import Home from "./components/Home";
 import DisplaySingle from "./components/DisplaySingle";
 import Page404 from "./components/Page404";
 import Login from "./components/Login";
+import AppBar from "./components/AppBar";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import UserContextProvider from "./context/UserContext";
+import { UserContext } from "./context/UserContext";
 
 function App() {
   // async function deletItem(type, id) {
@@ -21,30 +20,24 @@ function App() {
   //       .catch((err) => console.log(err));
   //   }
   // }
-  const [logged, setLogged] = useState(false);
+  // const [logged, setLogged] = useState(false);
+  const context = useContext(UserContext);
 
   return (
-    <UserContextProvider>
-      {!logged && (
+    <>
+      {!context.logged ? (
         <Router>
           <Route path="/">
-            <Login setLogged={setLogged} />
+            <Login />
           </Route>
         </Router>
-      )}
-      {logged && (
+      ) : (
         <div className="App">
           <div className="Responsive">
             <Router>
-              <section className="solid">
-                <h1>Music-Service</h1>
-                <div className="showCase">
-                  <Menu />
-                  <CreateNewData />
-                </div>
-              </section>
+              <AppBar className="AppBar" />
               <Switch>
-                <Route path="/home" component={Home} />
+                <Route path="/" component={Home} />
                 <Route path="/lists/:display" component={Display} />
                 <Route path="/songs/:id" component={DisplaySingle} />
                 <Route path="/albums/:id" component={DisplaySingle} />
@@ -56,7 +49,7 @@ function App() {
           </div>
         </div>
       )}
-    </UserContextProvider>
+    </>
   );
 }
 
