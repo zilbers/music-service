@@ -8,6 +8,7 @@ import Page404 from "./components/Page404";
 import Login from "./components/Login";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import UserContextProvider from "./context/UserContext";
 
 function App() {
   // async function deletItem(type, id) {
@@ -23,12 +24,12 @@ function App() {
   const [logged, setLogged] = useState(false);
 
   return (
-    <>
+    <UserContextProvider>
       {!logged && (
         <Router>
-            <Route path="/">
-              <Login setLogged={setLogged}/>
-            </Route>
+          <Route path="/">
+            <Login setLogged={setLogged} />
+          </Route>
         </Router>
       )}
       {logged && (
@@ -55,7 +56,7 @@ function App() {
           </div>
         </div>
       )}
-    </>
+    </UserContextProvider>
   );
 }
 

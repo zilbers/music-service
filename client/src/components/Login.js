@@ -12,6 +12,7 @@ import {
 import { create } from "../modules/axios-module";
 import "./css/Login.css";
 import { createBrowserHistory } from "history";
+import {UserContext} from '../context/UserContext'
 
 const history = createBrowserHistory();
 
@@ -22,18 +23,21 @@ class Login extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleChange(event) {
     this.setState({
       username: event.state.username,
       password: event.state.password,
     });
   }
+
   handleSubmit(event) {
     event.preventDefault();
     const credntials = {
       email: this.state.username,
       pass: this.state.password,
     };
+
     create("login", credntials)
       .then((res) => {
         if (res.data) {
@@ -45,6 +49,9 @@ class Login extends React.Component {
       })
       .catch((res) => alert(res.message));
   }
+
+  static contextType = UserContext;
+
   render() {
     return (
       <div>
