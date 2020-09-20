@@ -39,7 +39,7 @@ app.post('/api/login', (req, res) => {
     if (error) {
       res.status(500).send(error.message);
     } else {
-      res.status(200).send(!!results[0][0]);
+      res.status(200).send(results[0][0]);
     }
   });
 });
@@ -59,6 +59,19 @@ app.get('/api/songs', (req, res) => {
 // Get all from albums
 app.get('/api/albums', (req, res) => {
   mysqlCon.query('CALL get_all_albums()',
+    (error, results, fields) => {
+      if (error) {
+        res.status(500).send(error.message);
+      } else {
+        res.status(200).send(results[0]);
+      }
+    });
+});
+
+// Get liked sogs
+app.get('/api/liked/songs', (req, res) => {
+  const { id } = req.body;
+  mysqlCon.query('CALL get_user_likedSongs(?)', [id],
     (error, results, fields) => {
       if (error) {
         res.status(500).send(error.message);

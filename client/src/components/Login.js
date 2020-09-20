@@ -36,7 +36,6 @@ class Login extends React.Component {
     };
     create("login", credntials)
       .then((res) => {
-        console.log(this.props);
         if (res.data) {
           this.props.setLogged(true);
           history.push("home");
