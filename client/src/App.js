@@ -37,7 +37,7 @@ function App() {
             <Router>
               <AppBar className="AppBar" />
               <Switch>
-                <Route path="/" component={Home} />
+                <Route exact path="/" component={Home} />
                 <Route path="/lists/:display" component={Display} />
                 <Route path="/songs/:id" component={DisplaySingle} />
                 <Route path="/albums/:id" component={DisplaySingle} />
