@@ -9,23 +9,23 @@ import { UserContext } from "../context/UserContext";
 function Display(props) {
   const context = useContext(UserContext);
   const [data, setData] = useState([]);
+  const [liked, setLiked] = useState([]);
   const type = props.match.params.display;
 
-  function getAll(type) {
+  function getAll(type, setter) {
     get(type)
-      .then((data) => setData(data.data))
+      .then((data) => setter(data.data))
       .catch((err) => console.log(err));
   }
 
   function like(id) {
     create(`${type}/like`, { song_id: id, user_id: context.user_id })
-      .then(() => {})
+      .then(() => console.log("liked"))
       .catch((err) => console.log(err));
   }
 
   function favorite(id) {
     const currentDataId = data.slice();
-    like(id);
     let index = currentDataId.findIndex((item) => item.id === id);
     currentDataId[index].favorite
       ? delete currentDataId[index].favorite
@@ -33,9 +33,19 @@ function Display(props) {
     setData(currentDataId);
   }
 
+  const handleClick = (id) => {
+    like(id);
+    favorite(id);
+  };
+
   useEffect(() => {
-    getAll(type);
+    getAll(type, setData);
+    getAll(`top/liked/${type}${context.user_id}`, setLiked);
   }, [type]);
+
+  useEffect(() => {
+    liked[0] && liked.map((item) => favorite(item.id));
+  }, [liked]);
 
   return (
     <div className="display">
@@ -62,7 +72,7 @@ function Display(props) {
               {item.artist && <span className="artist">{item.artist}</span>}
             </span>
           </Link>
-          <span className="icon" onClick={() => favorite(item.id)}>
+          <span className="icon" onClick={() => handleClick(item.id)}>
             {item.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </span>
         </div>
