@@ -7,7 +7,6 @@ import { UserContext } from "../context/UserContext";
 
 function Home() {
   const context = useContext(UserContext);
-  console.log(context);
   const [charts, setCharts] = useState([]);
   const endpoints = [
     "songs",

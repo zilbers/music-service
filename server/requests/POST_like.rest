@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/songs/like
+Content-Type: application/json
+
+{
+    "id": 31,
+    "song_id" : 4
+}

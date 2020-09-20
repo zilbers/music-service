@@ -37,10 +37,9 @@ app.post('/api/login', (req, res) => {
   const query = `CALL music_service.login('${email}','${pass}')`;
   mysqlCon.query((query), (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send(results[0][0]);
+      return res.status(500).send(error.message);
     }
+    res.status(200).send(results[0][0]);
   });
 });
 
@@ -49,10 +48,9 @@ app.get('/api/songs', (req, res) => {
   mysqlCon.query('CALL get_all_songs()',
     (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
-      } else {
-        res.status(200).send(results[0]);
+        return res.status(500).send(error.message);
       }
+      res.status(200).send(results[0]);
     });
 });
 
@@ -61,23 +59,21 @@ app.get('/api/albums', (req, res) => {
   mysqlCon.query('CALL get_all_albums()',
     (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
-      } else {
-        res.status(200).send(results[0]);
+        return res.status(500).send(error.message);
       }
+      res.status(200).send(results[0]);
     });
 });
 
-// Get liked sogs
+// Get liked songs
 app.get('/api/top/liked/songs:id', (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_user_likedSongs(?)', [id],
     (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
-      } else {
-        res.status(200).send(results[0]);
+        return res.status(500).send(error.message);
       }
+      res.status(200).send(results[0]);
     });
 });
 
@@ -86,10 +82,9 @@ app.get('/api/playlists', (req, res) => {
   mysqlCon.query('CALL get_all_playlists()',
     (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
-      } else {
-        res.status(200).send(results[0]);
+        return res.status(500).send(error.message);
       }
+      res.status(200).send(results[0]);
     });
 });
 
@@ -97,10 +92,9 @@ app.get('/api/playlists', (req, res) => {
 app.get('/api/artists', (req, res) => {
   mysqlCon.query('CALL get_all_artists()', (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send(results[0]);
+      return res.status(500).send(error.message);
     }
+    res.status(200).send(results[0]);
   });
 });
 
@@ -110,11 +104,10 @@ app.get('/api/songs/:id', async (req, res) => {
   mysqlCon.query('CALL get_song_byId(?)',
     [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
         throw error;
-      } else {
-        results[0][0] ? res.send(results[0]) : res.status(404).send('No song with this ID');
       }
+      results[0][0] ? res.send(results[0]) : res.status(404).send('No song with this ID');
     });
 });
 
@@ -124,11 +117,10 @@ app.get('/api/albums/:id', async (req, res) => {
   mysqlCon.query('CALL get_albums_byId(?)',
     [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
         throw error;
-      } else {
-        results[0][0] ? res.send(results[0]) : res.status(404).send('No album with this ID');
       }
+      results[0][0] ? res.send(results[0]) : res.status(404).send('No album with this ID');
     });
 });
 
@@ -138,11 +130,10 @@ app.get('/api/playlists/:id', async (req, res) => {
   mysqlCon.query('CALL get_playlists_byId(?)',
     [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
         throw error;
-      } else {
-        results[0][0] ? res.send(results[0]) : res.status(404).send('No playlist with this ID');
       }
+      results[0][0] ? res.send(results[0]) : res.status(404).send('No playlist with this ID');
     });
 });
 
@@ -152,11 +143,10 @@ app.get('/api/artists/:id', async (req, res) => {
   mysqlCon.query('CALL get_artist_byId(?)',
     [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
         throw error;
-      } else {
-        results[0][0] ? res.send(results[0]) : res.status(404).send('No playlist with this ID');
       }
+      results[0][0] ? res.send(results[0]) : res.status(404).send('No playlist with this ID');
     });
 });
 
@@ -166,11 +156,10 @@ app.get('/api/playlists/:id/list', async (req, res) => {
   mysqlCon.query('CALL get_songs_inPlaylist(?)',
     [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
         throw error;
-      } else {
-        res.send(results[0]);
       }
+      res.send(results[0]);
     });
 });
 
@@ -180,11 +169,10 @@ app.get('/api/albums/:id/list', async (req, res) => {
   mysqlCon.query('CALL get_songs_inAlbum(?)',
     [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
         throw error;
-      } else {
-        res.send(results[0]);
       }
+      res.send(results[0]);
     });
 });
 
@@ -194,11 +182,10 @@ app.get('/api/artists/:id/list', async (req, res) => {
   mysqlCon.query('CALL get_songs_ofArtist(?)',
     [id], (error, results, fields) => {
       if (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
         throw error;
-      } else {
-        res.send(results[0]);
       }
+      res.send(results[0]);
     });
 });
 
@@ -206,10 +193,9 @@ app.get('/api/artists/:id/list', async (req, res) => {
 app.get('/api/top/songs', (req, res) => {
   mysqlCon.query('CALL get_top_songs()', (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send(results[0]);
+      return res.status(500).send(error.message);
     }
+    res.status(200).send(results[0]);
   });
 });
 
@@ -217,10 +203,9 @@ app.get('/api/top/songs', (req, res) => {
 app.get('/api/top/albums', (req, res) => {
   mysqlCon.query('CALL get_top_ablums()', (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send(results[0]);
+      return res.status(500).send(error.message);
     }
+    res.status(200).send(results[0]);
   });
 });
 
@@ -228,10 +213,9 @@ app.get('/api/top/albums', (req, res) => {
 app.get('/api/top/playlists', (req, res) => {
   mysqlCon.query('CALL get_top_playlists()', (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send(results[0]);
+      return res.status(500).send(error.message);
     }
+    res.status(200).send(results[0]);
   });
 });
 
@@ -239,10 +223,9 @@ app.get('/api/top/playlists', (req, res) => {
 app.get('/api/top/artists', (req, res) => {
   mysqlCon.query('CALL get_top_artists()', (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send(results[0]);
+      return res.status(500).send(error.message);
     }
+    res.status(200).send(results[0]);
   });
 });
 
@@ -255,10 +238,9 @@ app.post('/api/songs', (req, res) => {
   mysqlCon.query(`INSERT INTO \`${database}\`.\`songs\` (${collums}, uploaded_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send('Uploaded new song');
+      return res.status(500).send(error.message);
     }
+    res.status(200).send('Uploaded new song');
   });
 });
 
@@ -271,10 +253,9 @@ app.post('/api/albums', (req, res) => {
   mysqlCon.query(`INSERT INTO \`${database}\`.\`albums\` (${collums}, uploaded_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send('Uploaded new album');
+      return res.status(500).send(error.message);
     }
+    res.status(200).send('Uploaded new album');
   });
 });
 
@@ -287,10 +268,9 @@ app.post('/api/playlists', (req, res) => {
   mysqlCon.query(`INSERT INTO \`${database}\`.\`playlists\` (${collums}, uploaded_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send('Uploaded new playlist');
+      return res.status(500).send(error.message);
     }
+    res.status(200).send('Uploaded new playlist');
   });
 });
 
@@ -303,11 +283,25 @@ app.post('/api/artists', (req, res) => {
   mysqlCon.query(`INSERT INTO \`${database}\`.\`artists\` (${collums}, uploaded_at) 
     VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send('Uploaded new artist');
+      return res.status(500).send(error.message);
     }
+    res.status(200).send('Uploaded new artist');
   });
+});
+
+// Like song
+app.post('/api/songs/like', async (req, res) => {
+  const { user_id, song_id } = req.body;
+  mysqlCon.query('CALL like_song(?,?)',
+    [user_id, song_id], (error, results, fields) => {
+      if (error) {
+        return res.status(500).send('Error with action');
+      } if (results.length) {
+        console.log('The result is  ', rows[0].user);
+      } else {
+        res.send(results[0]);
+      }
+    });
 });
 
 // Update song data in the database
@@ -367,7 +361,6 @@ app.put('/api/playlists/:id', (req, res) => {
   const values = req.body.values.map((value) => `'${value}'`);
   const query = collums.map((collum, index) => `${collum} = ${values[index]}`).join();
 
-  const { table } = req.params;
   mysqlCon.query(`UPDATE \`${database}\`.\`playlists\` 
   SET ${query} 
   WHERE playlist_id =${req.params.id}`, (error, results, fields) => {

@@ -76,6 +76,12 @@ CREATE TABLE `User_liked_songs`(
 --     FOREIGN KEY(`user_id`) REFERENCES `Users`(`user_id`)
 );
 
+ALTER TABLE
+    `User_liked_songs` ADD CONSTRAINT `user_liked_songs_song_id_foreign` FOREIGN KEY(`song_id`) REFERENCES `Songs`(`song_id`);
+ALTER TABLE
+    `User_liked_songs` ADD CONSTRAINT `user_liked_songs_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `Users`(`user_id`);
+
+
 CREATE TABLE `Songs_in_album`(
     `album_id` INT UNSIGNED NOT NULL,
     `song_id` INT UNSIGNED NOT NULL
@@ -108,8 +114,6 @@ ALTER TABLE
 ALTER TABLE
     `Songs_in_playlist` ADD CONSTRAINT `songs_in_playlist_song_id_foreign` FOREIGN KEY(`song_id`) REFERENCES `Songs`(`song_id`);
 ALTER TABLE
-    `User_liked_songs` ADD CONSTRAINT `user_liked_songs_song_id_foreign` FOREIGN KEY(`song_id`) REFERENCES `Songs`(`song_id`);
-ALTER TABLE
     `Songs` ADD CONSTRAINT `songs_album_id_foreign` FOREIGN KEY(`album_id`) REFERENCES `Albums`(`album_id`);
 ALTER TABLE
     `Songs` ADD CONSTRAINT `songs_artist_id_foreign` FOREIGN KEY(`artist_id`) REFERENCES `Artists`(`artist_id`);
@@ -121,8 +125,6 @@ ALTER TABLE
     `User_playlists` ADD CONSTRAINT `user_playlists_playlist_id_foreign` FOREIGN KEY(`playlist_id`) REFERENCES `Playlists`(`playlist_id`);
 ALTER TABLE
     `User_playlists` ADD CONSTRAINT `user_playlists_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `Users`(`user_id`);
-ALTER TABLE
-    `User_liked_songs` ADD CONSTRAINT `user_liked_songs_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `Users`(`user_id`);
 ALTER TABLE
     `Songs_in_album` ADD CONSTRAINT `user_Songs_in_album_album_id_foreign` FOREIGN KEY(`album_id`) REFERENCES `Albums`(`album_id`);
 ALTER TABLE

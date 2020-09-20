@@ -105,3 +105,9 @@ SELECT artists.artist_id as id, artists.name as name
 FROM music_service.artists 
 WHERE artist_id = id;
 END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `like_song`(IN user_id int, IN song_id int)
+BEGIN
+INSERT INTO music_service.user_liked_songs
+    VALUES (user_id, song_id);
+END
