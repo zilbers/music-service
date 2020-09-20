@@ -1,6 +1,7 @@
 .App {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   background-color: #222831;
   min-height: 100vh;
   font-size: calc(10px + 1vmin);
@@ -10,13 +11,6 @@
 
 .AppBar{
   width: 100%;
-}
-
-.Responsive{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 a {
@@ -48,7 +42,7 @@ a {
 }
 
 @media screen and (min-width: 1300px) {
-  .Responsive {
+  .App {
       width: 1300px;
   }
 }

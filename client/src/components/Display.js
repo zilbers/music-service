@@ -33,8 +33,8 @@ function Display(props) {
     <div className="display">
       <h2 className="header">{type}</h2>
       {data.map((item) => (
-        <Link key={item.id} className="row" to={`/${type}/${item.id}`}>
-          <div className="linksDisplay" key={item.id}>
+        <div className="linksDisplay" key={item.id}>
+          <Link key={item.id} className="row links" to={`/${type}/${item.id}`}>
             {item.cover_img && (
               <img
                 className="cover_img"
@@ -53,11 +53,11 @@ function Display(props) {
               {item.name}
               {item.artist && <span className="artist">{item.artist}</span>}
             </span>
+        </Link>
             <span className="icon" onClick={() => favorite(item.id)}>
               {item.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
             </span>
           </div>
-        </Link>
       ))}
     </div>
   );

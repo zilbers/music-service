@@ -6,8 +6,16 @@ import "./css/Home.css";
 import { UserContext } from "../context/UserContext";
 
 function Home() {
+  const context = useContext(UserContext);
+  console.log(context);
   const [charts, setCharts] = useState([]);
-  const endpoints = ["songs", "albums", "artists", "playlists"];
+  const endpoints = [
+    "songs",
+    "albums",
+    "artists",
+    "playlists",
+    `liked/songs${context.user_id}`,
+  ];
 
   async function getAll(endpoints) {
     let topCharts = await Promise.all(
@@ -30,7 +38,7 @@ function Home() {
           charts.map((chart, index) => {
             return (
               <div key={index} className="chart">
-                <h3 className="title"> Top {endpoints[index]}</h3>
+                <h3 className="title"> Top {endpoints[index].split("/")[0]}</h3>
                 <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
                     return (

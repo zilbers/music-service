@@ -33,20 +33,20 @@ function App() {
         </Router>
       ) : (
         <div className="App">
-          <div className="Responsive">
-            <Router>
+          <Router>
+            <div className="AppBar"> 
               <AppBar className="AppBar" />
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/lists/:display" component={Display} />
-                <Route path="/songs/:id" component={DisplaySingle} />
-                <Route path="/albums/:id" component={DisplaySingle} />
-                <Route path="/artists/:id" component={DisplaySingle} />
-                <Route path="/playlists/:id" component={DisplaySingle} />
-                <Route component={Page404} />
-              </Switch>
-            </Router>
-          </div>
+            </div>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/lists/:display" component={Display} />
+              <Route path="/songs/:id" component={DisplaySingle} />
+              <Route path="/albums/:id" component={DisplaySingle} />
+              <Route path="/artists/:id" component={DisplaySingle} />
+              <Route path="/playlists/:id" component={DisplaySingle} />
+              <Route component={Page404} />
+            </Switch>
+          </Router>
         </div>
       )}
     </>

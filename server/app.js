@@ -69,8 +69,8 @@ app.get('/api/albums', (req, res) => {
 });
 
 // Get liked sogs
-app.get('/api/liked/songs', (req, res) => {
-  const { id } = req.body;
+app.get('/api/top/liked/songs:id', (req, res) => {
+  const { id } = req.params;
   mysqlCon.query('CALL get_user_likedSongs(?)', [id],
     (error, results, fields) => {
       if (error) {

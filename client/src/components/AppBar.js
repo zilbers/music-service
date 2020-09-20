@@ -34,7 +34,7 @@ export default function ButtonAppBar() {
             Music - Service
           </Typography>
           <Typography variant="h6" className={classes.title}>
-            Hi, {context.email}
+            Hi, {context.email.split("@")[0]}
           </Typography>
           <Link to="/" className="links">
             <Button color="inherit" onClick={context.logUserOut}>
