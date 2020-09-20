@@ -8,7 +8,7 @@ function App() {
     <div className="Page404">
       <h1 className="pageHeader">Noice, 404</h1>
       <img className="img404" src={url.default} alt={`404`} />
-      <Link className="goHome" to="/home">
+      <Link className="goHome" to="/">
         <h4 className="homeLink">Go home, you're drunk</h4>
       </Link>
     </div>

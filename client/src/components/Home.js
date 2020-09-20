@@ -44,7 +44,11 @@ function Home() {
                     return (
                       <Link
                         className="carouselLinks carouselItem"
-                        to={`/${endpoints[index]}/${item.id}`}
+                        to={`/${
+                          endpoints[index].split("/")[0] === "liked"
+                            ? "songs"
+                            : endpoints[index]
+                        }/${item.id}`}
                         key={item.name}
                       >
                         {item.cover_img && (
