@@ -1,7 +1,9 @@
+ html{
+    background: #222831;
+ }
+
  .login-form
  {
-     display: flex;
- justify-content: center;
  min-height: 50vh;
  }
 
@@ -10,7 +12,6 @@
  justify-content: center;
  min-height: 30vh;
  padding: 50px;
- background: black;
  }
  
  .MuiGrid-item {
