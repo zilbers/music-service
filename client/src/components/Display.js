@@ -44,7 +44,9 @@ function Display(props) {
   }, [type]);
 
   useEffect(() => {
-    liked[0] && liked.map((item) => favorite(item.id));
+    setTimeout(() => {
+      liked[0] && liked.map((item) => favorite(item.id));
+    }, 200);
   }, [liked]);
 
   return (
