@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -7,7 +7,10 @@ import Button from "@material-ui/core/Button";
 import Menu from "./Menu";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
-import SearchMenu from "./SearchMenu";
+import { get } from "../modules/axios-module";
+import SearchIcon from "@material-ui/icons/Search";
+import InputBase from "@material-ui/core/InputBase";
+import SearchResults from "./SearchResults";
 import "./css/AppBar.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -81,6 +84,25 @@ const useStyles = makeStyles((theme) => ({
 export default function ButtonAppBar() {
   const classes = useStyles();
   const context = useContext(UserContext);
+  const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+  const endpoint = "search?";
+
+  const handleChange = (filter) => {
+    setSearch(filter);
+    if (filter.length > 0) {
+      get(`${endpoint}filter=${filter}`)
+        .then((data) => setData(data.data))
+        .catch((err) => console.log(err));
+    }
+  };
+
+  useEffect(() => {
+    if (search === "") {
+      setSearch("");
+      setData([]);
+    }
+  }, [search]);
 
   return (
     <div className={classes.root}>
@@ -90,7 +112,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Music - Service
           </Typography>
-          {/* <div className={classes.search}>
+          <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -104,8 +126,8 @@ export default function ButtonAppBar() {
               inputProps={{ "aria-label": "search" }}
               value={search}
             />
-          </div> */}
-          <SearchMenu className={classes.search}/>
+          </div>
+          <SearchResults data={data} setData={setData} setSearch={setSearch} />
           <Typography variant="h6" className={classes.title}>
             Hi, {context.email.split("@")[0]}
           </Typography>

@@ -1,0 +1,9 @@
+.results {
+    position: absolute;
+    top: 100%;
+    left: 25%;
+    width: 50%;
+    z-index: 10;
+    background-color: #545a64;
+    border-radius: 5%;
+}
