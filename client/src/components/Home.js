@@ -9,11 +9,11 @@ function Home() {
   const context = useContext(UserContext);
   const [charts, setCharts] = useState([]);
   const endpoints = [
+    `liked/songs${context.user_id}`,
     "songs",
     "albums",
     "artists",
     "playlists",
-    `liked/songs${context.user_id}`,
   ];
 
   async function getAll(endpoints) {
@@ -37,7 +37,12 @@ function Home() {
           charts.map((chart, index) => {
             return (
               <div key={index} className="chart">
-                <h3 className="title"> Top {endpoints[index].split("/")[0]}</h3>
+                <h3 className="title">
+                  {" "}
+                  {endpoints[index].split("/")[0] === "liked"
+                    ? "Your liked songs"
+                    : `Top ${endpoints[index]}`}
+                </h3>
                 <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
                     return (

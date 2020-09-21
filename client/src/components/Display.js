@@ -27,9 +27,10 @@ function Display(props) {
   function favorite(id) {
     const currentDataId = data.slice();
     let index = currentDataId.findIndex((item) => item.id === id);
-    currentDataId[index].favorite
-      ? delete currentDataId[index].favorite
-      : (currentDataId[index].favorite = true);
+    currentDataId[index] &&
+      (currentDataId[index].favorite
+        ? delete currentDataId[index].favorite
+        : (currentDataId[index].favorite = true));
     setData(currentDataId);
   }
 
@@ -44,9 +45,7 @@ function Display(props) {
   }, [type]);
 
   useEffect(() => {
-    setTimeout(() => {
-      liked[0] && liked.map((item) => favorite(item.id));
-    }, 200);
+    liked[0] && liked.map((item) => favorite(item.id));
   }, [liked]);
 
   return (
