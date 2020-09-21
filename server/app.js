@@ -105,7 +105,6 @@ app.get('/api/songs/:id', async (req, res) => {
     [id], (error, results, fields) => {
       if (error) {
         return res.status(500).send(error.message);
-        throw error;
       }
       results[0][0] ? res.send(results[0]) : res.status(404).send('No song with this ID');
     });
