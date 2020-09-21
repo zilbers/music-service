@@ -15,7 +15,7 @@ In this project I created a Music Service Web Application, with React.js, Expres
   - [POST] Can upload new songs / albums / artists / playlists.
   - [PUT]  Can update entries.
 
-![add-song](./readme-files/add-song.gif)
+![add-song](./readme-files/Add-song.gif)
 
 ## Client
 - The app title is `Music Service`.
