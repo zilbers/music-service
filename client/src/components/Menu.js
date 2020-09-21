@@ -47,7 +47,6 @@ const StyledMenuItem = withStyles((theme) => ({
 
 export default function MenuComp(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [modal, setModal] = React.useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

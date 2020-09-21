@@ -35,6 +35,7 @@ function Recommended(props) {
             </div>
           );
         }
+        return null;
       })}
     </div>
   );

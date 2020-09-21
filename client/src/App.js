@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Display from "./components/Display";
 import Home from "./components/Home";
 import DisplaySingle from "./components/DisplaySingle";
@@ -34,7 +34,7 @@ function App() {
       ) : (
         <div className="App">
           <Router>
-            <div className="AppBar"> 
+            <div className="AppBar">
               <AppBar className="AppBar" />
             </div>
             <Switch>
