@@ -8,7 +8,7 @@ It also have backend which connects between the database and the client.
 ## Database
 - The app is using MySql database.
 - It has 10 tables which holds that about the users registerd, songs, playlists and albums.
-- The table is using mostly procedures for communiction.
+- The table is mostly using procedures for communiction.
 ![Log-in](./readme-files/data-diagram.png)
 
 ## Backend
