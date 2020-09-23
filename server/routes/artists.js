@@ -14,7 +14,7 @@ artistRouter.get('/', (req, res) => {
 });
 
 // Get by artist ID
-artistRouter.get('/song_:id', async (req, res) => {
+artistRouter.get('/artist_:id', async (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_artist_byId(?)',
     [id], (error, results, fields) => {
