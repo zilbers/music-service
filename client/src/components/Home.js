@@ -9,17 +9,17 @@ function Home() {
   const context = useContext(UserContext);
   const [charts, setCharts] = useState([]);
   const endpoints = [
-    `liked/songs${context.user_id}`,
-    "songs",
-    "albums",
-    "artists",
-    "playlists",
+    `songs/liked/${context.user_id}`,
+    "songs/top",
+    "albums/top",
+    "artists/top",
+    "playlists/top",
   ];
 
   async function getAll(endpoints) {
     let topCharts = await Promise.all(
       endpoints.map(async (endpoint) => {
-        return (await get(`top/${endpoint}`)).data;
+        return (await get(`${endpoint}`)).data;
       })
     );
     setCharts(topCharts);
@@ -39,9 +39,9 @@ function Home() {
               <div key={index} className="chart">
                 <h3 className="title">
                   {" "}
-                  {endpoints[index].split("/")[0] === "liked"
+                  {endpoints[index].split("/")[0] === "songs"
                     ? "Your liked songs"
-                    : `Top ${endpoints[index]}`}
+                    : `Top ${endpoints[index].split("/")[0]}`}
                 </h3>
                 <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
@@ -49,7 +49,7 @@ function Home() {
                       <Link
                         className="carouselLinks carouselItem"
                         to={`/${
-                          endpoints[index].split("/")[0] === "liked"
+                          endpoints[index].split("/")[1] === "liked"
                             ? "songs"
                             : endpoints[index]
                         }/${item.id}`}
