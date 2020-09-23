@@ -20,7 +20,9 @@ function List(props) {
 
   function like(id) {
     create(`songs/like`, { song_id: id, user_id: context.user_id })
-      .then(() => console.log("liked"))
+      .then(() => {
+        return;
+      })
       .catch((err) => console.log(err));
   }
 
