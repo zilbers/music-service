@@ -1,0 +1,30 @@
+.Page404{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pageHeader {
+    position: absolute;
+    top: 2%;
+}
+
+.goHome{
+    position: absolute;
+    bottom: 2%;
+}
+
+.homeLink{
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding:20px;
+}
+
+.goHome :hover{
+    background-color: rgb(0, 0, 0);
+}
+
+.img404{
+    width: 80%;
+}

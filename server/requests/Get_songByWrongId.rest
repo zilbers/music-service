@@ -1,1 +1,1 @@
-http://localhost:3001/api/lists/songs/1212312
+http://localhost:3001/api/songs/1212312
