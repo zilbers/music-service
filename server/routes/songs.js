@@ -10,7 +10,7 @@ songsRouter.get('/', (req, res) => {
       if (error) {
         return res.status(500).send(error.message);
       }
-      res.status(200).send(results[0]);
+      return res.status(200).send(results[0]);
     });
 });
 
@@ -32,7 +32,7 @@ songsRouter.get('/top', (req, res) => {
     if (error) {
       return res.status(500).send(error.message);
     }
-    res.status(200).send(results[0]);
+    return res.status(200).send(results[0]);
   });
 });
 
@@ -44,7 +44,7 @@ songsRouter.get('/liked/:id', (req, res) => {
       if (error) {
         return res.status(500).send(error.message);
       }
-      res.status(200).send(results[0]);
+      return res.status(200).send(results[0]);
     });
 });
 
@@ -71,8 +71,28 @@ songsRouter.post('/', (req, res) => {
     if (error) {
       return res.status(500).send(error.message);
     }
-    res.status(200).send('Uploaded new song');
+    return res.status(200).send('Uploaded new song');
   });
+});
+
+// Like song
+songsRouter.post('/like', async (req, res) => {
+  const { user_id, song_id } = req.body;
+  mysqlCon.query('CALL like_song(?,?)',
+    [user_id, song_id], (error, results, fields) => {
+      if (error) {
+        mysqlCon.query('CALL remove_likeSong(?,?)',
+          [user_id, song_id], (err1, res1, fields) => {
+            if (err1) {
+              return res.status(500).send('Error with action');
+            }
+            console.log('remove like');
+            return res.send(res1[0]);
+          });
+      } else {
+        res.send(results[0]);
+      }
+    });
 });
 
 // Update song data in the database
@@ -85,10 +105,9 @@ songsRouter.put('/:id', (req, res) => {
   SET ${query} 
   WHERE song_id =${req.params.id}`, (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send('Updated song');
+      return res.status(500).send(error.message);
     }
+    return res.status(200).send('Updated song');
   });
 });
 
@@ -97,10 +116,9 @@ songsRouter.delete('/:id', (req, res) => {
   mysqlCon.query(`DELETE FROM \`songs\` 
   WHERE song_id =${req.params.id}`, (error, results, fields) => {
     if (error) {
-      res.status(500).send(error.message);
-    } else {
-      res.status(200).send('Deleted song');
+      return res.status(500).send(error.message);
     }
+    return res.status(200).send('Deleted song');
   });
 });
 
