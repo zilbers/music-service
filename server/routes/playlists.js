@@ -27,7 +27,7 @@ playlisthRouter.get('/playlist_:id', async (req, res) => {
 });
 
 // Get the songs that are in the playlist
-playlisthRouter.get('/playlist_:id/list', async (req, res) => {
+playlisthRouter.get('/:id/list', async (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_songs_inPlaylist(?)',
     [id], (error, results, fields) => {

@@ -28,7 +28,6 @@ function Home() {
   useEffect(() => {
     getAll(endpoints);
   }, []);
-
   return (
     <div className="Home">
       <h1>Home</h1>
@@ -39,20 +38,17 @@ function Home() {
               <div key={index} className="chart">
                 <h3 className="title">
                   {" "}
-                  {endpoints[index].split("/")[0] === "songs"
+                  {endpoints[index].split("/")[1] === "liked"
                     ? "Your liked songs"
                     : `Top ${endpoints[index].split("/")[0]}`}
                 </h3>
                 <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
+                    const type = endpoints[index].split("/")[0];
                     return (
                       <Link
                         className="carouselLinks carouselItem"
-                        to={`/${
-                          endpoints[index].split("/")[1] === "liked"
-                            ? "songs"
-                            : endpoints[index]
-                        }/${item.id}`}
+                        to={`/${type}/${item.id}`}
                         key={item.name}
                       >
                         {item.cover_img && (

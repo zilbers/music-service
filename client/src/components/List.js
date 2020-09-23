@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import "./css/Table.css";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { get } from "../modules/axios-module";
+import { get, create } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
@@ -18,6 +18,12 @@ function List(props) {
       .catch((err) => console.log(err));
   }
 
+  function like(id) {
+    create(`songs/like`, { song_id: id, user_id: context.user_id })
+      .then(() => console.log("liked"))
+      .catch((err) => console.log(err));
+  }
+
   function favorite(id) {
     const currentDataId = data.slice();
     let index = currentDataId.findIndex((item) => item.id === id);
@@ -28,9 +34,14 @@ function List(props) {
     setData(currentDataId);
   }
 
+  const handleClick = (id) => {
+    like(id);
+    favorite(id);
+  };
+
   useEffect(() => {
     getAll(type, setData);
-    getAll(`top/liked/songs${context.user_id}`, setLiked);
+    getAll(`songs/liked/${context.user_id}`, setLiked);
   }, [type]);
 
   useEffect(() => {
@@ -55,7 +66,7 @@ function List(props) {
               {item.artist && <span className="artist">{item.artist}</span>}
             </span>
           </Link>
-          <span className="icon" onClick={() => favorite(item.id)}>
+          <span className="icon" onClick={() => handleClick(item.id)}>
             {item.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </span>
         </div>

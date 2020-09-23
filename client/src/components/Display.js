@@ -53,7 +53,7 @@ function Display(props) {
       <h2 className="header">{type}</h2>
       {data.map((item) => (
         <div className="linksDisplay" key={item.id}>
-          <Link key={item.id} className="row links" to={`/${type}/${type.slice(0, -1)}_${item.id}`}>
+          <Link key={item.id} className="row links" to={`/${type}/${item.id}`}>
             {item.cover_img && (
               <img
                 className="cover_img"

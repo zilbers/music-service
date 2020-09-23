@@ -27,7 +27,7 @@ albumRouter.get('/album_:id', async (req, res) => {
 });
 
 // Get the songs that are in the album
-albumRouter.get('/album_:id/list', async (req, res) => {
+albumRouter.get('/:id/list', async (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_songs_inAlbum(?)',
     [id], (error, results, fields) => {

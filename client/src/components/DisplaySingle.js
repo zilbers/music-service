@@ -7,6 +7,11 @@ import "./css/DisplaySingle.css";
 
 function DisplaySingle(props) {
   const [item, setItem] = useState({});
+  const urlParams = props.match.url.split("/");
+  const dataUrl = `${urlParams[1]}/${urlParams[1].slice(0, -1)}_${
+    urlParams[2]
+  }`;
+
   let type =
     props.match.path === "/playlists/:id" ||
     props.match.path === "/albums/:id" ||
@@ -19,10 +24,10 @@ function DisplaySingle(props) {
   }
 
   useEffect(() => {
-    getAll(`${props.match.url}`);
-  }, [props.match.url]);
+    getAll(dataUrl);
+  }, [dataUrl]);
 
-  const query = props.match.url.split("/").slice(1);
+  const query = urlParams.slice(1);
   const url = `/${query[0]}/${query[1]}/list`;
   const qParams = new URLSearchParams(props.location.search);
   const qParamsObj = { from: qParams.get("from"), id: qParams.get("id") };
@@ -35,9 +40,13 @@ function DisplaySingle(props) {
         </Link>
       )}
       <div className="mainSec">
-      {item.cover_img && (
-                          <img className="cover_img" src={item.cover_img} alt={`${item.name}`} />
-                        )}
+        {item.cover_img && (
+          <img
+            className="cover_img"
+            src={item.cover_img}
+            alt={`${item.name}`}
+          />
+        )}
         {item.youtube_link && (
           <iframe
             width="560"
@@ -53,12 +62,17 @@ function DisplaySingle(props) {
           (qParamsObj.from ? (
             <div className="recommended">
               From same {qParamsObj.from}
-              <Recommended url={`${qParamsObj.from}/${qParamsObj.id}/list`} item_id={item.id}/>
+              <Recommended
+                url={`${qParamsObj.from}/${qParamsObj.from.slice(0, -1)}_${
+                  qParamsObj.id
+                }/list`}
+                item_id={item.id}
+              />
             </div>
           ) : (
             <div className="recommended">
               More from charts
-              <Recommended url={`top/songs`} item_id={item.id}/>
+              <Recommended url={`songs/top`} item_id={item.id} />
             </div>
           ))}
       </div>
