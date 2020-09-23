@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/top/songs
+GET http://localhost:3001/api/songs/top

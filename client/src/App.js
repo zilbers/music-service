@@ -40,10 +40,10 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/lists/:display" component={Display} />
-              <Route path="/songs/:id" component={DisplaySingle} />
-              <Route path="/albums/:id" component={DisplaySingle} />
-              <Route path="/artists/:id" component={DisplaySingle} />
-              <Route path="/playlists/:id" component={DisplaySingle} />
+              <Route path="/songs/song_:id" component={DisplaySingle} />
+              <Route path="/albums/album_:id" component={DisplaySingle} />
+              <Route path="/artists/artist_:id" component={DisplaySingle} />
+              <Route path="/playlists/playlist_:id" component={DisplaySingle} />
               <Route component={Page404} />
             </Switch>
           </Router>

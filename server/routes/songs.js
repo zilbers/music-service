@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const { Router } = require('express');
 const mysqlCon = require('../modules/connections');
 
@@ -15,7 +16,7 @@ songsRouter.get('/', (req, res) => {
 });
 
 // Get song by ID
-songsRouter.get('/:id', async (req, res) => {
+songsRouter.get('/song_:id', async (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_song_byId(?)',
     [id], (error, results, fields) => {
@@ -45,18 +46,6 @@ songsRouter.get('/liked/:id', (req, res) => {
         return res.status(500).send(error.message);
       }
       return res.status(200).send(results[0]);
-    });
-});
-
-// Get song by ID
-songsRouter.get('/:id', async (req, res) => {
-  const { id } = req.params;
-  mysqlCon.query('CALL get_song_byId(?)',
-    [id], (error, results, fields) => {
-      if (error) {
-        return res.status(500).send(error.message);
-      }
-      return results[0][0] ? res.send(results[0]) : res.status(404).send('No song with this ID');
     });
 });
 
@@ -90,7 +79,7 @@ songsRouter.post('/like', async (req, res) => {
             return res.send(res1[0]);
           });
       } else {
-        res.send(results[0]);
+        return res.send(results[0]);
       }
     });
 });

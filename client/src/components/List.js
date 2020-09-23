@@ -48,7 +48,7 @@ function List(props) {
           <Link
             key={item.id + index}
             className="links"
-            to={`/songs/${item.id}?from=${query[0]}&id=${query[1]}`}
+            to={`/songs/song_${item.id}?from=${query[0]}&id=${query[1]}`}
           >
             <span className="title">
               {item.name}

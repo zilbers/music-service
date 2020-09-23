@@ -15,7 +15,7 @@ albumRouter.get('/', (req, res) => {
 });
 
 // Get by albums ID
-albumRouter.get('/:id', async (req, res) => {
+albumRouter.get('/album_:id', async (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_albums_byId(?)',
     [id], (error, results, fields) => {
@@ -27,7 +27,7 @@ albumRouter.get('/:id', async (req, res) => {
 });
 
 // Get the songs that are in the album
-albumRouter.get('/:id/list', async (req, res) => {
+albumRouter.get('/album_:id/list', async (req, res) => {
   const { id } = req.params;
   mysqlCon.query('CALL get_songs_inAlbum(?)',
     [id], (error, results, fields) => {
@@ -54,7 +54,7 @@ albumRouter.post('/api/albums', (req, res) => {
   const values = req.body.values.map((value) => `'${value}'`).join();
   const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
 
-  mysqlCon.query(`INSERT INTO \`${database}\`.\`albums\` (${collums}, uploaded_at) 
+  mysqlCon.query(`INSERT INTO \`albums\` (${collums}, uploaded_at) 
       VALUES (${values}, '${date}')`, (error, results, fields) => {
     if (error) {
       return res.status(500).send(error.message);
@@ -82,7 +82,7 @@ albumRouter.put('/:id', (req, res) => {
 
 // Delete data from database
 albumRouter.delete('/:id', (req, res) => {
-  mysqlCon.query(`DELETE FROM \`${database}\`.\`albums\` 
+  mysqlCon.query(`DELETE FROM \`albums\` 
     WHERE album_id =${req.params.id}`, (error, results, fields) => {
     if (error) {
       res.status(500).send(error.message);
