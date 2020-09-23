@@ -17,6 +17,8 @@ function logger(req, res, next) {
 
 app.use(logger);
 app.use(express.json());
+app.use('/api/', require('./api'));
+
 app.use('/', express.static('../client/build/'));
 
 const mysqlCon = mysql.createConnection({
