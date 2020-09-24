@@ -1,5 +1,3 @@
-/* eslint-disable lines-around-directive */
-
 const {
   Model,
 } = require('sequelize');
@@ -16,12 +14,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   allbum.init({
-    albumId: DataTypes.INTEGER,
     artistId: DataTypes.INTEGER,
     name: DataTypes.STRING,
     coverImg: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
-    uploadedAt: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'allbum',

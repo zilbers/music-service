@@ -14,16 +14,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   song.init({
-    songId: DataTypes.INTEGER,
     artistId: DataTypes.INTEGER,
     albumId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     length: DataTypes.TIME,
     trackNumber: DataTypes.STRING,
     lyrics: DataTypes.STRING,
-    youtubeLink: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
-    uploadedAt: DataTypes.DATE
+    youtubeLink: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'song',

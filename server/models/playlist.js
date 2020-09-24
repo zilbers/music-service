@@ -14,11 +14,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   playlist.init({
-    playlistId: DataTypes.INTEGER,
     name: DataTypes.STRING,
-    coverImg: DataTypes.STRING,
-    createdAt: DataTypes.DATE,
-    uploadedAt: DataTypes.DATE
+    coverImg: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'playlist',
