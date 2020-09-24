@@ -11,6 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.User_song, {
+        foreignKey: 'userId',
+      });
+      this.hasMany(models.User_playlist, {
+        foreignKey: 'userId',
+      });
+      this.hasMany(models.User_artist, {
+        foreignKey: 'userId',
+      });
+      this.hasMany(models.User_album, {
+        foreignKey: 'userId',
+      });
     }
   }
   User.init({
@@ -22,6 +34,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'User',
+    underscored: true,
   });
+
   return User;
 };

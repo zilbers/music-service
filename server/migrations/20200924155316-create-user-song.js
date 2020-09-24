@@ -1,30 +1,27 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('albums', {
+    await queryInterface.createTable('User_songs', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      artistId: {
+      user_id: {
         type: Sequelize.INTEGER,
       },
-      name: {
-        type: Sequelize.STRING,
+      song_id: {
+        type: Sequelize.INTEGER,
       },
-      coverImg: {
-        type: Sequelize.STRING,
-      },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('albums');
+    await queryInterface.dropTable('User_songs');
   },
 };

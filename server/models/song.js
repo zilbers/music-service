@@ -11,25 +11,34 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Artist, {
-        foreignKey: 'artistId',
-      });
       this.belongsTo(models.Album, {
         foreignKey: 'albumId',
+        as: 'album',
+      });
+      this.belongsTo(models.Artist, {
+        foreignKey: 'artistId',
+        as: 'artist',
+      });
+      this.hasMany(models.Playlist_song, {
+        foreignKey: 'artistId',
+      });
+      this.hasMany(models.User_song, {
+        foreignKey: 'artistId',
       });
     }
   }
   Song.init({
-    artistId: DataTypes.INTEGER,
-    albumId: DataTypes.INTEGER,
     name: DataTypes.STRING,
+    albumId: DataTypes.INTEGER,
+    artistId: DataTypes.INTEGER,
     length: DataTypes.TIME,
-    trackNumber: DataTypes.STRING,
+    trackNumber: DataTypes.INTEGER,
     lyrics: DataTypes.STRING,
     youtubeLink: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Song',
+    underscored: true,
   });
   return Song;
 };

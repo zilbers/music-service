@@ -1,42 +1,36 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('songs', {
+    await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      artistId: {
-        type: Sequelize.INTEGER,
-      },
-      albumId: {
-        type: Sequelize.INTEGER,
-      },
-      name: {
+      email: {
         type: Sequelize.STRING,
       },
-      length: {
-        type: Sequelize.TIME,
-      },
-      trackNumber: {
+      password: {
         type: Sequelize.STRING,
       },
-      lyrics: {
+      is_admin: {
+        type: Sequelize.BOOLEAN,
+      },
+      preferences: {
+        type: Sequelize.JSON,
+      },
+      remember_token: {
         type: Sequelize.STRING,
       },
-      youtubeLink: {
-        type: Sequelize.STRING,
-      },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('songs');
+    await queryInterface.dropTable('Users');
   },
 };

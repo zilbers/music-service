@@ -1,6 +1,6 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('playlists', {
+    await queryInterface.createTable('Playlists', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,18 +10,18 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      coverImg: {
+      cover_img: {
         type: Sequelize.STRING,
       },
-      createdAt: {
+      created_at: {
         type: Sequelize.DATE,
       },
-      updatedAt: {
+      updated_at: {
         type: Sequelize.DATE,
       },
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('playlists');
+    await queryInterface.dropTable('Playlists');
   },
 };

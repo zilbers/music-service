@@ -11,9 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.hasMany(models.Song);
       this.belongsTo(models.Artist, {
         foreignKey: 'artistId',
+        as: 'artist',
+      });
+      this.hasMany(models.Song, {
+        foreignKey: 'albumId',
+      });
+      this.hasMany(models.User_album, {
+        foreignKey: 'albumId',
       });
     }
   }
@@ -24,6 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Album',
+    underscored: true,
   });
   return Album;
 };
