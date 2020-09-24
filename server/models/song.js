@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   Song.init({
     artistId: DataTypes.INTEGER,
     albumId: DataTypes.INTEGER,
-    title: DataTypes.STRING,
+    name: DataTypes.STRING,
     length: DataTypes.TIME,
     trackNumber: DataTypes.STRING,
     lyrics: DataTypes.STRING,

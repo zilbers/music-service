@@ -6,38 +6,28 @@ const albumRouter = Router();
 // Get all from albums
 albumRouter.get('/', async (req, res) => {
   try {
-    const allAlbums = await Album.findAll({
-      include: ['Songs', 'Artist'],
-    });
+    const allAlbums = await Album.findAll();
     res.json(allAlbums);
   } catch {
     res.status(500).send('Error');
   }
 });
 
-// // Get by albums ID
-// albumRouter.get('/album_:id', async (req, res) => {
-//   const { id } = req.params;
-//   mysqlCon.query('CALL get_albums_byId(?)',
-//     [id], (error, results, fields) => {
-//       if (error) {
-//         return res.status(500).send(error.message);
-//       }
-//       return results[0][0] ? res.send(results[0]) : res.status(404).send('No album with this ID');
-//     });
-// });
+// Get by albums ID
+albumRouter.get('/album_:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const allAlbums = await Album.findByPk(id);
+    res.json(allAlbums);
+  } catch {
+    res.status(500).send('Error');
+  }
+});
 
-// // Get the songs that are in the album
-// albumRouter.get('/:id/list', async (req, res) => {
-//   const { id } = req.params;
-//   mysqlCon.query('CALL get_songs_inAlbum(?)',
-//     [id], (error, results, fields) => {
-//       if (error) {
-//         return res.status(500).send(error.message);
-//       }
-//       return res.send(results[0]);
-//     });
-// });
+// Get the songs that are in the album
+albumRouter.get('/:id/list', async (req, res) => {
+  const { id } = req.params;
+});
 
 // // Get the top albums
 // albumRouter.get('/top', (req, res) => {
