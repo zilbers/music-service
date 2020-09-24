@@ -32,7 +32,7 @@ albumRouter.get('/album_:id', async (req, res) => {
 albumRouter.get('/:id/list', async (req, res) => {
   const { id } = req.params;
   try {
-    const allAlbums = await Album.findByPk(id, {
+    const album = await Album.findByPk(id, {
       include: [
         {
           model: Artist,
@@ -43,7 +43,7 @@ albumRouter.get('/:id/list', async (req, res) => {
         },
       ],
     });
-    res.json(allAlbums);
+    res.json(album);
   } catch (e) {
     res.status(500).send(e.message);
   }

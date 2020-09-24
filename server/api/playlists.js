@@ -1,6 +1,133 @@
+/* eslint-disable camelcase */
 const { Router } = require('express');
+const { Sequelize } = require('sequelize');
+const {
+  Playlist, Song, Artist, Playlist_song,
+} = require('../models');
 
-const playlisthRouter = Router();
+const playlistRouter = Router();
+
+// Get all artists
+playlistRouter.get('/', async (req, res) => {
+  try {
+    const playlists = await Playlist.findAll();
+    res.json(playlists);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Get by playlist ID
+playlistRouter.get('/playlist_:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const playlist = await Playlist.findByPk(id);
+    res.json(playlist);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Get songs that are in the playlist
+playlistRouter.get('/:id/list', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const playlist = await Playlist_song.findAll({
+      include: [
+        {
+          model: Song,
+          attributes: ['name'],
+        },
+        {
+          model: Playlist,
+          attributes: ['name'],
+        },
+      ],
+      where: {
+        playlist_id: id,
+      },
+    });
+    res.json(playlist);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Get the top artists
+playlistRouter.get('/top', async (req, res) => {
+  try {
+    const topArtists = await User_artist.findAll({
+      attributes: [[Sequelize.fn('COUNT', Sequelize.col('user_id')), 'likes']],
+      include: [
+        {
+          model: Artist,
+          attributes: ['name', 'cover_img'],
+        },
+      ],
+      order: [
+        ['artist_id', 'ASC'],
+      ],
+      group: ['artist_id'],
+      raw: true,
+    });
+    res.json(topArtists);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Post new artist
+playlistRouter.post('/', async (req, res) => {
+  const { values, collums } = req.body;
+  const query = {};
+
+  collums.forEach((collum, index) => { query[collum] = values[index]; });
+
+  try {
+    await Artist.create(query);
+    res.status(200).send('Posted new artist');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Update albums data in the database
+playlistRouter.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { values, collums } = req.body;
+  const query = {};
+
+  collums.forEach((collum, index) => { query[collum] = values[index]; });
+
+  try {
+    await Artist.update(query, {
+      where: {
+        id,
+      },
+    });
+    res.status(200).send('Updated artist');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// // Delete artist from database
+playlistRouter.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Artist.destroy({
+      where: {
+        id,
+      },
+    });
+    res.status(200).send('Deleted artist');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+module.exports = playlistRouter;
 
 // // Get all from playlists
 // playlisthRouter.get('/', (req, res) => {
@@ -90,5 +217,3 @@ const playlisthRouter = Router();
 //     }
 //   });
 // });
-
-module.exports = playlisthRouter;

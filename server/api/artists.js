@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const { Sequelize } = require('sequelize');
 const {
-  Album, Song, Artist, User_artist,
+  Song, Artist, User_artist,
 } = require('../models');
 
 const artistRouter = Router();
