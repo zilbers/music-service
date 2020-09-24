@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/albums/4
+Content-Type: application/json
+
+{
+    "collums" : ["name", "artistId", "coverImg"],
+    "values" : ["Shalom", 2, "mamash"]
+}

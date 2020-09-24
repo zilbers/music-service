@@ -7,7 +7,7 @@ const {
 
 const albumRouter = Router();
 
-// Get all from albums
+// Get albums
 albumRouter.get('/', async (req, res) => {
   try {
     const allAlbums = await Album.findAll();
@@ -21,8 +21,8 @@ albumRouter.get('/', async (req, res) => {
 albumRouter.get('/album_:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const allAlbums = await Album.findByPk(id);
-    res.json(allAlbums);
+    const album = await Album.findByPk(id);
+    res.json(album);
   } catch (e) {
     res.status(500).send(e.message);
   }
@@ -52,7 +52,7 @@ albumRouter.get('/:id/list', async (req, res) => {
 // Get the top albums
 albumRouter.get('/top', async (req, res) => {
   try {
-    const allAlbums = await User_album.findAll({
+    const topAlbums = await User_album.findAll({
       attributes: [[Sequelize.fn('COUNT', Sequelize.col('user_id')), 'likes']],
       include: [
         {
@@ -70,61 +70,60 @@ albumRouter.get('/top', async (req, res) => {
       group: ['album_id'],
       raw: true,
     });
-    res.json(allAlbums);
+    res.json(topAlbums);
   } catch (e) {
     res.status(500).send(e.message);
   }
 });
 
-// Post new data to albums
+// Post new albums
 albumRouter.post('/', async (req, res) => {
   const { values, collums } = req.body;
   const query = {};
+
   collums.forEach((collum, index) => { query[collum] = values[index]; });
-  query.date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
   try {
     await Album.create(query);
     res.status(200).send('Posted new album');
   } catch (e) {
     res.status(500).send(e.message);
   }
-
-  // mysqlCon.query(`INSERT INTO \`albums\` (${collums}, uploaded_at)
-  //     VALUES (${values}, '${date}')`, (error, results, fields) => {
-  //   if (error) {
-  //     return res.status(500).send(error.message);
-  //   }
-  //   res.status(200).send('Uploaded new album');
-  // });
 });
 
-// // Update albums data in the database
-// albumRouter.put('/:id', (req, res) => {
-//   const collums = req.body.collums.map((collum) => `\`${collum}\``);
-//   const values = req.body.values.map((value) => `'${value}'`);
-//   const query = collums.map((collum, index) => `${collum} = ${values[index]}`).join();
+// Update albums data in the database
+albumRouter.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { values, collums } = req.body;
+  const query = {};
+  collums.forEach((collum, index) => { query[collum] = values[index]; });
+  query.date = new Date().toISOString().slice(0, 19).replace('T', ' ');
+  try {
+    await Album.update(query, {
+      where: {
+        id,
+      },
+    });
+    res.status(200).send('Updated album');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
-//   mysqlCon.query(`UPDATE \`albums\`.\`${req.params.table}\`
-//     SET ${query}
-//     WHERE album_id =${req.params.id}`, (error, results, fields) => {
-//     if (error) {
-//       res.status(500).send(error.message);
-//     } else {
-//       res.status(200).send('Updated album');
-//     }
-//   });
-// });
+// Delete album from database
+albumRouter.delete('/:id', async (req, res) => {
+  const { id } = req.params;
 
-// // Delete data from database
-// albumRouter.delete('/:id', (req, res) => {
-//   mysqlCon.query(`DELETE FROM \`albums\`
-//     WHERE album_id =${req.params.id}`, (error, results, fields) => {
-//     if (error) {
-//       res.status(500).send(error.message);
-//     } else {
-//       res.status(200).send('Deleted album');
-//     }
-//   });
-// });
+  try {
+    await Album.destroy({
+      where: {
+        id,
+      },
+    });
+    res.status(200).send('Deleted album');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 module.exports = albumRouter;

@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/artists
+Content-Type: application/json
+
+{
+    "collums" : ["name", "coverImg"],
+    "values" : ["dwq", "asd"]
+}
