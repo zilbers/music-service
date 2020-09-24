@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { Album } = require('../models');
+const { Album, Song, Artist } = require('../models');
 
 const albumRouter = Router();
 
@@ -19,25 +19,51 @@ albumRouter.get('/album_:id', async (req, res) => {
   try {
     const allAlbums = await Album.findByPk(id);
     res.json(allAlbums);
-  } catch {
-    res.status(500).send('Error');
+  } catch (e) {
+    res.status(500).send(e.message);
   }
 });
 
 // Get the songs that are in the album
 albumRouter.get('/:id/list', async (req, res) => {
   const { id } = req.params;
+  try {
+    const allAlbums = await Album.findByPk(id, {
+      include: [
+        {
+          model: Artist,
+          attributes: ['name'],
+        },
+        {
+          model: Song,
+        },
+      ],
+    });
+    res.json(allAlbums);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
 });
 
-// // Get the top albums
-// albumRouter.get('/top', (req, res) => {
-//   mysqlCon.query('CALL get_top_ablums()', (error, results, fields) => {
-//     if (error) {
-//       return res.status(500).send(error.message);
-//     }
-//     return res.status(200).send(results[0]);
-//   });
-// });
+// Get the top albums
+albumRouter.get('/top', async (req, res) => {
+  try {
+    const allAlbums = await Album.findAll({
+      include: [
+        {
+          model: Artist,
+          attributes: ['name'],
+        },
+        {
+          model: Song,
+        },
+      ],
+    });
+    res.json(allAlbums);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 // // Post new data to albums
 // albumRouter.post('/api/albums', (req, res) => {
