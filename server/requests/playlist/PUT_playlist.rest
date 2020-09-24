@@ -1,7 +1,7 @@
-PUT http://localhost:3001/api/albums/4
+PUT http://localhost:3001/api/playlists/1
 Content-Type: application/json
 
 {
-    "collums" : ["name", "artistId", "coverImg"],
-    "values" : ["Shalom", 2, "mamash"]
+    "collums" : ["name", "coverImg"],
+    "values" : ["Ahu", "Shakshuka"]
 }

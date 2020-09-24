@@ -1,7 +1,7 @@
-POST http://localhost:3001/api/albums
+POST http://localhost:3001/api/playlists
 Content-Type: application/json
 
 {
-    "collums" : ["name", "artistId", "coverImg"],
-    "values" : ["dwq", 2, "asd"]
+    "collums" : ["name", "coverImg"],
+    "values" : ["dwq", "asd"]
 }

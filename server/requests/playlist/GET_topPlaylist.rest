@@ -1,1 +1,1 @@
-GET http://localhost:3001/api/albums/top
+GET http://localhost:3001/api/playlists/top
