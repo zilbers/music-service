@@ -1,16 +1,24 @@
 const { Router } = require('express');
+const { User } = require('../models');
 
 const loginRouter = Router();
 
-// loginRouter.post('/', (req, res) => {
-//   const { email, pass } = req.body;
-//   const query = `CALL music_service.login('${email}','${pass}')`;
-//   mysqlCon.query((query), (error, results, fields) => {
-//     if (error) {
-//       return res.status(500).send(error.message);
-//     }
-//     return res.status(200).send(results[0][0]);
-//   });
-// });
+// Post new albums
+loginRouter.post('/', async (req, res) => {
+  const { email, password } = req.body;
+  //   collums.forEach((collum, index) => { query[collum] = values[index]; });
+
+  try {
+    const logIn = await User.findAll({
+      where: {
+        email,
+        password,
+      },
+    });
+    res.status(200).send(!!logIn[0]);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 module.exports = loginRouter;
