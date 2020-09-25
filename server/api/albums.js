@@ -65,7 +65,7 @@ albumRouter.get('/top', async (req, res) => {
         },
       ],
       order: [
-        ['album_id', 'ASC'],
+        ['user_id', 'ASC'],
       ],
       group: ['album_id'],
       raw: true,
