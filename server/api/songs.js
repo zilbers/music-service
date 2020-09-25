@@ -147,23 +147,3 @@ songsRouter.delete('/:id', async (req, res) => {
 });
 
 module.exports = songsRouter;
-
-// // Like song
-// songsRouter.post('/like', async (req, res) => {
-//   const { user_id, song_id } = req.body;
-//   mysqlCon.query('CALL like_song(?,?)',
-//     [user_id, song_id], (error, results, fields) => {
-//       if (error) {
-//         mysqlCon.query('CALL remove_likeSong(?,?)',
-//           [user_id, song_id], (err1, res1, fields) => {
-//             if (err1) {
-//               return res.status(500).send('Error with action');
-//             }
-//             console.log('remove like');
-//             return res.send(res1[0]);
-//           });
-//       } else {
-//         return res.send(results[0]);
-//       }
-//     });
-// });
