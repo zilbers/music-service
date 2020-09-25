@@ -6,7 +6,6 @@ const loginRouter = Router();
 // Post new albums
 loginRouter.post('/', async (req, res) => {
   const { email, password } = req.body;
-  //   collums.forEach((collum, index) => { query[collum] = values[index]; });
 
   try {
     const logIn = await User.findAll({

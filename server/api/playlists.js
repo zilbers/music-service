@@ -32,30 +32,22 @@ playlistRouter.get('/playlist_:id', async (req, res) => {
 playlistRouter.get('/:id/list', async (req, res) => {
   const { id } = req.params;
   try {
-    const playlist = await Playlist.findAll({
-      attributes: ['name', 'cover_img'],
+    const playlist = await Playlist.findByPk(id);
+    const songList = await Playlist_song.findAll({
+      where: [{ playlist_id: id }],
+      attributes: ['song_id'],
       include: [
         {
-          model: Playlist_song,
-          attributes: ['playlist_id'],
-          where: {
-            playlistId: id,
-          },
-          include: [
-            {
-              model: Song,
-              attributes: ['name'],
-              include: [{
-                model: Artist,
-                attributes: ['name'],
-              }],
-            },
-          ],
-        },
-      ],
+          model: Song,
+          attributes: ['name'],
+          include: [{
+            model: Artist,
+            attributes: ['name'],
+          }],
+        }],
       raw: true,
     });
-    res.json(playlist);
+    res.json({ playlist, songList });
   } catch (e) {
     res.status(500).send(e.message);
   }
