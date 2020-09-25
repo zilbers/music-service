@@ -1,67 +1,152 @@
 /* eslint-disable camelcase */
 const { Router } = require('express');
+const { Sequelize } = require('sequelize');
+const {
+  Album, Song, Artist, User_song,
+} = require('../models');
 
 const songsRouter = Router();
 
-// // Get all songs
-// songsRouter.get('/', (req, res) => {
-//   mysqlCon.query('CALL get_all_songs()',
-//     (error, results, fields) => {
-//       if (error) {
-//         return res.status(500).send(error.message);
-//       }
-//       return res.status(200).send(results[0]);
-//     });
-// });
+// Get all songs
+songsRouter.get('/', async (req, res) => {
+  try {
+    const allSongs = await Song.findAll();
+    res.json(allSongs);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
-// // Get song by ID
-// songsRouter.get('/song_:id', async (req, res) => {
-//   const { id } = req.params;
-//   mysqlCon.query('CALL get_song_byId(?)',
-//     [id], (error, results, fields) => {
-//       if (error) {
-//         return res.status(500).send(error.message);
-//       }
-//       return results[0][0] ? res.send(results[0]) : res.status(404).send('No song with this ID');
-//     });
-// });
+// Get by songs ID
+songsRouter.get('/song_:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const song = await Song.findByPk(id);
+    res.json(song);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
-// // Get the top songs
-// songsRouter.get('/top', (req, res) => {
-//   mysqlCon.query('CALL get_top_songs()', (error, results, fields) => {
-//     if (error) {
-//       return res.status(500).send(error.message);
-//     }
-//     return res.status(200).send(results[0]);
-//   });
-// });
+// Get the top songs
+songsRouter.get('/top', async (req, res) => {
+  try {
+    const topSongs = await User_song.findAll({
+      attributes: [[Sequelize.fn('COUNT', Sequelize.col('user_id')), 'likes']],
+      include: [
+        {
+          model: Song,
+          attributes: ['name'],
+          include: {
+            model: Artist,
+            attributes: ['name'],
+          },
+        },
+      ],
+      order: [
+        ['user_id', 'ASC'],
+      ],
+      group: ['song_id'],
+      raw: true,
+    });
+    res.json(topSongs);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
-// // Get liked songs by user ID
-// songsRouter.get('/liked/:id', (req, res) => {
-//   const { id } = req.params;
-//   mysqlCon.query('CALL get_user_likedSongs(?)', [id],
-//     (error, results, fields) => {
-//       if (error) {
-//         return res.status(500).send(error.message);
-//       }
-//       return res.status(200).send(results[0]);
-//     });
-// });
+// Get the top songs
+songsRouter.get('/liked/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const topSongs = await User_song.findAll({
+      attributes: ['song_id'],
+      include: [
+        {
+          model: Song,
+          attributes: ['name'],
+          include: {
+            model: Artist,
+            attributes: ['name'],
+          },
+        },
+      ],
+      where: {
+        userId: id,
+      },
+      raw: true,
+    });
+    res.json(topSongs);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
-// // Post new data to songs
-// songsRouter.post('/', (req, res) => {
-//   const collums = req.body.collums.map((collum) => `\`${collum}\``).join();
-//   const values = req.body.values.map((value) => `'${value}'`).join();
-//   const date = new Date().toISOString().slice(0, 19).replace('T', ' ');
-//   console.log(collums, values);
-//   mysqlCon.query(`INSERT INTO \`songs\` (${collums}, uploaded_at)
-//       VALUES (${values}, '${date}')`, (error, results, fields) => {
-//     if (error) {
-//       return res.status(500).send(error.message);
-//     }
-//     return res.status(200).send('Uploaded new song');
-//   });
-// });
+// Get the top songs
+songsRouter.post('/like', async (req, res) => {
+  try {
+    const { userId, songId } = req.body;
+    await User_song.create({
+      userId,
+      songId,
+    });
+    res.status(200).send('Liked song');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Post new song
+songsRouter.post('/', async (req, res) => {
+  const { values, collums } = req.body;
+  const query = {};
+
+  collums.forEach((collum, index) => { query[collum] = values[index]; });
+
+  try {
+    await Song.create(query);
+    res.status(200).send('Posted new song');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Update albums data in the database
+songsRouter.put('/:id', async (req, res) => {
+  const { id } = req.params;
+  const { values, collums } = req.body;
+  const query = {};
+  collums.forEach((collum, index) => { query[collum] = values[index]; });
+
+  try {
+    await Song.update(query, {
+      where: {
+        id,
+      },
+    });
+    res.status(200).send('Updated song');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Delete album from database
+songsRouter.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Song.destroy({
+      where: {
+        id,
+      },
+    });
+    res.status(200).send('Deleted song');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+module.exports = songsRouter;
 
 // // Like song
 // songsRouter.post('/like', async (req, res) => {
@@ -82,32 +167,3 @@ const songsRouter = Router();
 //       }
 //     });
 // });
-
-// // Update song data in the database
-// songsRouter.put('/:id', (req, res) => {
-//   const collums = req.body.collums.map((collum) => `\`${collum}\``);
-//   const values = req.body.values.map((value) => `'${value}'`);
-//   const query = collums.map((collum, index) => `${collum} = ${values[index]}`).join();
-
-//   mysqlCon.query(`UPDATE \`songs\`.\`${req.params.table}\`
-//   SET ${query}
-//   WHERE song_id =${req.params.id}`, (error, results, fields) => {
-//     if (error) {
-//       return res.status(500).send(error.message);
-//     }
-//     return res.status(200).send('Updated song');
-//   });
-// });
-
-// // Delete data from database
-// songsRouter.delete('/:id', (req, res) => {
-//   mysqlCon.query(`DELETE FROM \`songs\`
-//   WHERE song_id =${req.params.id}`, (error, results, fields) => {
-//     if (error) {
-//       return res.status(500).send(error.message);
-//     }
-//     return res.status(200).send('Deleted song');
-//   });
-// });
-
-module.exports = songsRouter;
