@@ -10,9 +10,9 @@ module.exports = {
     define: { underscore: true },
   },
   test: {
-    username: process.env.username,
+    username: 'root',
     password: process.env.password,
-    database: 'database_test',
+    database: process.env.database_test,
     host: '127.0.0.1',
     dialect: 'mysql',
   },
