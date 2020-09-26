@@ -101,7 +101,7 @@ describe(`${projectName} - first test suite`, () => {
     done();
   });
 
-  it('Not allowing uploading bad data', async (done) => {
+  it('Not allowing to upload bad data', async (done) => {
     await request(app).post('/api/songs').send(mock.badInput).expect(500);
     await request(app).post('/api/albums').send(mock.badInput).expect(500);
     await request(app).post('/api/playlists').send(mock.badInput).expect(500);
