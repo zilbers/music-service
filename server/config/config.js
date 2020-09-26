@@ -15,6 +15,7 @@ module.exports = {
     database: process.env.database_test,
     host: '127.0.0.1',
     dialect: 'mysql',
+    define: { underscore: true },
   },
   production: {
     username: process.env.username,

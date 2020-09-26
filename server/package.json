@@ -18,12 +18,10 @@
     "jest": "^26.4.2",
     "nodemon": "^2.0.4",
     "sequelize-cli": "^6.2.0",
-    "supertest": "^5.0.0",
-    "sequelize-mock": "^0.10.2"
+    "supertest": "^5.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "pretest": "NODE_ENV=test npm run db:migrate",
+    "test": "NODE_ENV=test jest --detectOpenHandles",
     "dev": "nodemon index.js"
   },
   "keywords": [],
