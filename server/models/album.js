@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Album.init({
-    name: DataTypes.STRING,
-    artistId: DataTypes.INTEGER,
+    name: { type: DataTypes.STRING, allowNull: false },
+    artistId: { type: DataTypes.STRING, allowNull: false },
     coverImg: DataTypes.STRING,
   }, {
     sequelize,

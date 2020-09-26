@@ -2,6 +2,6 @@ POST http://localhost:3001/api/albums
 Content-Type: application/json
 
 {
-    "collums" : ["name", "coverImg", "artist_id"],
+    "collums" : ["name", "coverImg", "artistId"],
     "values" : ["dwq", "asd", 2]
 }

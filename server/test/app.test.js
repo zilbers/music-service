@@ -9,29 +9,36 @@ const app = require('../app');
 
 const mock = {
   artist: {
-    collums: ['name', 'cover_img'],
+    collums: ['name', 'coverImg'],
     values: ['good', 'singer'],
   },
   album: {
-    collums: ['name', 'cover_img', 'artist_id'],
-    values: ['amazing', 'album', 1],
+    collums: ['name', 'coverImg', 'artistId'],
+    values: ['fine', 'album', 2],
   },
   playlist: {
-    collums: ['name', 'cover_img'],
+    collums: ['name', 'coverImg'],
     values: ['ok', 'playlist'],
   },
   song: {
-    collums: ['name', 'cover_img', 'album_id', 'artist_id'],
-    values: ['ok', 'playlist', 2, 2],
+    collums: ['name', 'artistId', 'albumId', 'lyrics', 'youtubeLink'],
+    values: ['A', 2, 2, 'very', 'good song'],
+  },
+  // Misses name property
+  badInput: {
+    collums: ['albumId', 'artistId', 'youtubeLink'],
+    values: [1, 1, 'link'],
   },
 };
 
 const projectName = '1.Music - Service Database';
 
 describe(`${projectName} - first test suite`, () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await Artist.destroy({ truncate: true, force: true });
     await Album.destroy({ truncate: true, force: true });
+    await Song.destroy({ truncate: true, force: true });
+    await Playlist.destroy({ truncate: true, force: true });
   });
 
   it('Can create artist', async (done) => {
@@ -45,7 +52,7 @@ describe(`${projectName} - first test suite`, () => {
   it('Can find artist', async (done) => {
     const res = await request(app).get('/api/artists').expect(200);
     const databaseValue = await Artist.findAll();
-    expect(res.body).toStrictEqual(databaseValue);
+    expect(res.body[0].name).toBe(databaseValue[0].name);
     done();
   });
 
@@ -60,7 +67,7 @@ describe(`${projectName} - first test suite`, () => {
   it('Can find albums', async (done) => {
     const res = await request(app).get('/api/albums').expect(200);
     const databaseValue = await Album.findAll();
-    expect(res.body).toStrictEqual(databaseValue);
+    expect(res.body[0].name).toBe(databaseValue[0].name);
     done();
   });
 
@@ -80,7 +87,7 @@ describe(`${projectName} - first test suite`, () => {
   });
 
   it('Can create song', async (done) => {
-    const res = await request(app).post('/api/songs').send(mock.playlist).expect(200);
+    const res = await request(app).post('/api/songs').send(mock.song).expect(200);
     expect(res.text).toBe('Posted new song');
     const databaseValue = await Song.findByPk(1);
     expect(databaseValue.name).toBe(mock.song.values[0]);
@@ -91,6 +98,14 @@ describe(`${projectName} - first test suite`, () => {
     const res = await request(app).get('/api/songs').expect(200);
     const databaseValue = await Song.findAll();
     expect(res.body[0].name).toBe(databaseValue[0].name);
+    done();
+  });
+
+  it('Not allowing uploading bad data', async (done) => {
+    await request(app).post('/api/songs').send(mock.badInput).expect(500);
+    await request(app).post('/api/albums').send(mock.badInput).expect(500);
+    await request(app).post('/api/playlists').send(mock.badInput).expect(500);
+    await request(app).post('/api/artists').send(mock.badInput).expect(500);
     done();
   });
 });

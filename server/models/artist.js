@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Artist.init({
-    name: DataTypes.STRING,
+    name: { type: DataTypes.STRING, allowNull: false },
     coverImg: DataTypes.STRING,
   }, {
     sequelize,
