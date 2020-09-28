@@ -41,21 +41,6 @@ describe(`${projectName} - first test suite`, () => {
     await Playlist.destroy({ truncate: true, force: true });
   });
 
-  it('Can create artist', async (done) => {
-    const res = await request(app).post('/api/artists').send(mock.artist).expect(200);
-    expect(res.text).toBe('Posted new artist');
-    const databaseValue = await Artist.findByPk(1);
-    expect(databaseValue.name).toBe(mock.artist.values[0]);
-    done();
-  });
-
-  it('Can find artist', async (done) => {
-    const res = await request(app).get('/api/artists').expect(200);
-    const databaseValue = await Artist.findAll();
-    expect(res.body[0].name).toBe(databaseValue[0].name);
-    done();
-  });
-
   it('Can create album', async (done) => {
     const res = await request(app).post('/api/albums').send(mock.album).expect(200);
     expect(res.text).toBe('Posted new album');
