@@ -20,7 +20,7 @@ function DisplaySingle(props) {
   function getAll(type) {
     get(type)
       .then((data) => {
-        console.log(data);
+        console.log("data", data, "match", props.match);
         setItem(data.data[0]);
       })
       .catch((err) => console.log(err));
