@@ -19,7 +19,10 @@ function DisplaySingle(props) {
 
   function getAll(type) {
     get(type)
-      .then((data) => setItem(data.data[0]))
+      .then((data) => {
+        console.log(data);
+        setItem(data.data[0]);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -34,31 +37,27 @@ function DisplaySingle(props) {
   return (
     <div className="DisplaySingle">
       <h2 className="header">{item.name}</h2>
-      {item.artist && (
-        <Link className="links" to={`/artists/${item.artist_id}`}>
-          <h4>By {item.artist}</h4>
+      {item.Artist && (
+        <Link className="links" to={`/artists/${item.Artist.id}`}>
+          <h4>By {item.Artist.name}</h4>
         </Link>
       )}
       <div className="mainSec">
         {item.cover_img && (
-          <img
-            className="cover_img"
-            src={item.cover_img}
-            alt={`${item.name}`}
-          />
+          <img className="cover_img" src={item.coverImg} alt={`${item.name}`} />
         )}
-        {item.youtube_link && (
+        {item.youtubeLink && (
           <iframe
             width="560"
             height="315"
             title={item.name}
-            src={`https://www.youtube.com/embed/${item.youtube_link}`}
+            src={`https://www.youtube.com/embed/${item.youtubeLink}`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
         )}
-        {item.youtube_link &&
+        {item.youtubeLink &&
           (qParamsObj.from ? (
             <div className="recommended">
               From same {qParamsObj.from}
@@ -76,16 +75,16 @@ function DisplaySingle(props) {
             </div>
           ))}
       </div>
-      {type && (
+      {/* {type && (
         <List
           dataType={url}
           match={props.match}
           history={props.history}
           location={props.location}
         />
-      )}
-      {item.created_at && (
-        <h5>Created at: {item.created_at.slice(0, 11).replace("T", " ")}</h5>
+      )} */}
+      {item.createdAt && (
+        <h5>Created at: {item.createdAt.slice(0, 11).replace("T", " ")}</h5>
       )}
     </div>
   );

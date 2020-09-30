@@ -21,7 +21,15 @@ albumRouter.get('/', async (req, res) => {
 albumRouter.get('/album_:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const album = await Album.findByPk(id);
+    const album = await Album.findAll({
+      where: {
+        id,
+      },
+      include: {
+        model: Artist,
+        attributes: ['name', 'id'],
+      },
+    });
     res.json(album);
   } catch (e) {
     res.status(500).send(e.message);
@@ -33,9 +41,7 @@ albumRouter.get('/:id/list', async (req, res) => {
   const { id } = req.params;
   try {
     const album = await Album.findByPk(id);
-    console.log(album);
     const songs = await album.getSongs();
-    console.log(songs);
     res.json({ album, songs });
   } catch (e) {
     res.status(500).send(e.message);
@@ -50,7 +56,7 @@ albumRouter.get('/top', async (req, res) => {
       include: [
         {
           model: Album,
-          attributes: ['name', 'cover_img'],
+          attributes: ['name', 'cover_img', 'id'],
           include: {
             model: Artist,
             attributes: ['name'],
@@ -61,7 +67,6 @@ albumRouter.get('/top', async (req, res) => {
         ['user_id', 'ASC'],
       ],
       group: ['album_id'],
-      raw: true,
     });
     res.json(topAlbums);
   } catch (e) {

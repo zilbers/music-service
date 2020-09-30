@@ -21,7 +21,11 @@ playlistRouter.get('/', async (req, res) => {
 playlistRouter.get('/playlist_:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const playlist = await Playlist.findByPk(id);
+    const playlist = await Playlist.findAll({
+      where: {
+        id,
+      },
+    });
     res.json(playlist);
   } catch (e) {
     res.status(500).send(e.message);
@@ -61,14 +65,13 @@ playlistRouter.get('/top', async (req, res) => {
       include: [
         {
           model: Playlist,
-          attributes: ['name', 'cover_img'],
+          attributes: ['name', 'cover_img', 'id'],
         },
       ],
       order: [
         ['playlist_id', 'ASC'],
       ],
       group: ['playlist_id'],
-      raw: true,
     });
     res.json(topPlaylists);
   } catch (e) {

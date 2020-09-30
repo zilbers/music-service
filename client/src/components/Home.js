@@ -44,29 +44,30 @@ function Home() {
                 </h3>
                 <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
-                    const type = endpoints[index].split("/")[0];
+                    const rawType = endpoints[index].split("/")[0];
+                    const type = rawType.charAt(0).toUpperCase() + rawType.slice(1, -1);
                     return (
                       <Link
                         className="carouselLinks carouselItem"
-                        to={`/${type}/${item.id}`}
-                        key={item.name}
+                        to={`/${rawType}/${item[type].id}`}
+                        key={item[type].name}
                       >
-                        {item.cover_img && (
+                        {item[type].cover_img && (
                           <img
                             className="cover_img"
-                            src={item.cover_img}
-                            alt={`${item.name}`}
+                            src={item[type].cover_img}
+                            alt={`${item[type].name}`}
                           />
                         )}
-                        {item.youtube_link && (
+                        {item[type].youtube_link && (
                           <img
                             className="cover_img"
-                            src={`https://img.youtube.com/vi/${item.youtube_link}/0.jpg`}
-                            alt={`${item.name}`}
+                            src={`https://img.youtube.com/vi/${item[type].youtube_link}/0.jpg`}
+                            alt={`${item[type].name}`}
                           />
                         )}
-                        <span className="itemTitle" key={item.id}>
-                          {item.name}
+                        <span className="itemTitle" key={item[type].id}>
+                          {item[type].name}
                         </span>
                       </Link>
                     );

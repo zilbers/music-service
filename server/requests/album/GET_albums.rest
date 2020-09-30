@@ -1,1 +1,3 @@
 GET http://localhost:3001/api/albums
+Content-Type: application/json
+x-access-token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJpYXQiOjE2MDE0ODQxMzYsImV4cCI6MTYwMTU3MDUzNn0.VNTPFhjYUV24Rt_C8Sba8foI9mmzygTz12sUr7WpCfk"

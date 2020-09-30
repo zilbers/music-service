@@ -5,7 +5,6 @@ const { User } = require('../models');
 
 const loginRouter = Router();
 
-// Post new albums
 loginRouter.post('/', async (req, res) => {
   const { email, password } = req.body;
 
@@ -18,13 +17,14 @@ loginRouter.post('/', async (req, res) => {
     const check = bcrypt.compare(password, user.password);
     if (!user || !check) {
       return res.status(403).json({
-        errorMessage: 'wrong login credentials',
+        errorMessage: 'Wrong login credentials',
       });
     }
     const token = jwt.sign({ email },
       process.env.JWT_SECRET,
       { expiresIn: '24h' });
     return res.json({
+      email,
       success: true,
       token,
     });

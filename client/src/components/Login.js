@@ -35,12 +35,13 @@ class Login extends React.Component {
     event.preventDefault();
     const credntials = {
       email: this.state.username,
-      pass: this.state.password,
+      password: this.state.password,
     };
 
     create("login", credntials)
       .then((res) => {
-        if (res.data) {
+        if (res.data && res.data.success && res.data.token) {
+          localStorage.setItem('token', res.data.token);
           this.context.logUserIn(res.data);
           history.push("/");
         } else {

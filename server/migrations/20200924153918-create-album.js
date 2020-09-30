@@ -14,7 +14,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       cover_img: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT('long'),
       },
       created_at: {
         type: Sequelize.DATE,

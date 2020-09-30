@@ -96,6 +96,10 @@ export default function ButtonAppBar() {
         .catch((err) => console.log(err));
     }
   };
+  const logout = () => {
+    context.logUserOut();
+    localStorage.removeItem('token');
+  }
 
   useEffect(() => {
     if (search === "") {
@@ -132,7 +136,7 @@ export default function ButtonAppBar() {
             Hi, {context.email.split("@")[0]}
           </Typography>
           <Link to="/" className="links">
-            <Button color="inherit" onClick={context.logUserOut}>
+            <Button color="inherit" onClick={logout}>
               Logout
             </Button>
           </Link>

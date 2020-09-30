@@ -21,7 +21,11 @@ artistRouter.get('/', async (req, res) => {
 artistRouter.get('/artist_:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const artist = await Artist.findByPk(id);
+    const artist = await Artist.findAll({
+      where: {
+        id,
+      },
+    });
     res.json(artist);
   } catch (e) {
     res.status(500).send(e.message);
@@ -53,14 +57,13 @@ artistRouter.get('/top', async (req, res) => {
       include: [
         {
           model: Artist,
-          attributes: ['name', 'cover_img'],
+          attributes: ['name', 'cover_img', 'id'],
         },
       ],
       order: [
         ['artist_id', 'ASC'],
       ],
       group: ['artist_id'],
-      raw: true,
     });
     res.json(topArtists);
   } catch (e) {

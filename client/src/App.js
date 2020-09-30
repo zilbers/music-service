@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      {!context.logged ? (
+      {!context.success ? (
         <Router>
           <Route path="/">
             <Login />

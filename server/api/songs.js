@@ -2,7 +2,7 @@
 const { Router } = require('express');
 const { Sequelize } = require('sequelize');
 const {
-  Album, Song, Artist, User_song,
+  Song, Artist, User_song,
 } = require('../models');
 
 const songsRouter = Router();
@@ -21,7 +21,11 @@ songsRouter.get('/', async (req, res) => {
 songsRouter.get('/song_:id', async (req, res) => {
   const { id } = req.params;
   try {
-    const song = await Song.findByPk(id);
+    const song = await Song.findAll({
+      where: {
+        id,
+      },
+    });
     res.json(song);
   } catch (e) {
     res.status(500).send(e.message);
@@ -36,7 +40,7 @@ songsRouter.get('/top', async (req, res) => {
       include: [
         {
           model: Song,
-          attributes: ['name'],
+          attributes: ['name', 'youtube_link', 'id'],
           include: {
             model: Artist,
             attributes: ['name'],
@@ -47,7 +51,6 @@ songsRouter.get('/top', async (req, res) => {
         ['user_id', 'ASC'],
       ],
       group: ['song_id'],
-      raw: true,
     });
     res.json(topSongs);
   } catch (e) {
