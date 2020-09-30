@@ -2,41 +2,45 @@
  * @jest-environment node
  */
 const request = require('supertest');
-const { Artist, Album } = require('../models');
+const {
+  Artist, Album, Playlist, Song,
+} = require('../models');
 const app = require('../app');
 
 const mock = {
   test: {
-    collums: ['name', 'coverImg', 'artistId'],
-    values: ['test', 'coverImg'],
+    collums: ['name', 'coverImg', 'artistId', 'albumId', 'youtubeLink'],
+    values: ['test', 'coverImg', 1, 1, 'first link'],
   },
   anotherTest: {
-    collums: ['name', 'coverImg', 'artistId'],
-    values: ['anotherTest', 'anotherCoverImg'],
+    collums: ['name', 'coverImg', 'artistId', 'albumId', 'youtubeLink'],
+    values: ['anotherTest', 'anotherCoverImg', 1, 1, 'second link'],
   },
   updatedTest: {
-    collums: ['name', 'coverImg', 'artistId'],
-    values: ['updatedTest', 'updatedCoverImg'],
+    collums: ['name', 'coverImg', 'artistId', 'albumId', 'youtubeLink'],
+    values: ['updatedTest', 'updatedCoverImg', 1, 1, 'updated link'],
   },
   artist: {
-    collums: ['name', 'coverImg', 'artistId'],
+    collums: ['name', 'coverImg', 'artistId', 'albumId', 'youtubeLink'],
     values: ['better', 'album', 1],
   },
 };
 
-const test = ['artist', 'album'];
-const models = [Artist, Album];
+const test = ['artist', 'album', 'playlist', 'song'];
+const models = [Artist, Album, Playlist, Song];
 
 test.forEach((typeOfTest, index) => {
   describe(`Music - Service Database - ${typeOfTest}s API`, () => {
     beforeAll(async () => {
       await models[index].destroy({ truncate: true, force: true });
-      await request(app).post('/api/artists').send(mock.artist).expect(200);
+      if (test !== 'artist') {
+        await request(app).post('/api/artists').send(mock.artist).expect(200);
+      }
     });
 
     it(`Can create ${typeOfTest}`, async (done) => {
       const res = await request(app).post(`/api/${typeOfTest}s`).send(mock.test).expect(200);
-      const anotherRes = await request(app).post(`/api/${typeOfTest}s`).send(mock.anotherTests).expect(200);
+      const anotherRes = await request(app).post(`/api/${typeOfTest}s`).send(mock.anotherTest).expect(200);
       expect(res.text).toBe(`Posted new ${typeOfTest}`);
       expect(anotherRes.text).toBe(`Posted new ${typeOfTest}`);
       const databaseValue = await models[index].findAll({
@@ -47,10 +51,10 @@ test.forEach((typeOfTest, index) => {
       expect(databaseValue[0].name).toBe(mock.test.values[0]);
       const anotherDatabaseValue = await models[index].findAll({
         where: {
-          name: mock.anotherTests.values[0],
+          name: mock.anotherTest.values[0],
         },
       });
-      expect(anotherDatabaseValue[0].name).toBe(mock.anotherTests.values[0]);
+      expect(anotherDatabaseValue[0].name).toBe(mock.anotherTest.values[0]);
       done();
     });
 
