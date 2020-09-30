@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
 const loginRouter = Router();
@@ -8,15 +9,26 @@ loginRouter.post('/', async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const logIn = await User.findAll({
+    const user = await User.findOne({
       where: {
         email,
         password,
       },
     });
-    res.status(200).send(!!logIn[0]);
+    if (!user) {
+      return res.status(403).json({
+        errorMessage: 'wrong login credentials',
+      });
+    }
+    const token = jwt.sign({ email },
+      process.env.JWT_SECRET,
+      { expiresIn: '24h' });
+    return res.json({
+      success: true,
+      token,
+    });
   } catch (e) {
-    res.status(500).send(e.message);
+    return res.status(500).send(e.message);
   }
 });
 

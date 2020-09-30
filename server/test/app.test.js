@@ -42,7 +42,7 @@ test.forEach((typeOfTest, index) => {
       }
     });
 
-    it(`Can create ${typeOfTest}`, async (done) => {
+    it(`Can create new ${typeOfTest}`, async (done) => {
       const res = await request(app).post(`/api/${typeOfTest}s`).send(mock.test).expect(200);
       const anotherRes = await request(app).post(`/api/${typeOfTest}s`).send(mock.anotherTest).expect(200);
       expect(res.text).toBe(`Posted new ${typeOfTest}`);
