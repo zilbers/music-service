@@ -2,8 +2,8 @@
  * @jest-environment node
  */
 const request = require('supertest');
-const { Artist } = require('../models');
-const app = require('../app');
+const { Artist } = require('../../models');
+const app = require('../../app');
 
 const mock = {
   artist: {

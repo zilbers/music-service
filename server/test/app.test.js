@@ -24,6 +24,10 @@ const mock = {
     collums: ['name', 'coverImg', 'artistId', 'albumId', 'youtubeLink'],
     values: ['better', 'album', 1],
   },
+  badInput: {
+    collums: ['coverImg', 'artistId', 'albumId', 'youtubeLink'],
+    values: ['badInput', 1, 1, 'bad link'],
+  },
 };
 
 const test = ['artist', 'album', 'playlist', 'song'];
@@ -89,13 +93,18 @@ test.forEach((typeOfTest, index) => {
       done();
     });
 
-    it(`Can find ${typeOfTest} by id`, async (done) => {
+    it(`Can delete ${typeOfTest} by id`, async (done) => {
       const res = await request(app).get(`/api/${typeOfTest}s`).expect(200);
       const { id } = res.body[0];
       const afteDelete = await request(app).delete(`/api/${typeOfTest}s/${id}`).expect(200);
       expect(afteDelete.text).toBe(`Deleted ${typeOfTest}`);
       const afterDeleteGetAll = await request(app).get(`/api/${typeOfTest}s`).expect(200);
       expect(afterDeleteGetAll.length).not.toBe(res.body.length);
+      done();
+    });
+
+    it('Not allowing to upload bad data', async (done) => {
+      await request(app).post(`/api/${typeOfTest}s`).send(mock.badInput).expect(500);
       done();
     });
   });
