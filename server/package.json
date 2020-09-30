@@ -8,6 +8,7 @@
     "express": "^4.17.1",
     "faker": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.3.5"

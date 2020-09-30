@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const checkToken = require('../middeleware/auth.js');
+const checkToken = require('../modules/auth.js');
 
 const router = Router();
 
