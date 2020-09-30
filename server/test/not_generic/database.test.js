@@ -4,8 +4,8 @@
 const request = require('supertest');
 const {
   Album, Artist, Playlist, Song,
-} = require('../models');
-const app = require('../app');
+} = require('../../models');
+const app = require('../../app');
 
 const mock = {
   artist: {
