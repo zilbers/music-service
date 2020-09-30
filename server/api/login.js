@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('../modules/bcrypt');
 const { User } = require('../models');
 
 const loginRouter = Router();
@@ -12,10 +13,10 @@ loginRouter.post('/', async (req, res) => {
     const user = await User.findOne({
       where: {
         email,
-        password,
       },
     });
-    if (!user) {
+    const check = bcrypt.compare(password, user.password);
+    if (!user || !check) {
       return res.status(403).json({
         errorMessage: 'wrong login credentials',
       });
