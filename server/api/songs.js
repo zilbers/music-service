@@ -10,7 +10,12 @@ const songsRouter = Router();
 // Get all songs
 songsRouter.get('/', async (req, res) => {
   try {
-    const allSongs = await Song.findAll();
+    const allSongs = await Song.findAll({
+      include: {
+        model: Artist,
+        attributes: ['name', 'id'],
+      },
+    });
     res.json(allSongs);
   } catch (e) {
     res.status(500).send(e.message);

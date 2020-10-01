@@ -10,7 +10,12 @@ const albumRouter = Router();
 // Get albums
 albumRouter.get('/', async (req, res) => {
   try {
-    const allAlbums = await Album.findAll();
+    const allAlbums = await Album.findAll({
+      include: {
+        model: Artist,
+        attributes: ['name', 'id'],
+      },
+    });
     res.json(allAlbums);
   } catch (e) {
     res.status(500).send(e.message);

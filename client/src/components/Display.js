@@ -11,7 +11,7 @@ function Display(props) {
   const [data, setData] = useState([]);
   const [liked, setLiked] = useState([]);
   const type = props.match.params.display;
-  // const model = type.charAt(0).toUpperCase() + type.slice(1, -1);
+  const model = type.charAt(0).toUpperCase() + type.slice(1, -1);
 
   function getAll(type, setter) {
     get(type)
@@ -51,9 +51,12 @@ function Display(props) {
   }, [type]);
 
   useEffect(() => {
-    console.log(liked);
     liked[0] && liked.map((item) => favorite(item.id));
   }, [liked]);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <div className="display">
@@ -61,23 +64,23 @@ function Display(props) {
       {data.map((item) => (
         <div className="linksDisplay" key={item.id}>
           <Link key={item.id} className="row links" to={`/${type}/${item.id}`}>
-            {item.cover_img && (
+            {item.coverImg && (
               <img
                 className="cover_img"
-                src={item.cover_img}
+                src={item.coveImg}
                 alt={`${item.name}`}
               />
             )}
-            {item.youtube_link && (
+            {item.youtubeLink && (
               <img
                 className="cover_img"
-                src={`https://img.youtube.com/vi/${item.youtube_link}/0.jpg`}
+                src={`https://img.youtube.com/vi/${item.youtubeLink}/0.jpg`}
                 alt={`${item.name}`}
               />
             )}
             <span className="title">
               {item.name}
-              {item.artist && <span className="artist">{item.artist}</span>}
+              {item.Artist && <span className="artist">{item.Artist.name}</span>}
             </span>
           </Link>
           <span className="icon" onClick={() => handleClick(item.id)}>

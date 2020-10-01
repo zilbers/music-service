@@ -20,8 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User_artist.init({
-    userId: DataTypes.INTEGER,
-    artistId: DataTypes.INTEGER,
+    userId: { type: DataTypes.INTEGER, allowNull: false },
+    artistId: { type: DataTypes.INTEGER, allowNull: false },
   }, {
     sequelize,
     modelName: 'User_artist',
