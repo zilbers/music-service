@@ -74,6 +74,43 @@ albumRouter.get('/top', async (req, res) => {
   }
 });
 
+// Get the liked albums
+albumRouter.get('/liked/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const likedAlbums = await User_album.findAll({
+      attributes: [['album_id', 'id']],
+      include: [
+        {
+          model: Album,
+          attributes: ['name'],
+        },
+      ],
+      where: {
+        userId: id,
+      },
+      raw: true,
+    });
+    res.json(likedAlbums);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Like album
+albumRouter.post('/like', async (req, res) => {
+  try {
+    const { userId, albumId } = req.body;
+    await User_album.create({
+      userId,
+      albumId,
+    });
+    res.status(200).send('Liked album');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
 // Post new albums
 albumRouter.post('/', async (req, res) => {
   const { values, collums } = req.body;

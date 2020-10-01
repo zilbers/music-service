@@ -9,7 +9,7 @@ function Home() {
   const context = useContext(UserContext);
   const [charts, setCharts] = useState([]);
   const endpoints = [
-    `songs/liked/${context.user_id}`,
+    `songs/liked/${context.id}`,
     "songs/top",
     "albums/top",
     "artists/top",
@@ -50,7 +50,7 @@ function Home() {
                       <Link
                         className="carouselLinks carouselItem"
                         to={`/${rawType}/${item[type].id}`}
-                        key={item[type].name}
+                        key={item[type].id + smallIndex + item[type].name}
                       >
                         {item[type].cover_img && (
                           <img

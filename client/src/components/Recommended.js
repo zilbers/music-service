@@ -28,7 +28,7 @@ function Recommended(props) {
               <Link
                 key={data.Song.id + index}
                 className="links"
-                to={`/songs/song_${data.Song.id}`}
+                to={`/songs/${data.Song.id}`}
               >
                 <span className="title">
                   {data.Song.name}

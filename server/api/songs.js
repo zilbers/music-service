@@ -58,16 +58,16 @@ songsRouter.get('/top', async (req, res) => {
   }
 });
 
-// Get the top songs
+// Get the liked songs
 songsRouter.get('/liked/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const topSongs = await User_song.findAll({
-      attributes: ['song_id'],
+    const likedSongs = await User_song.findAll({
+      attributes: [['song_id', 'id']],
       include: [
         {
           model: Song,
-          attributes: ['name'],
+          attributes: ['name', 'id', 'youtube_link'],
           include: {
             model: Artist,
             attributes: ['name'],
@@ -77,15 +77,14 @@ songsRouter.get('/liked/:id', async (req, res) => {
       where: {
         userId: id,
       },
-      raw: true,
     });
-    res.json(topSongs);
+    res.json(likedSongs);
   } catch (e) {
     res.status(500).send(e.message);
   }
 });
 
-// Get the top songs
+// Like song
 songsRouter.post('/like', async (req, res) => {
   try {
     const { userId, songId } = req.body;

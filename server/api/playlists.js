@@ -94,6 +94,42 @@ playlistRouter.post('/', async (req, res) => {
   }
 });
 
+// Get the liked playlists
+playlistRouter.get('/liked/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const likedPlaylist = await User_playlist.findAll({
+      attributes: [['playlist_id', 'id']],
+      include: [
+        {
+          model: Playlist,
+          attributes: ['name', 'id', 'cover_img'],
+        },
+      ],
+      where: {
+        userId: id,
+      },
+    });
+    res.json(likedPlaylist);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Like playlist
+playlistRouter.post('/like', async (req, res) => {
+  try {
+    const { userId, songId } = req.body;
+    await User_playlist.create({
+      userId,
+      playlistId: songId,
+    });
+    res.status(200).send('Liked playlist');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
 // Update albums data in the database
 playlistRouter.put('/:id', async (req, res) => {
   const { id } = req.params;

@@ -25,6 +25,7 @@ loginRouter.post('/', async (req, res) => {
       { expiresIn: '24h' });
     return res.json({
       email,
+      id: user.id,
       success: true,
       token,
     });

@@ -71,6 +71,42 @@ artistRouter.get('/top', async (req, res) => {
   }
 });
 
+// Get the liked playlists
+artistRouter.get('/liked/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const likedArtists = await User_artist.findAll({
+      attributes: [['artist_id', 'id']],
+      include: [
+        {
+          model: Artist,
+          attributes: ['name', 'id', 'cover_img'],
+        },
+      ],
+      where: {
+        userId: id,
+      },
+    });
+    res.json(likedArtists);
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
+// Like artist
+artistRouter.post('/like', async (req, res) => {
+  try {
+    const { userId, songId } = req.body;
+    await User_artist.create({
+      userId,
+      artistId: songId,
+    });
+    res.status(200).send('Liked artist');
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
+
 // Post new artist
 artistRouter.post('/', async (req, res) => {
   const { values, collums } = req.body;

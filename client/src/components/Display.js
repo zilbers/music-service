@@ -11,15 +11,19 @@ function Display(props) {
   const [data, setData] = useState([]);
   const [liked, setLiked] = useState([]);
   const type = props.match.params.display;
+  // const model = type.charAt(0).toUpperCase() + type.slice(1, -1);
 
   function getAll(type, setter) {
     get(type)
-      .then((data) => setter(data.data))
+      .then((data) => {
+        console.log(data);
+        setter(data.data);
+      })
       .catch((err) => console.log(err));
   }
 
   function like(id) {
-    create(`${type}/like`, { song_id: id, user_id: context.user_id })
+    create(`${type}/like`, { songId: id, userId: context.id })
       .then(() => {
         return;
       })
@@ -43,10 +47,11 @@ function Display(props) {
 
   useEffect(() => {
     getAll(type, setData);
-    getAll(`${type}/liked/${context.user_id}`, setLiked);
+    getAll(`${type}/liked/${context.id}`, setLiked);
   }, [type]);
 
   useEffect(() => {
+    console.log(liked);
     liked[0] && liked.map((item) => favorite(item.id));
   }, [liked]);
 
