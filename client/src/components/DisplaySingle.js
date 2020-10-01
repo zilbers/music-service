@@ -20,7 +20,6 @@ function DisplaySingle(props) {
   function getAll(type) {
     get(type)
       .then((data) => {
-        console.log("data", data, "match", props.match);
         setItem(data.data[0]);
       })
       .catch((err) => console.log(err));
@@ -62,9 +61,7 @@ function DisplaySingle(props) {
             <div className="recommended">
               From same {qParamsObj.from}
               <Recommended
-                url={`${qParamsObj.from}/${qParamsObj.from.slice(0, -1)}_${
-                  qParamsObj.id
-                }/list`}
+                url={`${qParamsObj.from}/${qParamsObj.id}/list`}
                 item_id={item.id}
               />
             </div>
@@ -75,14 +72,14 @@ function DisplaySingle(props) {
             </div>
           ))}
       </div>
-      {/* {type && (
+      {type && (
         <List
           dataType={url}
           match={props.match}
           history={props.history}
           location={props.location}
         />
-      )} */}
+      )}
       {item.createdAt && (
         <h5>Created at: {item.createdAt.slice(0, 11).replace("T", " ")}</h5>
       )}

@@ -15,10 +15,7 @@ function Display(props) {
 
   function getAll(type, setter) {
     get(type)
-      .then((data) => {
-        console.log(data);
-        setter(data.data);
-      })
+      .then((data) => setter(data.data))
       .catch((err) => console.log(err));
   }
 
@@ -54,10 +51,6 @@ function Display(props) {
     liked[0] && liked.map((item) => favorite(item.id));
   }, [liked]);
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
   return (
     <div className="display">
       <h2 className="header">{type}</h2>
@@ -80,7 +73,9 @@ function Display(props) {
             )}
             <span className="title">
               {item.name}
-              {item.Artist && <span className="artist">{item.Artist.name}</span>}
+              {item.Artist && (
+                <span className="artist">{item.Artist.name}</span>
+              )}
             </span>
           </Link>
           <span className="icon" onClick={() => handleClick(item.id)}>

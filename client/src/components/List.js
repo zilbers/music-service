@@ -14,12 +14,15 @@ function List(props) {
 
   function getAll(type, setter) {
     get(type)
-      .then((data) => setter(data.data))
+      .then((data) => {
+        console.log(data);
+        setter(data.data);
+      })
       .catch((err) => console.log(err));
   }
 
   function like(id) {
-    create(`songs/like`, { song_id: id, user_id: context.user_id })
+    create(`songs/like`, { songId: id, userId: context.id })
       .then(() => {
         return;
       })
@@ -42,8 +45,8 @@ function List(props) {
   };
 
   useEffect(() => {
-    getAll(type, setData);
-    getAll(`songs/liked/${context.user_id}`, setLiked);
+    getAll(type, (item) => setData(item.songs));
+    getAll(`songs/liked/${context.id}`, setLiked);
   }, [type]);
 
   useEffect(() => {
@@ -55,13 +58,13 @@ function List(props) {
     <div className="display">
       {data.map((item, index) => (
         <div className="row" key={item.id + index + item.name}>
-          {item.cover_img && (
-            <img className="cover_img" src={item.cover_img} alt={item.name} />
+          {item.coverImg && (
+            <img className="cover_img" src={item.coverIg} alt={item.name} />
           )}
           <Link
             key={item.id + index}
             className="links"
-            to={`/songs/song_${item.id}?from=${query[0]}&id=${query[1]}`}
+            to={`/songs/${item.id}?from=${query[0]}&id=${query[1]}`}
           >
             <span className="title">
               {item.name}

@@ -10,8 +10,11 @@ function Recommended(props) {
   function getAll(type) {
     get(type)
       .then((data) => {
-        console.log(data);
-        setData(data.data);
+        if (data.data.songs) {
+          setData(data.data.songs);
+        } else {
+          setData(data.data);
+        }
       })
       .catch((err) => console.log(err));
   }
@@ -22,17 +25,21 @@ function Recommended(props) {
   return (
     <div className="recommendedDisplay">
       {data.map((data, index) => {
-        if (data.Song.id !== props.item_id) {
+        const item = data.Song ? data.Song : data;
+        console.log(item);
+        if (item.id !== props.item_id) {
           return (
-            <div className="row" key={(data.Song.id * index) - index}>
+            <div className="row" key={item.id * index - index}>
               <Link
-                key={data.Song.id + index}
+                key={item.id + index}
                 className="links"
-                to={`/songs/${data.Song.id}`}
+                to={`/songs/${item.id}`}
               >
                 <span className="title">
-                  {data.Song.name}
-                  {data.Song.Artist.name && <span className="artist">{data.Song.Artist.name}</span>}
+                  {item.name}
+                  {item.Artist && (
+                    <span className="artist">{item.Artist.name}</span>
+                  )}
                 </span>
               </Link>
             </div>
