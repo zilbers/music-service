@@ -15,7 +15,7 @@ function List(props) {
   function getAll(type, setter) {
     get(type)
       .then((data) => {
-        console.log(data);
+        console.log("data", data.data, props.dataType);
         setter(data.data);
       })
       .catch((err) => console.log(err));
@@ -45,7 +45,10 @@ function List(props) {
   };
 
   useEffect(() => {
-    getAll(type, (item) => setData(item.songs));
+    const regex = RegExp("playlist*", "g");
+    getAll(type, (item) =>
+      setData(regex.test(props.dataType) ? item.songList : item.songs)
+    );
     getAll(`songs/liked/${context.id}`, setLiked);
   }, [type]);
 
@@ -56,26 +59,31 @@ function List(props) {
   const query = props.match.url.split("/").slice(1);
   return (
     <div className="display">
-      {data.map((item, index) => (
-        <div className="row" key={item.id + index + item.name}>
-          {item.coverImg && (
-            <img className="cover_img" src={item.coverIg} alt={item.name} />
-          )}
-          <Link
-            key={item.id + index}
-            className="links"
-            to={`/songs/${item.id}?from=${query[0]}&id=${query[1]}`}
-          >
-            <span className="title">
-              {item.name}
-              {item.artist && <span className="artist">{item.artist}</span>}
+      {data.map((item, index) => {
+        const song = item.Song ? item.Song : item;
+        return (
+          <div className="row" key={song.id * Math.random()}>
+            {song.coverImg && (
+              <img className="cover_img" src={song.coverImg} alt={song.name} />
+            )}
+            <Link
+              key={song.id + index}
+              className="links"
+              to={`/songs/${song.id}?from=${query[0]}&id=${query[1]}`}
+            >
+              <span className="title">
+                {song.name}
+                {song.Artist && (
+                  <span className="artist">{song.Artist.name}</span>
+                )}
+              </span>
+            </Link>
+            <span className="icon" onClick={() => handleClick(song.id)}>
+              {song.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
             </span>
-          </Link>
-          <span className="icon" onClick={() => handleClick(item.id)}>
-            {item.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </span>
-        </div>
-      ))}
+          </div>
+        );
+      })}
     </div>
   );
 }

@@ -55,7 +55,7 @@ function Display(props) {
     <div className="display">
       <h2 className="header">{type}</h2>
       {data.map((item) => (
-        <div className="linksDisplay" key={item.id}>
+        <div className="linksDisplay" key={item.id * Math.random()}>
           <Link key={item.id} className="row links" to={`/${type}/${item.id}`}>
             {item.coverImg && (
               <img

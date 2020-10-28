@@ -12,6 +12,8 @@ function Recommended(props) {
       .then((data) => {
         if (data.data.songs) {
           setData(data.data.songs);
+        } else if (data.data.songList) {
+          setData(data.data.songList);
         } else {
           setData(data.data);
         }
@@ -26,10 +28,9 @@ function Recommended(props) {
     <div className="recommendedDisplay">
       {data.map((data, index) => {
         const item = data.Song ? data.Song : data;
-        console.log(item);
         if (item.id !== props.item_id) {
           return (
-            <div className="row" key={item.id * index - index}>
+            <div className="row" key={item.id * Math.random()}>
               <Link
                 key={item.id + index}
                 className="links"
