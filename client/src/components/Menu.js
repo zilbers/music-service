@@ -45,7 +45,7 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-export default function MenuComp(props) {
+export default function MenuComp() {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {

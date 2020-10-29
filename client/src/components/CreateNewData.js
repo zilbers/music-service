@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TransitionsModal(props) {
+export default function TransitionsModal({ menuHandleClose }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -56,7 +56,7 @@ export default function TransitionsModal(props) {
     <div>
       <StyledMenuItem
         onClick={() => {
-          props.menuHandleClose();
+          menuHandleClose();
           handleOpen();
         }}
       >

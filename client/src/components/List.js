@@ -6,11 +6,11 @@ import { UserContext } from "../context/UserContext";
 import { like, favorite, getAll } from "../modules/actions";
 import "../CSS/Table.css";
 
-function List(props) {
+function List({ dataType, match }) {
   const context = useContext(UserContext);
   const [data, setData] = useState([]);
   const [liked, setLiked] = useState([]);
-  const type = props.dataType;
+  const type = dataType;
 
   const handleClick = (id) => {
     like(id, context.id);
@@ -20,7 +20,7 @@ function List(props) {
   useEffect(() => {
     const regex = RegExp("playlist*", "g");
     getAll(type, (item) =>
-      setData(regex.test(props.dataType) ? item.songList : item.songs)
+      setData(regex.test(dataType) ? item.songList : item.songs)
     );
     getAll(`songs/liked/${context.id}`, setLiked);
   }, [type]);
@@ -29,7 +29,7 @@ function List(props) {
     liked[0] && liked.map((item) => favorite(item.id, data, setData));
   }, [liked]);
 
-  const query = props.match.url.split("/").slice(1);
+  const query = match.url.split("/").slice(1);
   return (
     <div className="display">
       {data &&

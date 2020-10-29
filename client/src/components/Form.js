@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Form(props) {
+export default function Form({ handleClose }) {
   const classes = useStyles();
   const { register, handleSubmit, control, errors } = useForm();
   const [type, setType] = useState("");
@@ -54,7 +54,7 @@ export default function Form(props) {
   const [albums, setAlbums] = useState([]);
 
   const onSubmit = (data) => {
-    props.handleClose();
+    handleClose();
     const saveFormat = {
       collums: Object.keys(data),
       values: Object.values(data),

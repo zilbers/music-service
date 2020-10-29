@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../CSS/SearchResults.css";
 
-export default function SearchResults(props) {
+export default function SearchResults({ setData, setSearch, data }) {
   const handleClick = () => {
-    props.setData([]);
-    props.setSearch("");
+    setData([]);
+    setSearch("");
   };
   return (
     <div className="results">
-      {props.data.map((item) => (
+      {data.map((item) => (
         <div key={item.id}>
           {" "}
           <Link

@@ -6,11 +6,11 @@ import { like, favorite, getAll } from "../modules/actions";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
-function Display(props) {
+function Display({ match }) {
   const context = useContext(UserContext);
   const [data, setData] = useState([]);
   const [liked, setLiked] = useState([]);
-  const type = props.match.params.display;
+  const type = match.params.display;
 
   const handleClick = (id) => {
     like(id, context.id);
