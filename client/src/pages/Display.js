@@ -35,7 +35,7 @@ function Display({ match }) {
             {item.coverImg && (
               <img
                 className="cover_img"
-                src={item.coveImg}
+                src={item.coverImg}
                 alt={`${item.name}`}
               />
             )}
