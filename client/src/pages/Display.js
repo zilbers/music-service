@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
-import "./css/Display.css";
+import "../CSS/Display.css";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { get, create } from "../modules/axios-module";
+import { like, favorite, getAll } from "../modules/actions";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
@@ -11,35 +11,10 @@ function Display(props) {
   const [data, setData] = useState([]);
   const [liked, setLiked] = useState([]);
   const type = props.match.params.display;
-  const model = type.charAt(0).toUpperCase() + type.slice(1, -1);
-
-  function getAll(type, setter) {
-    get(type)
-      .then((data) => setter(data.data))
-      .catch((err) => console.log(err));
-  }
-
-  function like(id) {
-    create(`${type}/like`, { songId: id, userId: context.id })
-      .then(() => {
-        return;
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function favorite(id) {
-    const currentDataId = data.slice();
-    let index = currentDataId.findIndex((item) => item.id === id);
-    currentDataId[index] &&
-      (currentDataId[index].favorite
-        ? delete currentDataId[index].favorite
-        : (currentDataId[index].favorite = true));
-    setData(currentDataId);
-  }
 
   const handleClick = (id) => {
-    like(id);
-    favorite(id);
+    like(id, context.id);
+    favorite(id, data, setData);
   };
 
   useEffect(() => {
@@ -48,7 +23,7 @@ function Display(props) {
   }, [type]);
 
   useEffect(() => {
-    liked[0] && liked.map((item) => favorite(item.id));
+    liked[0] && liked.map((item) => favorite(item.id, data, setData));
   }, [liked]);
 
   return (
@@ -56,7 +31,7 @@ function Display(props) {
       <h2 className="header">{type}</h2>
       {data.map((item) => (
         <div className="linksDisplay" key={item.id * Math.random()}>
-          <Link key={item.id} className="row links" to={`/${type}/${item.id}`}>
+          <Link className="row links" to={`/${type}/${item.id}`}>
             {item.coverImg && (
               <img
                 className="cover_img"

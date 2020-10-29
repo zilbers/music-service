@@ -1,7 +1,7 @@
 import React from "react";
-import * as url from ".\\files\\Andy-Samberg-as-Jake-Peralta-in-Brooklyn-Nine-Nine-404.jpg";
+import * as url from "../files/Andy-Samberg-as-Jake-Peralta-in-Brooklyn-Nine-Nine-404.jpg";
 import { Link } from "react-router-dom";
-import './css/Page404.css'
+import "../CSS/Page404.css";
 
 function App() {
   return (

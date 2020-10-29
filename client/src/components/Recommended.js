@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
-import "./css/Recommended.css";
+import "../CSS/Recommended.css";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
 
-function Recommended(props) {
+function Recommended({ url, itemId }) {
   const [data, setData] = useState([]);
-  const url = props.url;
 
   function getAll(type) {
     get(type)
-      .then((data) => {
-        if (data.data.songs) {
-          setData(data.data.songs);
-        } else if (data.data.songList) {
-          setData(data.data.songList);
-        } else {
-          setData(data.data);
-        }
+      .then(({ data }) => {
+        const validData = data.songs
+          ? data.songs
+          : data.songList
+          ? data.songList
+          : data;
+        setData(validData);
       })
       .catch((err) => console.log(err));
   }
@@ -28,7 +26,7 @@ function Recommended(props) {
     <div className="recommendedDisplay">
       {data.map((data, index) => {
         const item = data.Song ? data.Song : data;
-        if (item.id !== props.item_id) {
+        if (item.id !== itemId) {
           return (
             <div className="row" key={item.id * Math.random()}>
               <Link

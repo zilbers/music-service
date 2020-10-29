@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./css/SearchResults.css";
+import "../CSS/SearchResults.css";
 
 export default function SearchResults(props) {
   const handleClick = () => {
@@ -12,7 +12,12 @@ export default function SearchResults(props) {
       {props.data.map((item) => (
         <div key={item.id}>
           {" "}
-          <Link key={item.id} className="row links" to={`/songs/${item.id}`} onClick={handleClick}>
+          <Link
+            key={item.id}
+            className="row links"
+            to={`/songs/${item.id}`}
+            onClick={handleClick}
+          >
             {item.youtube_link && (
               <img
                 className="cover_img"

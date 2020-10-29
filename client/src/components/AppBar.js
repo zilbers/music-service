@@ -11,7 +11,7 @@ import { get } from "../modules/axios-module";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import SearchResults from "./SearchResults";
-import "./css/AppBar.css";
+import "../CSS/AppBar.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,8 +98,8 @@ export default function ButtonAppBar() {
   };
   const logout = () => {
     context.logUserOut();
-    localStorage.removeItem('token');
-  }
+    localStorage.removeItem("token");
+  };
 
   useEffect(() => {
     if (search === "") {

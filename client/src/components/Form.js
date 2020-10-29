@@ -9,7 +9,7 @@ import {
   FormHelperText,
   TextField,
 } from "@material-ui/core";
-import "./css/Form.css";
+import "../CSS/Form.css";
 import { get, create } from "../modules/axios-module";
 
 const types = [
@@ -75,9 +75,8 @@ export default function Form(props) {
   };
 
   useEffect(() => {
-    getAll("artists", setArtists)
-    getAll("albums", setAlbums
-    )
+    getAll("artists", setArtists);
+    getAll("albums", setAlbums);
   }, []);
 
   return (

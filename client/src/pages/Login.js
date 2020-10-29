@@ -12,7 +12,7 @@ import {
 import { create } from "../modules/axios-module";
 import { createBrowserHistory } from "history";
 import { UserContext } from "../context/UserContext";
-import "./css/Login.css";
+import "../CSS/Login.css";
 
 const history = createBrowserHistory();
 
@@ -41,7 +41,7 @@ class Login extends React.Component {
     create("login", credntials)
       .then((res) => {
         if (res.data && res.data.success && res.data.token) {
-          localStorage.setItem('token', res.data.token);
+          localStorage.setItem("token", res.data.token);
           this.context.logUserIn(res.data);
           history.push("/");
         } else {

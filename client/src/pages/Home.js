@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import Carousel from "react-elastic-carousel";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
-import "./css/Home.css";
 import { UserContext } from "../context/UserContext";
+import "../CSS/Home.css";
 
 function Home() {
   const context = useContext(UserContext);
@@ -45,7 +45,8 @@ function Home() {
                 <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
                     const rawType = endpoints[index].split("/")[0];
-                    const type = rawType.charAt(0).toUpperCase() + rawType.slice(1, -1);
+                    const type =
+                      rawType.charAt(0).toUpperCase() + rawType.slice(1, -1);
                     return (
                       <Link
                         className="carouselLinks carouselItem"

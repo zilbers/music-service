@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { get } from "../modules/axios-module";
 import { Link } from "react-router-dom";
-import List from "./List";
-import Recommended from "./Recommended";
-import "./css/DisplaySingle.css";
+import List from "../components/List";
+import Recommended from "../components/Recommended";
+import "../CSS/DisplaySingle.css";
 
-function DisplaySingle(props) {
+function DisplaySingle({ match, history, location }) {
   const [item, setItem] = useState({});
-  const urlParams = props.match.url.split("/");
+  const urlParams = match.url.split("/");
   const dataUrl = `${urlParams[1]}/${urlParams[1].slice(0, -1)}_${
     urlParams[2]
   }`;
 
-  let type =
-    props.match.path === "/playlists/:id" ||
-    props.match.path === "/albums/:id" ||
-    props.match.path === "/artists/:id";
+  let type = !(match.path === "/songs/:id");
 
-  function getAll(type) {
-    get(type)
+  useEffect(() => {
+    get(dataUrl)
       .then((data) => {
         setItem(data.data[0]);
       })
       .catch((err) => console.log(err));
-  }
-
-  useEffect(() => {
-    getAll(dataUrl);
   }, [dataUrl]);
 
   const query = urlParams.slice(1);
   const url = `/${query[0]}/${query[1]}/list`;
-  const qParams = new URLSearchParams(props.location.search);
+  const qParams = new URLSearchParams(location.search);
   const qParamsObj = { from: qParams.get("from"), id: qParams.get("id") };
+
   return (
     <div className="DisplaySingle">
       <h2 className="header">{item.name}</h2>
@@ -42,7 +36,7 @@ function DisplaySingle(props) {
         </Link>
       )}
       <div className="mainSec">
-        {item.cover_img && (
+        {item.coverImg && (
           <img className="cover_img" src={item.coverImg} alt={`${item.name}`} />
         )}
         {item.youtubeLink && (
@@ -68,16 +62,16 @@ function DisplaySingle(props) {
           ) : (
             <div className="recommended">
               More from charts
-              <Recommended url={`songs/top`} item_id={item.id} />
+              <Recommended url={`songs/top`} itemId={item.id} />
             </div>
           ))}
       </div>
       {type && (
         <List
           dataType={url}
-          match={props.match}
-          history={props.history}
-          location={props.location}
+          match={match}
+          history={history}
+          location={location}
         />
       )}
       {item.createdAt && (
