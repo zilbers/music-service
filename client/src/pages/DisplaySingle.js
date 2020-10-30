@@ -66,7 +66,7 @@ function DisplaySingle({ match, history, location }) {
             </div>
           ))}
       </div>
-      {type && (
+      {type && item && (
         <List
           dataType={url}
           match={match}

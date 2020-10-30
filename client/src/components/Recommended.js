@@ -13,6 +13,8 @@ function Recommended({ url, itemId }) {
           ? data.songs
           : data.songList
           ? data.songList
+          : data.Songs
+          ? data.Songs
           : data;
         setData(validData);
       })

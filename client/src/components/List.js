@@ -17,12 +17,21 @@ function List({ dataType, match }) {
     favorite(id, data, setData);
   };
 
-  useEffect(() => {
+  const onRender = async () => {
     const regex = RegExp("playlist*", "g");
-    getAll(type, (item) =>
-      setData(regex.test(dataType) ? item.songList : item.songs)
-    );
-    getAll(`songs/liked/${context.id}`, setLiked);
+    await getAll(type, (item) => {
+      const newData = regex.test(dataType)
+        ? item.songList
+        : item.Songs
+        ? item.Songs
+        : item.songs;
+      setData(newData);
+    });
+    await getAll(`songs/liked/${context.id}`, setLiked);
+  };
+
+  useEffect(() => {
+    onRender();
   }, [type]);
 
   useEffect(() => {

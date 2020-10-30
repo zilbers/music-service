@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import "../CSS/Display.css";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { like, favorite, getAll } from "../modules/actions";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import "../CSS/Display.css";
 
 function Display({ match }) {
   const context = useContext(UserContext);
