@@ -28,7 +28,7 @@ function DisplaySingle({ match, history, location }) {
   const qParamsObj = { from: qParams.get("from"), id: qParams.get("id") };
 
   return (
-    <div className="DisplaySingle">
+    <div className="DisplaySingle place">
       <h2 className="header">{item.name}</h2>
       {item.Artist && (
         <Link className="links" to={`/artists/${item.Artist.id}`}>

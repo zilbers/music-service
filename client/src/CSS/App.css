@@ -9,7 +9,7 @@
   width: 100%;
 }
 
-.AppBar{
+.AppBar {
   width: 100%;
 }
 
@@ -42,7 +42,19 @@ a {
 }
 
 @media screen and (min-width: 1300px) {
+  #root {
+    width: 100%;
+  }
   .App {
-      width: 1300px;
+    width: 1300px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  #root {
+    width: 100%;
+  }
+  .App {
+    width: 100%;
   }
 }

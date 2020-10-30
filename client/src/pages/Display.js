@@ -18,8 +18,11 @@ function Display({ match }) {
   };
 
   useEffect(() => {
-    getAll(type, setData);
-    getAll(`${type}/liked/${context.id}`, setLiked);
+    const onRender = async () => {
+      await getAll(type, setData);
+      await getAll(`${type}/liked/${context.id}`, setLiked);
+    };
+    onRender();
   }, [type]);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ function Display({ match }) {
   }, [liked]);
 
   return (
-    <div className="display">
+    <div className="display place">
       <h2 className="header">{type}</h2>
       {data.map((item) => (
         <div className="linksDisplay" key={item.id * Math.random()}>

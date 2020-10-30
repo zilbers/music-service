@@ -4,7 +4,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { like, favorite, getAll } from "../modules/actions";
-import "../CSS/Table.css";
+import "../CSS/List.css";
 
 function List({ dataType, match }) {
   const context = useContext(UserContext);

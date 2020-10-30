@@ -96,7 +96,7 @@ export default function MenuComp() {
             <ListItemIcon>
               <MusicNoteIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="songs" />
+            <ListItemText primary="Songs" />
           </StyledMenuItem>
         </Link>
 
@@ -135,7 +135,7 @@ export default function MenuComp() {
             <ListItemIcon>
               <QueueMusicIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText primary="playlists" />
+            <ListItemText primary="Playlists" />
           </StyledMenuItem>
         </Link>
 

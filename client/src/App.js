@@ -10,6 +10,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { UserContext } from "./context/UserContext";
 import "./CSS/App.css";
 
+// const Display = React.lazy(() => import("./pages/Display"));
+// const Home = React.lazy(() => import("./pages/Home"));
+// const DisplaySingle = React.lazy(() => import("./pages/DisplaySingle"));
+// const Page404 = React.lazy(() => import("./pages/Page404"));
+
 function App() {
   const context = useContext(UserContext);
 

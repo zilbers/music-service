@@ -29,7 +29,7 @@ function Home() {
     getAll(endpoints);
   }, []);
   return (
-    <div className="Home">
+    <div className="Home place">
       <h1>Home</h1>
       <div className="charts">
         {charts &&

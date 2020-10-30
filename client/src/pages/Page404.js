@@ -5,7 +5,7 @@ import "../CSS/Page404.css";
 
 function App() {
   return (
-    <div className="Page404">
+    <div className="Page404 place">
       <h1 className="pageHeader">Noice, 404</h1>
       <img className="img404" src={url.default} alt={`404`} />
       <Link className="goHome" to="/">

@@ -9,8 +9,8 @@ import {
   FormHelperText,
   TextField,
 } from "@material-ui/core";
-import "../CSS/Form.css";
 import { get, create } from "../modules/axios-module";
+import "../CSS/Form.css";
 
 const types = [
   {
