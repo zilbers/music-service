@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import { like, favorite, getAll } from "../modules/actions";
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
-import "../CSS/Display.css";
+import React, { useEffect, useState, useContext } from 'react';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { like, favorite, getAll } from '../modules/actions';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import '../CSS/Display.css';
 
 function Display({ match }) {
   const context = useContext(UserContext);
@@ -17,11 +17,14 @@ function Display({ match }) {
     favorite(id, data, setData);
   };
 
+  const onRender = async () => {
+    getAll(type, setData);
+    await setTimeout(() => {
+      getAll(`${type}/liked/${context.id}`, setLiked);
+    }, 50);
+  };
+
   useEffect(() => {
-    const onRender = async () => {
-      await getAll(type, setData);
-      await getAll(`${type}/liked/${context.id}`, setLiked);
-    };
     onRender();
   }, [type]);
 
@@ -31,7 +34,7 @@ function Display({ match }) {
 
   return (
     <div className="display place">
-      <h2 className="header">{type}</h2>
+      <h2 className="header">{type.charAt(0).toUpperCase() + type.slice(1)}</h2>
       {data.map((item) => (
         <div className="linksDisplay" key={item.id * Math.random()}>
           <Link className="row links" to={`/${type}/${item.id}`}>

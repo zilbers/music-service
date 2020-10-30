@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { get } from "../modules/axios-module";
-import { Link } from "react-router-dom";
-import List from "../components/List";
-import Recommended from "../components/Recommended";
-import "../CSS/DisplaySingle.css";
+import React, { useEffect, useState } from 'react';
+import { get } from '../modules/axios-module';
+import { Link } from 'react-router-dom';
+import List from '../components/List';
+import Recommended from '../components/Recommended';
+import '../CSS/DisplaySingle.css';
 
 function DisplaySingle({ match, history, location }) {
   const [item, setItem] = useState({});
-  const urlParams = match.url.split("/");
+  const urlParams = match.url.split('/');
   const dataUrl = `${urlParams[1]}/${urlParams[1].slice(0, -1)}_${
     urlParams[2]
   }`;
 
-  let type = !(match.path === "/songs/:id");
+  let type = !(match.path === '/songs/:id');
 
   useEffect(() => {
     get(dataUrl)
@@ -25,7 +25,7 @@ function DisplaySingle({ match, history, location }) {
   const query = urlParams.slice(1);
   const url = `/${query[0]}/${query[1]}/list`;
   const qParams = new URLSearchParams(location.search);
-  const qParamsObj = { from: qParams.get("from"), id: qParams.get("id") };
+  const qParamsObj = { from: qParams.get('from'), id: qParams.get('id') };
 
   return (
     <div className="DisplaySingle place">
@@ -75,7 +75,7 @@ function DisplaySingle({ match, history, location }) {
         />
       )}
       {item.createdAt && (
-        <h5>Created at: {item.createdAt.slice(0, 11).replace("T", " ")}</h5>
+        <h5>Created at: {item.createdAt.slice(0, 11).replace('T', ' ')}</h5>
       )}
     </div>
   );

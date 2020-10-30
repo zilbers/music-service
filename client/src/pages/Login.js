@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   TextField,
@@ -8,18 +8,18 @@ import {
   Typography,
   Toolbar,
   Link,
-} from "@material-ui/core";
-import { create } from "../modules/axios-module";
-import { createBrowserHistory } from "history";
-import { UserContext } from "../context/UserContext";
-import "../CSS/Login.css";
+} from '@material-ui/core';
+import { create } from '../modules/axios-module';
+import { createBrowserHistory } from 'history';
+import { UserContext } from '../context/UserContext';
+import '../CSS/Login.css';
 
 const history = createBrowserHistory();
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "", authflag: 1 };
+    this.state = { username: '', password: '', authflag: 1 };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -38,14 +38,14 @@ class Login extends React.Component {
       password: this.state.password,
     };
 
-    create("login", credntials)
+    create('login', credntials)
       .then((res) => {
         if (res.data && res.data.success && res.data.token) {
-          localStorage.setItem("token", res.data.token);
+          localStorage.setItem('token', res.data.token);
           this.context.logUserIn(res.data);
-          history.push("/");
+          history.push('/');
         } else {
-          alert("Incorrect Credntials!");
+          alert('Incorrect Credntials!');
         }
       })
       .catch((res) => alert(res.message));

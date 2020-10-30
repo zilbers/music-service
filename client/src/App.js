@@ -1,14 +1,14 @@
-import React, { useContext, useEffect } from "react";
-import Display from "./pages/Display";
-import Home from "./pages/Home";
-import DisplaySingle from "./pages/DisplaySingle";
-import Page404 from "./pages/Page404";
-import Login from "./pages/Login";
-import AppBar from "./components/AppBar";
-import ReactGa from "react-ga";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { UserContext } from "./context/UserContext";
-import "./CSS/App.css";
+import React, { useContext, useEffect } from 'react';
+import Display from './pages/Display';
+import Home from './pages/Home';
+import DisplaySingle from './pages/DisplaySingle';
+import Page404 from './pages/Page404';
+import Login from './pages/Login';
+import AppBar from './components/AppBar';
+import ReactGa from 'react-ga';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { UserContext } from './context/UserContext';
+import './CSS/App.css';
 
 // const Display = React.lazy(() => import("./pages/Display"));
 // const Home = React.lazy(() => import("./pages/Home"));
@@ -19,8 +19,8 @@ function App() {
   const context = useContext(UserContext);
 
   useEffect(() => {
-    ReactGa.initialize("G-9C2R1E9HQ3");
-    ReactGa.pageview("/");
+    ReactGa.initialize('G-9C2R1E9HQ3');
+    ReactGa.pageview('/');
   }, []);
 
   return (

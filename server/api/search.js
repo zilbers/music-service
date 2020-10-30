@@ -14,7 +14,6 @@ searchRouter.get('/', async (req, res) => {
         },
       },
     });
-    console.log(filteredSongs);
     res.json(filteredSongs);
   } catch (e) {
     res.status(500).send(e.message);

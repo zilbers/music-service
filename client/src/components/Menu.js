@@ -1,34 +1,34 @@
-import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import AlbumIcon from "@material-ui/icons/Album";
-import MusicNoteIcon from "@material-ui/icons/MusicNote";
-import QueueMusicIcon from "@material-ui/icons/QueueMusic";
-import PersonIcon from "@material-ui/icons/Person";
-import HomeIcon from "@material-ui/icons/Home";
-import MenuIcon from "@material-ui/icons/Menu";
-import { Link } from "react-router-dom";
-import IconButton from "@material-ui/core/IconButton";
-import CreateNewData from "./CreateNewData";
+import React from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import AlbumIcon from '@material-ui/icons/Album';
+import MusicNoteIcon from '@material-ui/icons/MusicNote';
+import QueueMusicIcon from '@material-ui/icons/QueueMusic';
+import PersonIcon from '@material-ui/icons/Person';
+import HomeIcon from '@material-ui/icons/Home';
+import MenuIcon from '@material-ui/icons/Menu';
+import { Link } from 'react-router-dom';
+import IconButton from '@material-ui/core/IconButton';
+import CreateNewData from './CreateNewData';
 
 const StyledMenu = withStyles({
   paper: {
-    border: "1px solid #d3d4d5",
+    border: '1px solid #d3d4d5',
   },
 })((props) => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
     anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
+      vertical: 'bottom',
+      horizontal: 'center',
     }}
     transformOrigin={{
-      vertical: "top",
-      horizontal: "center",
+      vertical: 'top',
+      horizontal: 'center',
     }}
     {...props}
   />
@@ -36,9 +36,9 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    "&:focus": {
+    '&:focus': {
       backgroundColor: theme.palette.primary.main,
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
         color: theme.palette.common.white,
       },
     },

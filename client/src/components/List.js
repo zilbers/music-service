@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from "react";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
-import { like, favorite, getAll } from "../modules/actions";
-import "../CSS/List.css";
+import React, { useEffect, useState, useContext } from 'react';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import { like, favorite, getAll } from '../modules/actions';
+import '../CSS/List.css';
 
 function List({ dataType, match }) {
   const context = useContext(UserContext);
@@ -18,7 +18,7 @@ function List({ dataType, match }) {
   };
 
   const onRender = async () => {
-    const regex = RegExp("playlist*", "g");
+    const regex = RegExp('playlist*', 'g');
     await getAll(type, (item) => {
       const newData = regex.test(dataType)
         ? item.songList
@@ -38,7 +38,7 @@ function List({ dataType, match }) {
     liked[0] && liked.map((item) => favorite(item.id, data, setData));
   }, [liked]);
 
-  const query = match.url.split("/").slice(1);
+  const query = match.url.split('/').slice(1);
   return (
     <div className="display">
       {data &&

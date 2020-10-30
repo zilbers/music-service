@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { get } from "../modules/axios-module";
-import { Link } from "react-router-dom";
-import "../CSS/Recommended.css";
+import React, { useEffect, useState } from 'react';
+import { get } from '../modules/axios-module';
+import { Link } from 'react-router-dom';
+import '../CSS/Recommended.css';
 
 function Recommended({ url, itemId }) {
   const [data, setData] = useState([]);

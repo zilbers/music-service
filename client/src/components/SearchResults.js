@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../CSS/SearchResults.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../CSS/SearchResults.css';
 
 export default function SearchResults({ setData, setSearch, data }) {
   const handleClick = () => {
     setData([]);
-    setSearch("");
+    setSearch('');
   };
   return (
     <div className="results">

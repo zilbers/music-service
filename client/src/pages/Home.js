@@ -1,19 +1,19 @@
-import React, { useEffect, useState, useContext } from "react";
-import Carousel from "react-elastic-carousel";
-import { get } from "../modules/axios-module";
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
-import "../CSS/Home.css";
+import React, { useEffect, useState, useContext } from 'react';
+import Carousel from 'react-elastic-carousel';
+import { get } from '../modules/axios-module';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import '../CSS/Home.css';
 
 function Home() {
   const context = useContext(UserContext);
   const [charts, setCharts] = useState([]);
   const endpoints = [
     `songs/liked/${context.id}`,
-    "songs/top",
-    "albums/top",
-    "artists/top",
-    "playlists/top",
+    'songs/top',
+    'albums/top',
+    'artists/top',
+    'playlists/top',
   ];
 
   async function getAll(endpoints) {
@@ -37,14 +37,14 @@ function Home() {
             return (
               <div key={index} className="chart">
                 <h3 className="title">
-                  {" "}
-                  {endpoints[index].split("/")[1] === "liked"
-                    ? "Your liked songs"
-                    : `Top ${endpoints[index].split("/")[0]}`}
+                  {' '}
+                  {endpoints[index].split('/')[1] === 'liked'
+                    ? 'Your liked songs'
+                    : `Top ${endpoints[index].split('/')[0]}`}
                 </h3>
                 <Carousel itemsToShow={3} itemsToScroll={3}>
                   {chart.map((item, smallIndex) => {
-                    const rawType = endpoints[index].split("/")[0];
+                    const rawType = endpoints[index].split('/')[0];
                     const type =
                       rawType.charAt(0).toUpperCase() + rawType.slice(1, -1);
                     return (

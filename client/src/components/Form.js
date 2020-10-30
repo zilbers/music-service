@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { useForm, Controller } from "react-hook-form";
+import React, { useState, useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { useForm, Controller } from 'react-hook-form';
 import {
   Select,
   MenuItem,
@@ -8,35 +8,35 @@ import {
   InputLabel,
   FormHelperText,
   TextField,
-} from "@material-ui/core";
-import { get, create } from "../modules/axios-module";
-import "../CSS/Form.css";
+} from '@material-ui/core';
+import { get, create } from '../modules/axios-module';
+import '../CSS/Form.css';
 
 const types = [
   {
-    value: "songs",
-    label: "Song",
+    value: 'songs',
+    label: 'Song',
   },
   {
-    value: "albums",
-    label: "Album",
+    value: 'albums',
+    label: 'Album',
   },
   {
-    value: "artists",
-    label: "Artist",
+    value: 'artists',
+    label: 'Artist',
   },
   {
-    value: "playlists",
-    label: "Playlist",
+    value: 'playlists',
+    label: 'Playlist',
   },
 ];
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    "& > *": {
+    '& > *': {
       margin: theme.spacing(1),
-      width: "25ch",
-      display: "flex",
+      width: '25ch',
+      display: 'flex',
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Form({ handleClose }) {
   const classes = useStyles();
   const { register, handleSubmit, control, errors } = useForm();
-  const [type, setType] = useState("");
+  const [type, setType] = useState('');
   const [artists, setArtists] = useState([]);
   const [albums, setAlbums] = useState([]);
 
@@ -75,8 +75,8 @@ export default function Form({ handleClose }) {
   };
 
   useEffect(() => {
-    getAll("artists", setArtists);
-    getAll("albums", setAlbums);
+    getAll('artists', setArtists);
+    getAll('albums', setAlbums);
   }, []);
 
   return (
@@ -106,7 +106,7 @@ export default function Form({ handleClose }) {
       {type && (
         <>
           {/* Artist input */}
-          {(type === "albums" || type === "songs") && (
+          {(type === 'albums' || type === 'songs') && (
             <>
               <FormControl error={Boolean(errors.artist)}>
                 <InputLabel id="artist">Artist</InputLabel>
@@ -125,7 +125,7 @@ export default function Form({ handleClose }) {
                     </Select>
                   }
                   name="artist_id"
-                  rules={{ required: "this is required" }}
+                  rules={{ required: 'this is required' }}
                   control={control}
                   defaultValue=""
                 />
@@ -137,7 +137,7 @@ export default function Form({ handleClose }) {
           )}
 
           {/* Albums input */}
-          {type === "songs" && (
+          {type === 'songs' && (
             <>
               <FormControl error={Boolean(errors.albums)}>
                 <InputLabel id="albums">Albums</InputLabel>
@@ -156,7 +156,7 @@ export default function Form({ handleClose }) {
                     </Select>
                   }
                   name="album_id"
-                  rules={{ required: "this is required" }}
+                  rules={{ required: 'this is required' }}
                   control={control}
                   defaultValue=""
                 />
@@ -169,9 +169,9 @@ export default function Form({ handleClose }) {
 
           {/* Name input */}
           <TextField
-            name={type === "songs" ? "title" : "name"}
-            label={type === "songs" ? "title" : "name"}
-            id={type === "songs" ? "title" : "name"}
+            name={type === 'songs' ? 'title' : 'name'}
+            label={type === 'songs' ? 'title' : 'name'}
+            id={type === 'songs' ? 'title' : 'name'}
             inputRef={register({ required: true })}
             error={Boolean(errors.name)}
           />
@@ -182,7 +182,7 @@ export default function Form({ handleClose }) {
           )}
 
           {/* youtube_link input */}
-          {type === "songs" && (
+          {type === 'songs' && (
             <>
               <TextField
                 name="youtube_link"
@@ -194,7 +194,7 @@ export default function Form({ handleClose }) {
           )}
 
           {/* Created at input */}
-          {(type === "albums" || type === "songs") && (
+          {(type === 'albums' || type === 'songs') && (
             <>
               <TextField
                 name="Created_at"
@@ -212,9 +212,9 @@ export default function Form({ handleClose }) {
           )}
 
           {/* Cover-img input */}
-          {(type === "albums" ||
-            type === "artists" ||
-            type === "playlists") && (
+          {(type === 'albums' ||
+            type === 'artists' ||
+            type === 'playlists') && (
             <>
               <TextField
                 name="cover_img"
@@ -226,7 +226,7 @@ export default function Form({ handleClose }) {
           )}
 
           {/* Length input */}
-          {type === "songs" && (
+          {type === 'songs' && (
             <>
               <FormControl>
                 <Controller
@@ -247,7 +247,7 @@ export default function Form({ handleClose }) {
                   }
                   name="length"
                   defaultValue="00:00:00"
-                  rules={{ required: "this is required" }}
+                  rules={{ required: 'this is required' }}
                   control={control}
                 />
                 {errors.length && (
@@ -260,7 +260,7 @@ export default function Form({ handleClose }) {
           )}
 
           {/* Lyrics input */}
-          {type === "songs" && (
+          {type === 'songs' && (
             <FormControl>
               <Controller
                 as={
@@ -274,7 +274,7 @@ export default function Form({ handleClose }) {
                   />
                 }
                 name="lyrics"
-                rules={{ required: "this is required" }}
+                rules={{ required: 'this is required' }}
                 control={control}
                 defaultValue=""
               />
@@ -288,7 +288,7 @@ export default function Form({ handleClose }) {
 
           <input type="submit" />
 
-          {type === "albums" && <></>}
+          {type === 'albums' && <></>}
         </>
       )}
     </form>
