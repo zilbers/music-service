@@ -1,9 +1,7 @@
 /* eslint-disable camelcase */
 const { Router } = require('express');
 const { Sequelize } = require('sequelize');
-const {
-  Album, Song, Artist, User_album,
-} = require('../models');
+const { Album, Artist, User_album } = require('../models');
 
 const albumRouter = Router();
 
@@ -68,9 +66,7 @@ albumRouter.get('/top', async (req, res) => {
           },
         },
       ],
-      order: [
-        ['user_id', 'ASC'],
-      ],
+      order: [['user_id', 'ASC']],
       group: ['album_id'],
     });
     res.json(topAlbums);
@@ -121,7 +117,9 @@ albumRouter.post('/', async (req, res) => {
   const { values, collums } = req.body;
   const query = {};
 
-  collums.forEach((collum, index) => { query[collum] = values[index]; });
+  collums.forEach((collum, index) => {
+    query[collum] = values[index];
+  });
 
   try {
     await Album.create(query);
@@ -136,7 +134,9 @@ albumRouter.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { values, collums } = req.body;
   const query = {};
-  collums.forEach((collum, index) => { query[collum] = values[index]; });
+  collums.forEach((collum, index) => {
+    query[collum] = values[index];
+  });
   query.date = new Date().toISOString().slice(0, 19).replace('T', ' ');
   try {
     await Album.update(query, {

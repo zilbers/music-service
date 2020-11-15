@@ -11,6 +11,7 @@ import { get } from '../modules/axios-module';
 import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import SearchResults from './SearchResults';
+import useSearch from './useSearch';
 import '../CSS/AppBar.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -90,25 +91,29 @@ export default function ButtonAppBar() {
   const [data, setData] = useState([]);
   const endpoint = 'search?';
 
-  const handleChange = (filter) => {
-    setSearch(filter);
-    if (filter.length > 0) {
-      get(`${endpoint}filter=${filter}`)
-        .then((data) => setData(data.data))
-        .catch((err) => console.log(err));
-    }
-  };
+  const { results, loading, error } = useSearch(search);
+
+  // const handleChange = async (filter) => {
+  //   // setSearch(filter);
+  //   if (filter.length > 0) {
+  //     // const { loading, error, results } = await useSearch(filter);
+  //     // setData(results)
+  //     get(`${endpoint}filter=${filter}`)
+  //       .then((data) => setData(data.data))
+  //       .catch((err) => console.log(err));
+  //   }
+  // };
   const logout = () => {
     context.logUserOut();
     localStorage.removeItem('token');
   };
 
-  useEffect(() => {
-    if (search === '') {
-      setSearch('');
-      setData([]);
-    }
-  }, [search]);
+  // useEffect(() => {
+  //   if (search === '') {
+  //     setSearch('');
+  //     setData([]);
+  //   }
+  // }, [search]);
 
   return (
     <div className={classes.root}>
@@ -128,12 +133,16 @@ export default function ButtonAppBar() {
                 root: classes.inputRoot,
                 input: classes.inputInput,
               }}
-              onChange={(e) => handleChange(e.target.value)}
+              onChange={(e) => setSearch(e.target.value)}
               inputProps={{ 'aria-label': 'search' }}
               value={search}
             />
           </div>
-          <SearchResults data={data} setData={setData} setSearch={setSearch} />
+          <SearchResults
+            data={results}
+            setData={setData}
+            setSearch={setSearch}
+          />
           <Typography variant="h6" className={classes.title}>
             Hi, {context.email.split('@')[0]}
           </Typography>
