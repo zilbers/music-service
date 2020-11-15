@@ -1,5 +1,5 @@
-const express = require("express");
-require("dotenv").config();
+const express = require('express');
+require('dotenv').config();
 
 const app = express();
 module.exports = app;
@@ -15,6 +15,7 @@ function logger(req, res, next) {
 
 app.use(logger);
 app.use(express.json());
-app.use("/", express.static("../client/build/"));
+app.use('/', express.static('../client/build/'));
+app.use(express.urlencoded({ extended: false }));
 
-app.use("/api/", require("./api"));
+app.use('/api/', require('./api'));
