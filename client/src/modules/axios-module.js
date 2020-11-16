@@ -1,5 +1,5 @@
 import network from './network';
-const baseUrl = '/api';
+const baseUrl = 'http://localhost:3001/api';
 
 function get(endPoint) {
   return network.get(`${baseUrl}/${endPoint}`);

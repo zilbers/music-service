@@ -1,3 +1,5 @@
+const Users = require('../orm-seeder-data/Users');
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -8,8 +10,8 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
-    await queryInterface.bulkInsert('Album', [{}]);
+     */
+    await queryInterface.bulkInsert('Album', Users);
   },
 
   down: async (queryInterface, Sequelize) => {
