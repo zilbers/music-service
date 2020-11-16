@@ -1,6 +1,4 @@
-const {
-  Model,
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Playlist extends Model {
@@ -19,13 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Playlist.init({
-    name: { type: DataTypes.STRING, allowNull: false },
-    coverImg: DataTypes.STRING,
-  }, {
-    sequelize,
-    modelName: 'Playlist',
-    underscored: true,
-  });
+  Playlist.init(
+    {
+      name: { type: DataTypes.STRING, allowNull: false },
+      coverImg: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: 'Playlist',
+      tableName: 'Playlists',
+      underscored: true,
+    }
+  );
   return Playlist;
 };

@@ -10,4 +10,4 @@ RUN git clone https://github.com/vishnubob/wait-for-it.git
 
 EXPOSE 3001
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "docker"]

@@ -1,6 +1,4 @@
-const {
-  Model,
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User_artist extends Model {
@@ -19,13 +17,17 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  User_artist.init({
-    userId: { type: DataTypes.INTEGER, allowNull: false },
-    artistId: { type: DataTypes.INTEGER, allowNull: false },
-  }, {
-    sequelize,
-    modelName: 'User_artist',
-    underscored: true,
-  });
+  User_artist.init(
+    {
+      userId: { type: DataTypes.INTEGER, allowNull: false },
+      artistId: { type: DataTypes.INTEGER, allowNull: false },
+    },
+    {
+      sequelize,
+      modelName: 'User_artist',
+      tableName: 'User_artists',
+      underscored: true,
+    }
+  );
   return User_artist;
 };

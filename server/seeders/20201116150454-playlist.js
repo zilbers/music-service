@@ -1,4 +1,4 @@
-const Users = require('../orm-seeder-data/Users');
+const data = require('../orm-seeder-data/Playlist');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -11,7 +11,7 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
      */
-    await queryInterface.bulkInsert('Album', Users);
+    await queryInterface.bulkInsert('Playlists', data);
   },
 
   down: async (queryInterface, Sequelize) => {
@@ -21,5 +21,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+    await queryInterface.bulkDelete('Playlists', null, {});
   },
 };

@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import DisplaySingle from './pages/DisplaySingle';
 import Page404 from './pages/Page404';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import AppBar from './components/AppBar';
 import ReactGa from 'react-ga';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -27,8 +28,11 @@ function App() {
     <>
       {!context.success ? (
         <Router>
-          <Route path="/">
+          <Route exact path="/">
             <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
         </Router>
       ) : (

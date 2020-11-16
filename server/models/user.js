@@ -1,6 +1,4 @@
-const {
-  Model,
-} = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -25,28 +23,32 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  User.init({
-    email: {
-      type: DataTypes.STRING,
-      unique: {
-        name: 'users_email',
-        msg: 'A user with this email already exists.',
+  User.init(
+    {
+      email: {
+        type: DataTypes.STRING,
+        unique: {
+          name: 'users_email',
+          msg: 'A user with this email already exists.',
+        },
+        allowNull: false,
+        validate: {
+          notEmpty: true,
+          isEmail: true,
+        },
       },
-      allowNull: false,
-      validate: {
-        notEmpty: true,
-        isEmail: true,
-      },
+      password: { type: DataTypes.STRING, allowNull: false },
+      isAdmin: DataTypes.BOOLEAN,
+      preferences: DataTypes.JSON,
+      rememberToken: DataTypes.STRING,
     },
-    password: { type: DataTypes.STRING, allowNull: false },
-    isAdmin: DataTypes.BOOLEAN,
-    preferences: DataTypes.JSON,
-    rememberToken: DataTypes.STRING,
-  }, {
-    sequelize,
-    modelName: 'User',
-    underscored: true,
-  });
+    {
+      sequelize,
+      modelName: 'User',
+      tableName: 'Users',
+      underscored: true,
+    }
+  );
 
   return User;
 };
