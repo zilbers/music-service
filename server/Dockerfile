@@ -1,9 +1,8 @@
 FROM node:12
 
-ADD /package.json /usr/app/server
-
 WORKDIR /usr/app/server
 
+ADD /package.json .
 RUN npm install
 
 COPY . .

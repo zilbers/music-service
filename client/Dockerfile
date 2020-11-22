@@ -1,8 +1,8 @@
 FROM node:12
 
-ADD /package.json /usr/app/client
-
 WORKDIR /usr/app/client
+
+ADD /package.json .
 
 RUN npm install
 
