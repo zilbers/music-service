@@ -1,10 +1,12 @@
 FROM node:12
 
+ADD /package.json /usr/app/client
+
 WORKDIR /usr/app/client
 
-COPY . .
-
 RUN npm install
+
+COPY . .
 
 EXPOSE 3000
 

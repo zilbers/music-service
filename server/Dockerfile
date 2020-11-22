@@ -1,10 +1,12 @@
 FROM node:12
 
+ADD /package.json /usr/app/server
+
 WORKDIR /usr/app/server
 
-COPY . .
-
 RUN npm install
+
+COPY . .
 
 RUN git clone https://github.com/vishnubob/wait-for-it.git
 
