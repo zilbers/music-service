@@ -9,6 +9,9 @@ module.exports = {
     dialect: 'mysql',
     define: { underscore: true },
     logging: false,
+    port: process.env.MYSQL_PORT || 3306,
+    seederStorage: 'sequelize',
+    seederStorageTableName: 'sequelize_data',
   },
   test: {
     username: process.env.MYSQL_USERNAME,
@@ -18,6 +21,9 @@ module.exports = {
     dialect: 'mysql',
     define: { underscore: true },
     logging: false,
+    port: process.env.MYSQL_PORT || 3306,
+    seederStorage: 'sequelize',
+    seederStorageTableName: 'sequelize_data',
   },
   production: {
     username: process.env.MYSQL_USERNAME,
@@ -26,5 +32,8 @@ module.exports = {
     host: process.env.MYSQL_HOST || '127.0.0.1',
     dialect: 'mysql',
     logging: false,
+    port: process.env.MYSQL_PORT || 3306,
+    seederStorage: 'sequelize',
+    seederStorageTableName: 'sequelize_data',
   },
 };
