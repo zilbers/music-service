@@ -24,7 +24,6 @@ services:
       # dockerfile: Dockerfile.dev
     stdin_open: true
     volumes:
-      # - '/usr/app/server/node_modules'
       - ./server:/usr/app/server
     ports:
       - 3001:8080
@@ -48,8 +47,7 @@ services:
       context: ./client
       # dockerfile: Dockerfile.dev
     stdin_open: true
-    volumes:
-      # - '/usr/app/client/node_modules'
+   volumes:
       - ./client:/usr/app/client
     ports:
       - 3000:3000
