@@ -1,14 +1,17 @@
 FROM node:12
 
-WORKDIR /usr/app/server
+RUN mkdir -p /src/server
 
-ADD /package.json .
-RUN npm install
+WORKDIR /src/server
 
-COPY . .
+COPY package.json /src/app/package.json
 
-RUN git clone https://github.com/vishnubob/wait-for-it.git
+RUN npm i --silent
 
 EXPOSE 3001
+
+COPY . /src/server
+
+RUN git clone https://github.com/vishnubob/wait-for-it.git
 
 CMD ["npm", "run", "docker"]

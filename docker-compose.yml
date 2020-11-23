@@ -18,14 +18,17 @@ services:
     volumes:
       - ./my-db:/var/lib/mysql
 
+    networks:
+      frontapp_a:
+        ipv4_address: 172.22.0.10
+
   server:
     build:
-      context: ./server
-      # dockerfile: Dockerfile.dev
+      context: './server'
+      dockerfile: Dockerfile
     stdin_open: true
     volumes:
-      # - '/usr/app/server/node_modules'
-      - ./server:/usr/app/server
+      - ./server:/src/server
     ports:
       - 3001:8080
     environment:
@@ -43,15 +46,30 @@ services:
     depends_on:
       - db
 
+    networks:
+      frontapp_a:
+        ipv4_address: 172.22.0.11
+
   client:
     build:
       context: ./client
-      # dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile
     stdin_open: true
     volumes:
-      # - '/usr/app/client/node_modules'
-      - ./client:/usr/app/client
+      - ./client:/src/client
     ports:
       - 3000:3000
     depends_on:
       - server
+
+    networks:
+      frontapp_a:
+        ipv4_address: 172.22.0.12
+
+networks:
+  frontapp_a:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.22.0.0/16

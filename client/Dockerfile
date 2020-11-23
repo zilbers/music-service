@@ -1,13 +1,15 @@
 FROM node:12
 
-WORKDIR /usr/app/client
+RUN mkdir -p /src/client
 
-ADD /package.json .
+WORKDIR /src/client
 
-RUN npm install
+COPY package.json /src/client/package.json
 
-COPY . .
+RUN npm i --silent
 
 EXPOSE 3000
+
+COPY . /src/client
 
 CMD ["npm", "run", "start"]

@@ -21,3 +21,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 app.use('/api/', require('./api'));
+
+app.get('/ping', (req, res) => {
+  try {
+    res.status(200).send('pong');
+  } catch ({ message }) {
+    res.status(500).send(message);
+  }
+});
