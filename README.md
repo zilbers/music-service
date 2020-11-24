@@ -1,9 +1,9 @@
 # ![Scale-Up Velocity](./readme-files/logo-main.png)   Zilbers - Music Service
-In this project I created a Music Service Web Application, with React.js, Express and a MySql database./
-The search mechanism uses Elasticsearch database and the data is saved in their cloud service./
-The app is dockerized and can be run with the docker-compose./
-The app has a login page, customized home page per user, and page for each song / album / playlist. /
-It also have backend which connects between the database and the client./
+In this project I created a Music Service Web Application, with React.js, Express and a MySql database. \
+The search mechanism uses Elasticsearch database and the data is saved in their cloud service. \
+The app is dockerized and can be run with the docker-compose. \
+The app has a login page, customized home page per user, and page for each song / album / playlist. \
+It also have backend which connects between the database and the client. \
 
 ![Log-in](./readme-files/log-in.gif)
 
