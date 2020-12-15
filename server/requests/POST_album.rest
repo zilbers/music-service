@@ -1,7 +1,0 @@
-POST http://localhost:3001/api/albums
-Content-Type: application/json
-
-{
-    "collums": ["name", "cover_img", "artist_id", "created_at"],
-    "values" : ["Purpose", "https://upload.wikimedia.org/wikipedia/en/2/27/Justin_Bieber_-_Purpose_%28Official_Album_Cover%29.png", 26, "2015-11-13" ]
-}

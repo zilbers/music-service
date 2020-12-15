@@ -4,19 +4,31 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@elastic/elasticsearch": "^7.10.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mysql": "^2.18.1"
+    "faker": "^5.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
   },
   "devDependencies": {
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "nodemon": "^2.0.4"
+    "jest": "^26.4.2",
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^6.2.0",
+    "supertest": "^5.0.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon index.js"
+    "test": "NODE_ENV=test jest --detectOpenHandles",
+    "dev": "nodemon index.js",
+    "docker": "npx sequelize-cli db:create && npx sequelize db:migrate && npx sequelize-cli db:seed:all --debug && nodemon index.js",
+    "migrate": "npx sequelize db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",

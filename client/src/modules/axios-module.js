@@ -1,20 +1,20 @@
-import axios from 'axios';
-const baseUrl = '/api';
+import network from './network';
+const baseUrl = 'http://localhost:3001/api';
 
 function get(endPoint) {
-  return axios.get(`${baseUrl}/${endPoint}`);
+  return network.get(`${baseUrl}/${endPoint}`);
 }
 
 function create(endPoint, newObject) {
-  return axios.post(`${baseUrl}/${endPoint}`, newObject);
+  return network.post(`${baseUrl}/${endPoint}`, newObject);
 }
 
 function update(id, newObject) {
-  return axios.put(`${baseUrl}/${id}`, newObject);
+  return network.put(`${baseUrl}/${id}`, newObject);
 }
 
 function deleteById(endpoint) {
-  return axios.delete(`${baseUrl}/${endpoint}`);
+  return network.delete(`${baseUrl}/${endpoint}`);
 }
 
 export { get, create, update, deleteById };

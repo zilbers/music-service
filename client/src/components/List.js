@@ -1,65 +1,76 @@
-import React, { useEffect, useState, useContext } from "react";
-import "./css/Table.css";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import { get } from "../modules/axios-module";
-import { Link } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import React, { useEffect, useState, useContext } from 'react';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
+import { like, favorite, getAll } from '../modules/actions';
+import '../CSS/List.css';
 
-function List(props) {
+function List({ dataType, match }) {
   const context = useContext(UserContext);
   const [data, setData] = useState([]);
   const [liked, setLiked] = useState([]);
-  const type = props.dataType;
+  const type = dataType;
 
-  function getAll(type, setter) {
-    get(type)
-      .then((data) => setter(data.data))
-      .catch((err) => console.log(err));
-  }
+  const handleClick = (id) => {
+    like(id, context.id);
+    favorite(id, data, setData);
+  };
 
-  function favorite(id) {
-    const currentDataId = data.slice();
-    let index = currentDataId.findIndex((item) => item.id === id);
-    currentDataId[index] &&
-      (currentDataId[index].favorite
-        ? delete currentDataId[index].favorite
-        : (currentDataId[index].favorite = true));
-    setData(currentDataId);
-  }
+  const onRender = async () => {
+    const regex = RegExp('playlist*', 'g');
+    await getAll(type, (item) => {
+      const newData = regex.test(dataType)
+        ? item.songList
+        : item.Songs
+        ? item.Songs
+        : item.songs;
+      setData(newData);
+    });
+    await getAll(`songs/liked/${context.id}`, setLiked);
+  };
 
   useEffect(() => {
-    getAll(type, setData);
-    getAll(`top/liked/songs${context.user_id}`, setLiked);
+    onRender();
   }, [type]);
 
   useEffect(() => {
-    liked[0] && liked.map((item) => favorite(item.id));
+    liked[0] && liked.map((item) => favorite(item.id, data, setData));
   }, [liked]);
 
-  const query = props.match.url.split("/").slice(1);
+  const query = match.url.split('/').slice(1);
   return (
     <div className="display">
-      {data.map((item, index) => (
-        <div className="row" key={item.id + index + item.name}>
-          {item.cover_img && (
-            <img className="cover_img" src={item.cover_img} alt={item.name} />
-          )}
-          <Link
-            key={item.id + index}
-            className="links"
-            to={`/songs/${item.id}?from=${query[0]}&id=${query[1]}`}
-          >
-            <span className="title">
-              {item.name}
-              {item.artist && <span className="artist">{item.artist}</span>}
-            </span>
-          </Link>
-          <span className="icon" onClick={() => favorite(item.id)}>
-            {item.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-          </span>
-        </div>
-      ))}
+      {data &&
+        data.map((item, index) => {
+          const song = item.Song ? item.Song : item;
+          return (
+            <div className="row" key={song.id * Math.random()}>
+              {song.coverImg && (
+                <img
+                  className="cover_img"
+                  src={song.coverImg}
+                  alt={song.name}
+                />
+              )}
+              <Link
+                key={song.id + index}
+                className="links"
+                to={`/songs/${song.id}?from=${query[0]}&id=${query[1]}`}
+              >
+                <span className="title">
+                  {song.name}
+                  {song.Artist && (
+                    <span className="artist">{song.Artist.name}</span>
+                  )}
+                </span>
+              </Link>
+              <span className="icon" onClick={() => handleClick(song.id)}>
+                {song.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+              </span>
+            </div>
+          );
+        })}
     </div>
   );
 }

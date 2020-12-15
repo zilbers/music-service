@@ -1,0 +1,26 @@
+const data = require('../orm-seeder-data/Playlist_song');
+
+module.exports = {
+  up: async (queryInterface, Sequelize) => {
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+     */
+    await queryInterface.bulkInsert('Playlist_songs', data);
+  },
+
+  down: async (queryInterface, Sequelize) => {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+    await queryInterface.bulkDelete('Playlist_songs', null, {});
+  },
+};

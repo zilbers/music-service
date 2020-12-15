@@ -1,0 +1,7 @@
+PUT http://localhost:3001/api/songs/2
+Content-Type: application/json
+
+{
+    "collums" : ["name", "lyrics"],
+    "values" : ["Ahu", "Shakshuka"]
+}

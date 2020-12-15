@@ -1,34 +1,38 @@
-import React, { useContext } from "react";
-import Display from "./components/Display";
-import Home from "./components/Home";
-import DisplaySingle from "./components/DisplaySingle";
-import Page404 from "./components/Page404";
-import Login from "./components/Login";
-import AppBar from "./components/AppBar";
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { UserContext } from "./context/UserContext";
+import React, { useContext, useEffect } from 'react';
+import Display from './pages/Display';
+import Home from './pages/Home';
+import DisplaySingle from './pages/DisplaySingle';
+import Page404 from './pages/Page404';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import AppBar from './components/AppBar';
+import ReactGa from 'react-ga';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { UserContext } from './context/UserContext';
+import './CSS/App.css';
+
+// const Display = React.lazy(() => import("./pages/Display"));
+// const Home = React.lazy(() => import("./pages/Home"));
+// const DisplaySingle = React.lazy(() => import("./pages/DisplaySingle"));
+// const Page404 = React.lazy(() => import("./pages/Page404"));
 
 function App() {
-  // async function deletItem(type, id) {
-  //   if (window.confirm(`Delete the ${type.slice(0, -1)}?`)) {
-  //     await deleteById(`${type}/${id}`)
-  //       .then((res) => {
-  //         getAll();
-  //         alert(res.data);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }
-  // const [logged, setLogged] = useState(false);
   const context = useContext(UserContext);
+
+  useEffect(() => {
+    ReactGa.initialize('G-9C2R1E9HQ3');
+    ReactGa.pageview('/');
+  }, []);
 
   return (
     <>
-      {!context.logged ? (
+      {!context.success ? (
         <Router>
-          <Route path="/">
+          <Route exact path="/">
             <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
         </Router>
       ) : (

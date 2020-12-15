@@ -1,15 +1,23 @@
-import React, { useEffect, useState } from "react";
-import "./css/Recommended.css";
-import { get } from "../modules/axios-module";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { get } from '../modules/axios-module';
+import { Link } from 'react-router-dom';
+import '../CSS/Recommended.css';
 
-function Recommended(props) {
+function Recommended({ url, itemId }) {
   const [data, setData] = useState([]);
-  const url = props.url;
 
   function getAll(type) {
     get(type)
-      .then((data) => setData(data.data))
+      .then(({ data }) => {
+        const validData = data.songs
+          ? data.songs
+          : data.songList
+          ? data.songList
+          : data.Songs
+          ? data.Songs
+          : data;
+        setData(validData);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -19,17 +27,20 @@ function Recommended(props) {
   return (
     <div className="recommendedDisplay">
       {data.map((data, index) => {
-        if (data.id !== props.item_id) {
+        const item = data.Song ? data.Song : data;
+        if (item.id !== itemId) {
           return (
-            <div className="row" key={(data.id + index) * index}>
+            <div className="row" key={item.id * Math.random()}>
               <Link
-                key={data.id + index}
+                key={item.id + index}
                 className="links"
-                to={`/songs/${data.id}`}
+                to={`/songs/${item.id}`}
               >
                 <span className="title">
-                  {data.name}
-                  {data.artist && <span className="artist">{data.artist}</span>}
+                  {item.name}
+                  {item.Artist && (
+                    <span className="artist">{item.Artist.name}</span>
+                  )}
                 </span>
               </Link>
             </div>

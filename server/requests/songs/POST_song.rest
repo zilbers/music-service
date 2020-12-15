@@ -1,0 +1,7 @@
+POST http://localhost:3001/api/songs
+Content-Type: application/json
+
+{
+    "collums" : ["name",  "artistId", "albumId", "lyrics", "youtubeLink"],
+    "values" : ["shishlik", 2, 2, "harta", "barta"]
+}

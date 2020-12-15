@@ -1,0 +1,128 @@
+.charts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.links {
+  color: white;
+}
+
+.row:hover {
+  background-color: #eeeeee3a;
+  border-radius: 5%;
+}
+
+.itemTitle {
+  font-weight: 400;
+  font-size: 1.1rem;
+  padding: 0px 20px;
+}
+
+.index {
+  font-weight: 300;
+  font-size: 0.9rem;
+}
+.Home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+.chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 2%;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #4d5464af;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carouselItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+  margin: 2%;
+  border: white 1px;
+}
+
+.carouselItem:hover {
+  background-color: #eeeeee3a;
+}
+
+.carouselLinks {
+  color: white;
+}
+
+.cover_img {
+  height: 100px;
+  width: 100px;
+  border-radius: 5%;
+}
+
+.brcpxa {
+  display: none;
+}
+.ikyGAt {
+  display: none;
+}
+
+.sc-bdnylx.chowzb.rec.rec-arrow.rec.rec-arrow-right {
+  background-color: #ffffff;
+  color: #383838;
+  font-size: 20px;
+  width: 8px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 0;
+}
+
+.sc-bdnylx.chowzb.rec.rec-arrow.rec.rec-arrow-left {
+  background-color: #ffffff;
+  color: #383838;
+  font-size: 20px;
+  width: 8px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 0;
+}
+
+.sc-bdnylx.hCVuYx.rec.rec-arrow.rec.rec-arrow-right {
+  background-color: #4d546400;
+  color: #4d5464af;
+  font-size: 20px;
+  width: 8px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 0;
+}
+
+.sc-bdnylx.hCVuYx.rec.rec-arrow.rec.rec-arrow-left {
+  background-color: #4d546400;
+  color: #4d5464af;
+  font-size: 20px;
+  width: 8px;
+  min-width: 20px;
+  height: 20px;
+  line-height: 0;
+}
+
+@media screen and (max-width: 600px) {
+  .Home {
+    top: 64px;
+    width: 500px;
+  }
+}

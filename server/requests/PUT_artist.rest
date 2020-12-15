@@ -1,7 +1,0 @@
-PUT http://localhost:3001/api/artists/1
-Content-Type: application/json
-
-{
-    "collums": ["name"],
-    "values" : ["Dr. Seus"]
-}
